@@ -2,3 +2,6 @@ streamlit_option_menu
 pip==22.0.4
 matplotlib
 seaborn
+sklearn
+pandas
+numpy
