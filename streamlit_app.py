@@ -5,7 +5,7 @@ from home import *
 from multidisease import *
 import heart as h
 import multidisease as m
-from tkinter import Tk
+from tk import Tk
 
 ap = Tk()
 sw = ap.winfo_screenwidth()
