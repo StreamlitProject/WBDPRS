@@ -5,9 +5,9 @@ from home import *
 from multidisease import *
 import heart as h
 import multidisease as m
-import tinkter
+import tkinter
 
-ap = tinkter.Tk()
+ap = tkinter.Tk()
 sw = ap.winfo_screenwidth()
 sh = ap.winfo_screenheight()
 
