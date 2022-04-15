@@ -5,3 +5,4 @@ seaborn
 sklearn
 pandas
 numpy
+Tkinter==3.10.4
