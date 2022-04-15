@@ -5,4 +5,4 @@ seaborn
 sklearn
 pandas
 numpy
-tkinter
+tkinter==3.9.12
