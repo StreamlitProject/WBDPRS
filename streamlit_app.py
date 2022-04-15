@@ -10,7 +10,7 @@ import multidisease as m
 st.set_page_config(
      page_title="WBDPRS",
      page_icon="🤖",
-     layout="wide",
+     layout="centered",
      initial_sidebar_state="expanded",
      menu_items={
          'Get Help': 'https://www.extremelycoolapp.com/help',
