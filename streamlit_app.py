@@ -54,7 +54,7 @@ def set_bg_hack_url():
          p, ol, ul, dl{{font-weight:bold;
                         text-align:center;
                         font-size:1.3rem;}}
-	.viewerBadge_link__15137{{
+	.viewerBadge_link__1S137{{
 		visibility: hidden;
 		}}
          </style>
