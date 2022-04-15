@@ -7,7 +7,7 @@ import heart as h
 import multidisease as m
 import tk
 
-ap = tk()
+ap = tk.tk()
 sw = ap.winfo_screenwidth()
 sh = ap.winfo_screenheight()
 
