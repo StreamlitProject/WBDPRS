@@ -5,3 +5,4 @@ seaborn
 sklearn
 pandas
 numpy
+tkinter
