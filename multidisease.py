@@ -103,13 +103,6 @@ def multidisease():
     Symptom5 = st.selectbox('Symptom5', tuple(['None']) + tuple(l1))
     psymptoms.append(Symptom5)
 
-    if st.button('Clear'):
-        psymptoms[0] = 'None'
-        psymptoms[1] = 'None'
-        psymptoms[2] = 'None'
-        psymptoms[3] = 'None'
-        psymptoms[4] = 'None'
-        psymptoms[5] = 'None'
     if st.button('Submit'):
         if psymptoms.count('None') == 0:
             for k in range(0, len(l1)):
@@ -125,7 +118,10 @@ def multidisease():
                     h = 'yes'
                     break
             if (h == 'yes'):
-                st.write(disease[a])
+                st.success(disease[a])
+                st.snow()
             else:
-                st.write("No Disease")
-
+                st.success("No Disease")
+                st.snow()
+    else:
+        st.warning("Select All the 5 Symptoms")
