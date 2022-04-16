@@ -8,31 +8,19 @@ import multidisease as m
 
 
 # basic page conifg static but changes in few parameters
-if sw<400 and sh<700:
-    st.set_page_config(
-        page_title="WBDPRS",
-        page_icon="🤖",
-        layout="centered",
-        initial_sidebar_state="expanded",
-        menu_items={
-            'Get Help': 'https://www.extremelycoolapp.com/help',
-            'Report a bug': "https://www.extremelycoolapp.com/bug",
-            'About': "# This is a header. This is an *extremely* cool app!"
-        }
-    )
-else:
-    st.set_page_config(
-        page_title="WBDPRS",
-        page_icon="🤖",
-        layout="wide",
-        initial_sidebar_state="expanded",
-        menu_items={
-            'Get Help': 'https://www.extremelycoolapp.com/help',
-            'Report a bug': "https://www.extremelycoolapp.com/bug",
-            'About': "# This is a header. This is an *extremely* cool app!"
-        }
-    )
-    
+
+st.set_page_config(
+    page_title="WBDPRS",
+    page_icon="🤖",
+    layout="centered",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://www.extremelycoolapp.com/help',
+        'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'About': "# This is a header. This is an *extremely* cool app!"
+    }
+)
+
 st.title("Web-based Disease Prediction & Recommender System")
 # NavBar standard for all
 selected3 = option_menu(None, ['Home', 'Heart Disease', 'Skin Cancer', 'Catract', 'Pneumonia', 'Multidisease'],
