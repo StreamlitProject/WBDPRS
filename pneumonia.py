@@ -41,7 +41,7 @@ def pneumonia():
             t=uploaded_file.read()
             st.image(t)
             st.write(type(t))
-           st.write(t)
+            st.write(t)
             img = image.load_img(t,target_size=(224,224))
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
