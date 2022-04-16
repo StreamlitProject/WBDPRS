@@ -5,6 +5,8 @@ from home import *
 from multidisease import *
 import heart as h
 import multidisease as m
+import pneumonia as p
+from pneumonia import *
 
 
 # basic page conifg static but changes in few parameters
@@ -104,3 +106,6 @@ elif selected3 == "Heart Disease":
 elif selected3 == "Multidisease":
     st.write("Multidisease")
     m.multidisease()
+elif selected3 == 'Pneumonia':
+    st.write('Pneumonia')
+    p.pneumonia()
