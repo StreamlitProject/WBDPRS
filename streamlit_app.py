@@ -64,7 +64,7 @@ def set_bg_hack_url():
 	.css-16huue1{{color:black;}}
 	.st-by {{color:black;}}
 	.css-1595djx{{visibility:hidden;}}
-	.menu-title[data-v-4323f8ce], .menu .nav-item[data-v-4323f8ce], .menu .nav-link[data-v-4323f8ce], hr[data-v-4323f8ce] {{color: #0c292f;}}
+	.menu .nav-item[data-v-4323f8ce]{{color: #0c292f;}}
 
          </style>
          """,
