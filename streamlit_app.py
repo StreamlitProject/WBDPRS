@@ -68,6 +68,7 @@ def set_bg_hack_url():
 	.viewerBadge_container__1QSob {{visibility:hidden;}}
 	.st-dc{{background-color:white;}}
 	.st-bu {{background-color:rgb(240,242,246);}}
+	.css-e3kofv {{background:rgb(240,242,246);}}
 
          </style>
          """,
