@@ -12,7 +12,7 @@ from PIL import Image
 #besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
 
 model = load_model('model_vgg16.h5')
-def LOAD_image(image_file):
+def Load_image(image_file):
     img = Image.open(image_file)
     return img
 
