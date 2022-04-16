@@ -5,11 +5,7 @@ from home import *
 from multidisease import *
 import heart as h
 import multidisease as m
-import tkinter
 
-ap = tkinter.Tk()
-sw = ap.winfo_screenwidth()
-sh = ap.winfo_screenheight()
 
 # basic page conifg static but changes in few parameters
 if sw<400 and sh<700:
