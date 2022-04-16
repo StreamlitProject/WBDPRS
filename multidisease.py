@@ -119,9 +119,7 @@ def multidisease():
                     break
             if (h == 'yes'):
                 st.success(disease[a])
-                st.snow()
             else:
                 st.success("No Disease")
-                st.snow()
-        else:
+        elif psymptoms.count('None') >= 1:
             st.warning("Select All the 5 Symptoms")
