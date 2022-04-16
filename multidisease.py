@@ -49,7 +49,12 @@ def multidisease():
     psymptoms.append(Symptom5)
 
     if st.button('Clear'):
-        psymptoms.clear();
+        psymptoms[0]='None';
+	psymptoms[1]='None';
+	psymptoms[2]='None';
+	psymptoms[3]='None';
+	psymptoms[4]='None';
+	psymptoms[5]='None';
     
     if psymptoms.count('None')==0:
         for k in range(0,len(l1)):
