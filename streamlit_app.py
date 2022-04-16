@@ -63,6 +63,7 @@ def set_bg_hack_url():
 	.css-ffhzg2 {{color:black;}}
 	.css-16huue1{{color:black;}}
 	.st-by {{color:black;}}
+	.css-1595djx{{visibility:hidden;}}
 
          </style>
          """,
