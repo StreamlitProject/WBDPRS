@@ -123,5 +123,5 @@ def multidisease():
             else:
                 st.success("No Disease")
                 st.snow()
-        elif:
+        else:
             st.warning("Select All the 5 Symptoms")
