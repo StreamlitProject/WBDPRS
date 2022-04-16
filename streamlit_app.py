@@ -5,8 +5,8 @@ from home import *
 from multidisease import *
 import heart as h
 import multidisease as m
-import pneumonia as p
 from pneumonia import *
+import pneumonia as p
 
 
 # basic page conifg static but changes in few parameters
