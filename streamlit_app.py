@@ -47,6 +47,7 @@ def set_bg_hack_url():
     st.markdown(
         f"""
          <style>
+	 /*setting background image*/
          .stApp {{
              background: url("https://drive.google.com/uc?export=view&id=13vhdzYq-NQyW-pzfJooTAfPsluAvsagA");
              https://drive.google.com/file/d/13vhdzYq-NQyW-pzfJooTAfPsluAvsagA/view?usp=sharing
@@ -59,17 +60,16 @@ def set_bg_hack_url():
          p, ol, ul, dl{{font-weight:bold;
                         text-align:center;
                         font-size:1.3rem;}}
-	.viewerBadge_link__1S137 {{visibility:hidden;}}
-	.css-ffhzg2 {{color:black;}}
-	.css-16huue1{{color:black;}}
-	.st-by {{color:black;}}
-	.css-1595djx{{visibility:hidden;}}
-	.viewerBadge_container__1QSob {{visibility:hidden;}}
-	.st-dc{{background-color:white;}}
-	.st-bu {{background-color:rgb(240,242,246);}}
-	.st-bp {{color:black;}}
-	.css-e3kofv {{background:rgb(240,242,246);}}
-	.css-1q8dd3e {{background:white;}}
+	
+	.css-ffhzg2 {{color:black;}} /*form title color*/
+	.css-16huue1{{color:black;}} /*text in form*/
+	.st-by {{color:black;}}  /*text in form*/
+	.css-1595djx{{visibility:hidden;}} /*upper tag hidden*/
+	.st-dc{{background-color:white;}}  /*dropdown background*/
+	.st-bu {{background-color:rgb(240,242,246);}}  /*dropdown flex color*/
+	.st-bp {{color:black;}}  /*dropdown text*/
+	.css-e3kofv {{background:rgb(240,242,246);}}  /*dropdown hover*/
+	.css-1q8dd3e {{background:white;}}  /*clear button*/
 	.menu-title[data-v-4323f8ce], .menu .nav-item[data-v-4323f8ce], .menu .nav-link[data-v-4323f8ce], hr[data-v-4323f8ce]{{color:black;}}
 
          </style>
