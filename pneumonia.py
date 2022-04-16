@@ -20,8 +20,8 @@ def pneumonia():
                             menu_icon="cast", default_index=0, orientation="horizontal",
                             styles={"container": {"padding": "0!important", "background-color": "#fafafa"},"icon": {"color": "black", "font-size": "15px"}, "nav-link": {"font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},"nav-link-selected": {"background-color": "#6cdacf"},})
     def LOAD_image(image_file):
-	img = Image.open(image_file)
-	return img
+        img = Image.open(image_file)
+        return img
     if selected1=='Camera':
         picture = st.camera_input("Take a picture")
         if picture:
