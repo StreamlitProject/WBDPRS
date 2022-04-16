@@ -64,7 +64,8 @@ def set_bg_hack_url():
 	.css-16huue1{{color:black;}}
 	.st-by {{color:black;}}
 	.css-1595djx{{visibility:hidden;}}
-	.menu .nav-item[data-v-4323f8ce]{{color: #0c292f;}}
+	.menu .nav-item[data-v-4323f8ce]{{color: black;}}
+	.viewerBadge_container__1QSob {{visibility:hidden;}}
 
          </style>
          """,
