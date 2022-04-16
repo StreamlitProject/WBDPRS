@@ -64,13 +64,13 @@ def set_bg_hack_url():
 	.css-16huue1{{color:black;}}
 	.st-by {{color:black;}}
 	.css-1595djx{{visibility:hidden;}}
-	.menu.nav-item[data-v-4323f8ce]{{color: black;}}
 	.viewerBadge_container__1QSob {{visibility:hidden;}}
 	.st-dc{{background-color:white;}}
 	.st-bu {{background-color:rgb(240,242,246);}}
 	.st-bp {{color:black;}}
 	.css-e3kofv {{background:rgb(240,242,246);}}
 	.css-1q8dd3e {{background:white;}}
+	:root {{--text-color:black;}}
 
          </style>
          """,
