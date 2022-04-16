@@ -70,6 +70,7 @@ def set_bg_hack_url():
 	.st-bu {{background-color:rgb(240,242,246);}}
 	.st-bp {{color:black;}}
 	.css-e3kofv {{background:rgb(240,242,246);}}
+	.css-1q8dd3e {{background:white;}}
 
          </style>
          """,
