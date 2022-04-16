@@ -70,7 +70,7 @@ def set_bg_hack_url():
 	.st-bp {{color:black;}}
 	.css-e3kofv {{background:rgb(240,242,246);}}
 	.css-1q8dd3e {{background:white;}}
-	:root {{--text-color:black;}}
+	.menu-title[data-v-4323f8ce], .menu .nav-item[data-v-4323f8ce], .menu .nav-link[data-v-4323f8ce], hr[data-v-4323f8ce]{{color:black;}}
 
          </style>
          """,
