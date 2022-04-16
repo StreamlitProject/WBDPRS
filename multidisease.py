@@ -90,7 +90,7 @@ def multidisease():
     # print(accuracy_score(y_test, y_pred))
     # print(accuracy_score(y_test, y_pred, normalize=False))
 
-    
+
     psymptoms = []
     Symptom1 = st.selectbox('Symptom1', tuple(['None']) + tuple(l1))
     psymptoms.append(Symptom1)
@@ -109,22 +109,23 @@ def multidisease():
         psymptoms[2] = 'None';
         psymptoms[3] = 'None';
         psymptoms[4] = 'None';
-
-    if psymptoms.count('None') == 0:
-        for k in range(0, len(l1)):
-            for z in psymptoms:
-                if (z == l1[k]):
-                    l2[k] = 1
-        inputtest = [l2]
-        predict = gnb.predict(inputtest)
-        predicted = predict[0]
-        h = 'no'
-        for a in range(0, len(disease)):
-            if (disease[predicted] == disease[a]):
-                h = 'yes'
-                break
-        if (h == 'yes'):
-            st.write(disease[a])
-        else:
-            st.write("No Disease")
+        psymptoms[5] = 'None';
+    if st.button('Submit'):
+        if psymptoms.count('None') == 0:
+            for k in range(0, len(l1)):
+                for z in psymptoms:
+                    if (z == l1[k]):
+                        l2[k] = 1
+            inputtest = [l2]
+            predict = gnb.predict(inputtest)
+            predicted = predict[0]
+            h = 'no'
+            for a in range(0, len(disease)):
+                if (disease[predicted] == disease[a]):
+                    h = 'yes'
+                    break
+            if (h == 'yes'):
+                st.write(disease[a])
+            else:
+                st.write("No Disease")
 
