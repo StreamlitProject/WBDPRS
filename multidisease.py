@@ -90,26 +90,25 @@ def multidisease():
     # print(accuracy_score(y_test, y_pred))
     # print(accuracy_score(y_test, y_pred, normalize=False))
 
-    while True:
-        psymptoms = []
-        Symptom1 = st.selectbox('Symptom1', tuple(['None']) + tuple(l1))
-        psymptoms.append(Symptom1)
-        Symptom2 = st.selectbox('Symptom2', tuple(['None']) + tuple(l1))
-        psymptoms.append(Symptom2)
-        Symptom3 = st.selectbox('Symptom3', tuple(['None']) + tuple(l1))
-        psymptoms.append(Symptom3)
-        Symptom4 = st.selectbox('Symptom4', tuple(['None']) + tuple(l1))
-        psymptoms.append(Symptom4)
-        Symptom5 = st.selectbox('Symptom5', tuple(['None']) + tuple(l1))
-        psymptoms.append(Symptom5)
     
-        if st.button('Clear'):
-            psymptoms[0] = 'None';
-            psymptoms[1] = 'None';
-            psymptoms[2] = 'None';
-            psymptoms[3] = 'None';
-            psymptoms[4] = 'None';
-            psymptoms[5] = 'None';
+    psymptoms = []
+    Symptom1 = st.selectbox('Symptom1', tuple(['None']) + tuple(l1))
+    psymptoms.append(Symptom1)
+    Symptom2 = st.selectbox('Symptom2', tuple(['None']) + tuple(l1))
+    psymptoms.append(Symptom2)
+    Symptom3 = st.selectbox('Symptom3', tuple(['None']) + tuple(l1))
+    psymptoms.append(Symptom3)
+    Symptom4 = st.selectbox('Symptom4', tuple(['None']) + tuple(l1))
+    psymptoms.append(Symptom4)
+    Symptom5 = st.selectbox('Symptom5', tuple(['None']) + tuple(l1))
+    psymptoms.append(Symptom5)
+
+    if st.button('Clear'):
+        psymptoms[0] = 'None';
+        psymptoms[1] = 'None';
+        psymptoms[2] = 'None';
+        psymptoms[3] = 'None';
+        psymptoms[4] = 'None';
 
     if psymptoms.count('None') == 0:
         for k in range(0, len(l1)):
