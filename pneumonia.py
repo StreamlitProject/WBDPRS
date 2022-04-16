@@ -8,7 +8,7 @@ from keras.applications.vgg16 import preprocess_input
 #besturl='https://drive.google.com/file/d/1HWVuUAhUcMfWbis6HC_XgSBdnrcnKoan/view?usp=sharing'
 #besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
 
-model = load_model('//model_vgg16.h5')
+model = load_model('model_vgg16.h5')
 
 
 def pneumonia():
