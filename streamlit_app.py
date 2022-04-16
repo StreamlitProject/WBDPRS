@@ -61,6 +61,7 @@ def set_bg_hack_url():
                         font-size:1.3rem;}}
 	.viewerBadge_link__1S137 {{visibility:hidden;}}
 	.css-ffhzg2 {{color:black;}}
+	.css-16huue1{{color:black;}}
 
          </style>
          """,
