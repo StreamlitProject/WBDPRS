@@ -7,4 +7,4 @@ pandas
 numpy
 keras
 tensorflow
-PIL
+Pillow==9.1.0
