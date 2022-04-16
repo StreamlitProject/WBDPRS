@@ -60,6 +60,7 @@ def set_bg_hack_url():
                         text-align:center;
                         font-size:1.3rem;}}
 	.viewerBadge_link__1S137 {{visibility:hidden;}}
+	.css-ffhzg2 {{color:black;}}
 
          </style>
          """,
