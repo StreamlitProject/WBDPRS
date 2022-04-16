@@ -8,3 +8,4 @@ numpy
 keras
 tensorflow
 Pillow==9.1.0
+io
