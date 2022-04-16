@@ -12,9 +12,9 @@ from PIL import Image
 #besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
 
 model = load_model('model_vgg16.h5')
-def LOAD_image(image_file):
-    img = Image.open(image_file)
-    return img
+#def LOAD_image(image_file):
+ #   img = Image.open(image_file)
+  #  return img
 
 def pneumonia():
     selected1 = option_menu(None, ['Camera','Upload Image'],
@@ -38,8 +38,7 @@ def pneumonia():
     elif selected1=='Upload Image':
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
-            t=LOAD_image(uploaded_file)
-            r=Image.open(t)
+            r=Image.open(uploaded_file)
             img = image.load_img(r,target_size=(224,224))
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
