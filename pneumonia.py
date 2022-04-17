@@ -40,6 +40,7 @@ def pneumonia():
             t=Image.open(uploaded_file)
             #t=uploaded_file
             st.write(type(t))
+            st.image(t)
             
             x=np.asarray(t)
             x = np.expand_dims(x,axis=0)
