@@ -41,4 +41,5 @@ def pneumonia():
             #t=uploaded_file
             st.write(type(t))
             st.image(t)
+            st.write(np.array(t))
            
