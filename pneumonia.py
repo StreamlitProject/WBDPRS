@@ -40,7 +40,7 @@ def pneumonia():
             t=Image.open(uploaded_file)
             st.image(t)
             
-            img_path = f'C:/Users/ESB/Downloads/{uploaded_file}'
+            img_path = f'C:/Users/ESB/Downloads/{uploaded_file.name}'
             img = image.load_img(img_path,target_size=(224,224))
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
@@ -50,8 +50,3 @@ def pneumonia():
                 st.success("Normal")
             elif int(classes[0][1])==1:
                 st.success("Pneumonia")
-            
-            
-            
-            
-           
