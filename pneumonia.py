@@ -43,7 +43,7 @@ def pneumonia():
             #st.image(t)
             #st.write(type(t))
             #st.write(t)
-            img = image.load_img(uploaded_file,target_size=(224,224))
+            img = tf.keras.preprocessing.image.load_img(uploaded_file,target_size=(224,224))
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
