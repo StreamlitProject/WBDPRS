@@ -40,7 +40,7 @@ def pneumonia():
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             #t=LOAD_image(uploaded_file)
-            stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+            stringio = StringIO(uploaded_file.getvalue().decode('unicode_escape').encode('utf-8'))
             st.write(stringio)
             img = image.load_img(stringio,target_size=(224,224))
             x = image.img_to_array(img)
