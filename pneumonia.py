@@ -47,4 +47,7 @@ def pneumonia():
             st.write(x)
             img_data = preprocess_input(x)
             st.write(img_data)
+            classes = model.predict(img_data)
+            st.write(classes)
+            
            
