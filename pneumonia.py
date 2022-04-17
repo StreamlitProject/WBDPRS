@@ -39,13 +39,14 @@ def pneumonia():
         if uploaded_file is not None:
             #img=uploaded_file.resize((224,224))
             t=Image.open(uploaded_file)
-            m=uploaded_file.read()
-            st.write(type(m))
-            #st.write(type(t))
+            #m=uploaded_file.read()
+            #st.write(type(m))
+            st.write(type(t))
    
             #img_test = image.load_img(m,grayscale=True)
             #st.write(type(img_test))
-            x = image.img_to_array(t)
+            #x = image.img_to_array(t)
+            x=np.array(t)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
             classes = model.predict(img_data)
