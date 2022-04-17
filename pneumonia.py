@@ -39,10 +39,11 @@ def pneumonia():
     elif selected1=='Upload Image':
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
-            #t=LOAD_image(uploaded_file)
-            stringio = StringIO(uploaded_file.getvalue())
-            st.write(stringio)
-            img = image.load_img(stringio,target_size=(224,224))
+            t=LOAD_image(uploaded_file)
+            #stringio = StringIO(uploaded_file.getvalue())
+            #st.write(stringio)
+            shape=(224,224)
+            img = image.load_img(stringio,target_size=shape)
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
