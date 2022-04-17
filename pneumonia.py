@@ -42,6 +42,7 @@ def pneumonia():
             st.write(type(t))
             st.image(t)
             img = image.load_img(t,target_size=(224,224))
+            """"
             x=np.array(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
@@ -50,3 +51,4 @@ def pneumonia():
                 st.success("Normal")
             elif int(classes[0][1]) == 1:
                 st.success("Pneumonia")
+                """
