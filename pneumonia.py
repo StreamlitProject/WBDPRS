@@ -20,7 +20,7 @@ def pneumonia():
                             styles={"container": {"padding": "0!important", "background-color": "#fafafa"},"icon": {"color": "black", "font-size": "15px"}, "nav-link": {"font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},"nav-link-selected": {"background-color": "#6cdacf"},})
 
     if selected1=='Camera':
-        picture = st.camera_input("Take a picture",type['jpeg','png','jpg'])
+        picture = st.camera_input("Take a picture",type=['jpeg','png','jpg'])
         """
         if picture:
             st.image(picture)
@@ -37,7 +37,8 @@ def pneumonia():
     elif selected1=='Upload Image':
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
-            t=Image.open(uploaded_file)
+            #t=Image.open(uploaded_file)
+            t=uploaded_file.read()
             st.write(type(t))
             
             x=np.array(t)
