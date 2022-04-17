@@ -6,6 +6,7 @@ from keras.models import load_model
 from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input
 from PIL import Image
+import tensorflow as tf
 #from io import BytesIO
 
 
