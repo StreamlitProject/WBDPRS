@@ -43,6 +43,6 @@ def pneumonia():
             st.image(t)
             st.write(np.array(t))
             m = np.array(t)
-            x = np.expand_dims(x,axis=0)
-            st.write(x.shape)
+            x = np.expand_dims(m,axis=0)
+            st.write(x)
            
