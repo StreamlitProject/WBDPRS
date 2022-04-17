@@ -6,7 +6,7 @@ from keras.models import load_model
 from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input
 from PIL import Image
-from io import BytesIO
+#from io import BytesIO
 
 
 #besturl='https://drive.google.com/file/d/1HWVuUAhUcMfWbis6HC_XgSBdnrcnKoan/view?usp=sharing'
@@ -40,10 +40,10 @@ def pneumonia():
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             t=uploaded_file.read()
-            st.image(t)
-            st.write(type(t))
-            st.write(t)
-            img = image.load_img(BytesIO(uploaded_file),target_size=(224,224))
+            #st.image(t)
+            #st.write(type(t))
+            #st.write(t)
+            img = image.load_img(uploaded_file,target_size=(224,224))
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
