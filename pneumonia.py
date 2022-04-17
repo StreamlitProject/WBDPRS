@@ -6,7 +6,7 @@ from keras.models import load_model
 from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input
 from PIL import Image
-
+st.option('deprecation.showfileUploaderEncoding',False)
 
 #besturl='https://drive.google.com/file/d/1HWVuUAhUcMfWbis6HC_XgSBdnrcnKoan/view?usp=sharing'
 #besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
