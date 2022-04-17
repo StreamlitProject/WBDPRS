@@ -36,8 +36,8 @@ def pneumonia():
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             t=Image.open(uploaded_file)
-            shape=(224,224)
-            img = image.load_img(t,target_size=shape)
+            img=t.resize((224,224))
+            #img = image.load_img(t)
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
