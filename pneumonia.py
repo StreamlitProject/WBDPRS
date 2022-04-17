@@ -37,9 +37,9 @@ def pneumonia():
     elif selected1=='Upload Image':
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
-            img=uploaded_file.resize((224,224))
+            #img=uploaded_file.resize((224,224))
             #t=Image.open(uploaded_file)
-            m=img.read()
+            m=uploaded_file.read()
             st.write(type(m))
             #st.write(type(t))
    
