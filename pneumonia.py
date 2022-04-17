@@ -41,8 +41,8 @@ def pneumonia():
             #t=uploaded_file
             st.write(type(t))
             st.image(t)
-            
-            x=np.asarray(t)
+            img = image.load_img(t,target_size=(224,224))
+            x=np.asarray(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
             classes = model.predict(img_data)
