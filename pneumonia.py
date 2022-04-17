@@ -37,23 +37,21 @@ def pneumonia():
     elif selected1=='Upload Image':
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
-            t=Image.open(uploaded_file,'r')
-            #t=uploaded_file
-            st.write(type(t))
+            t=Image.open(uploaded_file)
             st.image(t)
-            st.write(np.array(t))
-            test=np.array(t)
-            test = image.load_img(test)
-            st.write(test)
-            test = test/255
-            #m = np.array(t)
-            #m=m/255
-            st.write(test)
-            x = np.expand_dims(test,axis=0)
-            st.write(x)
+            
+            img_path = f'C:/Users/ESB/Downloads/{uploaded_file}'
+            img = image.load_img(img_path,target_size=(224,224))
+            x = image.img_to_array(img)
+            x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
-            st.write(img_data)
             classes = model.predict(img_data)
-            st.write(classes)
+            if int(classes[0][0])==1:
+                st.success("Normal")
+            elif int(classes[0][1])==1:
+                st.success("Pneumonia")
+            
+            
+            
             
            
