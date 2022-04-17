@@ -21,6 +21,7 @@ def pneumonia():
 
     if selected1=='Camera':
         picture = st.camera_input("Take a picture")
+        """
         if picture:
             st.image(picture)
             img = image.load_img(picture,target_size=(224,224))
@@ -32,11 +33,12 @@ def pneumonia():
                 st.success("Normal")
             elif int(classes[0][1])==1:
                 st.success("Pneumonia")
+        """
     elif selected1=='Upload Image':
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
             t=Image.open(uploaded_file)
-            img=t.resize((224,224))
+            img=t.resize((224,224,0))
             #img = image.load_img(t)
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
