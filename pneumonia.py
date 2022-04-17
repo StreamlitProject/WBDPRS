@@ -6,6 +6,7 @@ from keras.models import load_model
 from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input
 from PIL import Image
+from io import StringIO
 
 
 #besturl='https://drive.google.com/file/d/1HWVuUAhUcMfWbis6HC_XgSBdnrcnKoan/view?usp=sharing'
