@@ -42,7 +42,9 @@ def pneumonia():
             st.write(type(t))
             st.image(t)
             test = t.resize((224,224))
+            st.write(test)
             test = image.load_img(test)
+            st.write(test)
             test = test/255
             #m = np.array(t)
             #m=m/255
