@@ -23,7 +23,7 @@ st.set_page_config(
     }
 )
 
-st.title("Web-based Disease Prediction & Recommender System")
+st.title("Web-based Disease Prediction System")
 # NavBar standard for all
 selected3 = option_menu(None, ['Home', 'Heart Disease', 'Skin Cancer', 'Catract', 'Pneumonia', 'Multidisease'],
                         icons=['house', 'heart', 'file-person', 'eye', 'clipboard-plus', 'file-medical'],
