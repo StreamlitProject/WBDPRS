@@ -42,4 +42,7 @@ def pneumonia():
             st.write(type(t))
             st.image(t)
             st.write(np.array(t))
+            m = np.array(t)
+            x = np.expand_dims(x,axis=0)
+            st.write(x)
            
