@@ -108,4 +108,4 @@ elif selected3 == "Multidisease":
     m.multidisease()
 elif selected3 == 'Pneumonia':
     st.write('Pneumonia')
-    pneumonia()
+    p.pneumonia()
