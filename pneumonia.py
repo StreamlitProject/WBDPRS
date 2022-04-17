@@ -44,5 +44,5 @@ def pneumonia():
             st.write(np.array(t))
             m = np.array(t)
             x = np.expand_dims(x,axis=0)
-            st.write(x)
+            st.write(x.shape)
            
