@@ -37,11 +37,11 @@ def pneumonia():
     elif selected1=='Upload Image':
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
-            #t=Image.open(uploaded_file)
-            t=uploaded_file
+            t=Image.open(uploaded_file)
+            #t=uploaded_file
             st.write(type(t))
             
-            x=np.array(t)
+            x=np.asarray(t)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
             classes = model.predict(img_data)
