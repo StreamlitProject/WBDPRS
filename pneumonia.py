@@ -51,7 +51,7 @@ def pneumonia():
             classes = model.predict(x)
             if int(classes[0][0])==1:
                 st.success("Normal")
-                elif int(classes[0][1])==1:
-                    st.success("Pneumonia")
+            elif int(classes[0][1])==1:
+                st.success("Pneumonia")
 
              
