@@ -14,10 +14,7 @@ besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
 
 def pneumonia():
     model = load_model(r'model_vgg16.h5')
-    def saveImage(byteImage):
-        bytesImg = BytesIO(byteImage)
-        img=Image.open(bytesImg)
-        return img
+    st.write(besturl)
     selected1 = option_menu(None, ['Camera','Upload Image'],
                             icons=['camera','image'], 
                             menu_icon="cast", default_index=0, orientation="horizontal",
