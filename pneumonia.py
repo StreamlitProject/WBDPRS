@@ -49,7 +49,7 @@ def pneumonia():
             #st.image(path)
             
             #img_path = f'/Users/ESB/Downloads/{uploaded_file.name+"jpeg"}'
-            i#mg = image.load_img(path,target_size=(224,224))
+            #img = image.load_img(path,target_size=(224,224))
             #x = image.img_to_array(img)
             x = loadImage(besturl)
             x = np.expand_dims(x,axis=0)
