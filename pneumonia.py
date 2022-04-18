@@ -14,7 +14,10 @@ besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
 
 def pneumonia():
     model = load_model(r'model_vgg16.h5')
-    st.write(besturl)
+    def saveImage(byteImage):
+        bytesImg = BytesIO(byteImage)
+        img=Image.open(bytesImg)
+        return img
     selected1 = option_menu(None, ['Camera','Upload Image'],
                             icons=['camera','image'], 
                             menu_icon="cast", default_index=0, orientation="horizontal",
@@ -41,14 +44,11 @@ def pneumonia():
             #t=Image.open(uploaded_file)
             #st.image(t)
             #file = uploaded_file.read()
-            #path = saveImage(file)
-            #st.image(path)
-            #st.write(path)
+            path = saveImage(besturl)
+            st.image(path)
             
             #img_path = f'/Users/ESB/Downloads/{uploaded_file.name+"jpeg"}'
-            img = image.load_img(besturl,target_size=(224,224))
-            st.write(besturl)
-            st.image(besturl)
+            img = image.load_img(path,target_size=(224,224))
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
