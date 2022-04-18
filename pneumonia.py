@@ -10,7 +10,7 @@ from io import BytesIO
 import urllib
 
 besturl='https://drive.google.com/file/d/1giYPPAkdfWIjXXrBJVDoB8EWkbcXh5-r/view?usp=sharing'
-#besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
+besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
 
 
 def pneumonia():
