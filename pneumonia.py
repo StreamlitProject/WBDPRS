@@ -53,4 +53,4 @@ def pneumonia():
                 st.success("Normal")
             elif int(classes[0][1])==1:
                 st.success("Pneumonia")
-                
+             
