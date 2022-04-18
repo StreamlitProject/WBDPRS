@@ -9,4 +9,4 @@ keras
 tensorflow
 Pillow==9.1.0
 urllib3==1.26.9
-
+opencv-python==4.5.5.64
