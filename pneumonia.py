@@ -43,14 +43,15 @@ def pneumonia():
         if uploaded_file is not None:
             #t=Image.open(uploaded_file)
             #st.image(t)
-            file = uploaded_file.read()
-            path = saveImage(file)
-            st.image(path)
-            st.write(path)
+            #file = uploaded_file.read()
+            #path = saveImage(file)
+            #st.image(path)
+            #st.write(path)
             
             #img_path = f'/Users/ESB/Downloads/{uploaded_file.name+"jpeg"}'
             img = image.load_img(besturl,target_size=(224,224))
             st.write(besturl)
+            st.image(besturl)
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
