@@ -7,7 +7,7 @@ from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input
 from PIL import Image
 from io import BytesIO
-import cv2
+from cv2 import *
 #import urllib
 
 #besturl='https://drive.google.com/file/d/1giYPPAkdfWIjXXrBJVDoB8EWkbcXh5-r/view?usp=sharing'
