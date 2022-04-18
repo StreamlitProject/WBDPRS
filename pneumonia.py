@@ -6,7 +6,7 @@ from keras.models import load_model
 from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input
 from PIL import Image
-#st.option('deprecation.showfileUploaderEncoding',False)
+from io import BytesIO
 
 #besturl='https://drive.google.com/file/d/1HWVuUAhUcMfWbis6HC_XgSBdnrcnKoan/view?usp=sharing'
 #besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
@@ -14,6 +14,10 @@ from PIL import Image
 
 def pneumonia():
     model = load_model(r'model_vgg16.h5')
+    def saveImage(byteImage):
+        bytesImg = BytesIO(byteImage)
+        img=Image.open(bytesImg)
+        return img
     selected1 = option_menu(None, ['Camera','Upload Image'],
                             icons=['camera','image'], 
                             menu_icon="cast", default_index=0, orientation="horizontal",
@@ -37,11 +41,14 @@ def pneumonia():
     elif selected1=='Upload Image':
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
-            t=Image.open(uploaded_file)
-            st.image(t)
+            #t=Image.open(uploaded_file)
+            #st.image(t)
+            file = uploaded_file.read()
+            path = saveImage(file)
+            st.image(path)
             
-            img_path = f'/Users/ESB/Downloads/{uploaded_file.name+"jpeg"}'
-            img = image.load_img(img_path,target_size=(224,224))
+            #img_path = f'/Users/ESB/Downloads/{uploaded_file.name+"jpeg"}'
+            img = image.load_img(path,target_size=(224,224))
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
