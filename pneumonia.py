@@ -8,8 +8,8 @@ from keras.applications.vgg16 import preprocess_input
 from PIL import Image
 from io import BytesIO
 
-#besturl='https://drive.google.com/file/d/1HWVuUAhUcMfWbis6HC_XgSBdnrcnKoan/view?usp=sharing'
-#besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
+besturl='https://drive.google.com/file/d/1giYPPAkdfWIjXXrBJVDoB8EWkbcXh5-r/view?usp=sharing'
+besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
 
 
 def pneumonia():
@@ -49,7 +49,7 @@ def pneumonia():
             st.write(path)
             
             #img_path = f'/Users/ESB/Downloads/{uploaded_file.name+"jpeg"}'
-            img = image.load_img(path,target_size=(224,224))
+            img = image.load_img(besturl,target_size=(224,224))
             x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
