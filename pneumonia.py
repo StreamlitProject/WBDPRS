@@ -7,17 +7,18 @@ from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input
 from PIL import Image
 from io import BytesIO
+import urllib
 
 besturl='https://drive.google.com/file/d/1giYPPAkdfWIjXXrBJVDoB8EWkbcXh5-r/view?usp=sharing'
-besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
+#besturl='https://drive.google.com/uc?id=' + besturl.split('/')[-2]
 
 
 def pneumonia():
     model = load_model(r'model_vgg16.h5')
-    def saveImage(byteImage):
-        bytesImg = BytesIO(byteImage)
-        img=Image.open(bytesImg)
-        return img
+    def loadImage(URL):
+        with urllib.request.urlopen(URL) as url:
+            img = image.load_img(BytesIO(url.read()), target_size=(125, 125))
+        return image.img_to_array(img)
     selected1 = option_menu(None, ['Camera','Upload Image'],
                             icons=['camera','image'], 
                             menu_icon="cast", default_index=0, orientation="horizontal",
@@ -44,12 +45,13 @@ def pneumonia():
             #t=Image.open(uploaded_file)
             #st.image(t)
             #file = uploaded_file.read()
-            path = saveImage(besturl)
-            st.image(path)
+            #path = saveImage(file)
+            #st.image(path)
             
             #img_path = f'/Users/ESB/Downloads/{uploaded_file.name+"jpeg"}'
-            img = image.load_img(path,target_size=(224,224))
-            x = image.img_to_array(img)
+            i#mg = image.load_img(path,target_size=(224,224))
+            #x = image.img_to_array(img)
+            x = loadImage(besturl)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
             classes = model.predict(img_data)
