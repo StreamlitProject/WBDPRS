@@ -46,6 +46,7 @@ def pneumonia():
             file = uploaded_file.read()
             path = saveImage(file)
             st.image(path)
+            st.write(path)
             
             #img_path = f'/Users/ESB/Downloads/{uploaded_file.name+"jpeg"}'
             img = image.load_img(path,target_size=(224,224))
