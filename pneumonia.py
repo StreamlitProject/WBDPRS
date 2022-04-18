@@ -7,6 +7,7 @@ from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input
 from PIL import Image
 from io import BytesIO
+import cv2
 #import urllib
 
 #besturl='https://drive.google.com/file/d/1giYPPAkdfWIjXXrBJVDoB8EWkbcXh5-r/view?usp=sharing'
@@ -38,14 +39,15 @@ def pneumonia():
     elif selected1=='Upload Image':
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
-            t=Image.open(uploaded_file)
-            st.image(t)
+            #t=Image.open(uploaded_file)
+            #st.image(t)
             #file = uploaded_file.read()
+            x = np.asarray(bytearray(uploaded_file.read()),dtype=np.unit8)
+            st.write(x)
 
-            
-            img_path = f'/{uploaded_file.name}'
-            img = image.load_img(img_path,target_size=(224,224))
-            x = image.img_to_array(img)
+            #img_path = f'/{uploaded_file.name}'
+            #img = image.load_img(img_path,target_size=(224,224))
+            #x = image.img_to_array(img)
             x = np.expand_dims(x,axis=0)
             img_data = preprocess_input(x)
             classes = model.predict(img_data)
