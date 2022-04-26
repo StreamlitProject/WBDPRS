@@ -34,8 +34,6 @@ selected3 = option_menu(None, ['Home', 'Heart Disease', 'Skin Cancer', 'Catract'
                             "nav-link": {"font-size": "15px", "text-align": "left", "margin": "0px",
                                          "--hover-color": "#000000"},
                             "nav-link-selected": {"background-color": "#6cdacf"},
-			    "nav": {"color":"#000000"},
-			    "nav-item": {"color":"#000000"},
                         }
                         )
 
