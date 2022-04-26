@@ -79,6 +79,7 @@ def set_bg_hack_url():
 	.css-1wgbv7k {{background-color:rgb(109,218,207);}} /*Camera Pneumnia*/
 	.css-x8wxsk {{background-color:rgb(109,218,207);color:black;}} /*upload*/
 	:root{{--text-color:black;}}
+	.nav-item{{color:black;}}
 
 
          </style>
