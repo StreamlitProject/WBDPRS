@@ -78,6 +78,7 @@ def set_bg_hack_url():
 	nav-link active nav-link-horizontal{{color: black;}}
 	.css-1wgbv7k {{background-color:rgb(109,218,207);}}
 	.css-x8wxsk {{background-color:rgb(109,218,207);color:black;}}
+	element.style{{--hover-color:black;}}
 
          </style>
          """,
