@@ -78,6 +78,7 @@ def set_bg_hack_url():
 	.css-x8wxsk {{background-color:rgb(109,218,207);color:black;}} /*upload*/
 	:root{{--text-color:black;}}
 	.nav-item{{color:black;}}
+	.nav-item[data-v-4323f8ce]{{color:black;}}
 
 
          </style>
