@@ -74,6 +74,7 @@ def set_bg_hack_url():
 	.css-e3kofv {{background:rgb(240,242,246);}}  /*dropdown hover*/
 	.css-1q8dd3e {{background:white;}}  /*clear button*/
 	.menu-title[data-v-4323f8ce], .menu .nav-item[data-v-4323f8ce], .menu .nav-link[data-v-4323f8ce], hr[data-v-4323f8ce]{{color:black;}}
+	.nav-link.active[data-v-4323f8ce] {{color: #262730;}}
 
          </style>
          """,
