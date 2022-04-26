@@ -29,11 +29,13 @@ selected3 = option_menu(None, ['Home', 'Heart Disease', 'Skin Cancer', 'Catract'
                         icons=['house', 'heart', 'file-person', 'eye', 'clipboard-plus', 'file-medical'],
                         menu_icon="cast", default_index=0, orientation="horizontal",
                         styles={
-                            "container": {"padding": "0!important", "background-color": "#000000"},
+                            "container": {"padding": "0!important", "background-color": "#fafafa"},
                             "icon": {"color": "black", "font-size": "15px"},
                             "nav-link": {"font-size": "15px", "text-align": "left", "margin": "0px",
                                          "--hover-color": "#000000"},
                             "nav-link-selected": {"background-color": "#6cdacf"},
+			    "nav": {"color":"#000000"},
+			    "nav-item": {"color":"#000000"},
                         }
                         )
 
