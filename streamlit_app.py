@@ -73,12 +73,12 @@ def set_bg_hack_url():
 	.st-bp {{color:black;}}  /*dropdown text*/
 	.css-e3kofv {{background:rgb(240,242,246);}}  /*dropdown hover*/
 	.css-1q8dd3e {{background:white;}}  /*clear button*/
-	.menu-title[data-v-4323f8ce], .menu .nav-item[data-v-4323f8ce], .menu .nav-link[data-v-4323f8ce], hr[data-v-4323f8ce]{{color:black;}}
-	.nav-link.active[data-v-4323f8ce] {{color: #262730;}}
-	nav-link active nav-link-horizontal{{color: black;}}
-	.css-1wgbv7k {{background-color:rgb(109,218,207);}}
-	.css-x8wxsk {{background-color:rgb(109,218,207);color:black;}}
-	element.style{{--hover-color:black;}}
+	.menu-title[data-v-4323f8ce], .menu .nav-item[data-v-4323f8ce], .menu .nav-link[data-v-4323f8ce], hr[data-v-4323f8ce]{{color:black;}}/*NW*/
+	.nav-link.active[data-v-4323f8ce] {{color: #262730;}} /*NW*/
+	nav-link active nav-link-horizontal{{color: black;}} /*NW*/
+	.css-1wgbv7k {{background-color:rgb(109,218,207);}} /*Camera Pneumnia*/
+	.css-x8wxsk {{background-color:rgb(109,218,207);color:black;}} /*upload*/
+	element.style{{--hover-color:black;}} /*NW*/
 
          </style>
          """,
