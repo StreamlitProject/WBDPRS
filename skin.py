@@ -56,6 +56,7 @@ def skin():
             an_image = Image.open(uploaded_file)
             st.image(an_image,width=500)
             an_image = an_image.resize((28,28))
+            an_image = an_image.convert('RGB')
             img = np.array(an_image).reshape(-1,28,28,3)
             #an_image = an_image.convert('RGB')
             #x = image.img_to_array(an_image)
