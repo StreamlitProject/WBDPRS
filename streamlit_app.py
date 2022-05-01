@@ -7,6 +7,8 @@ import heart as h
 import multidisease as m
 from pneumonia import *
 import pneumonia as p
+from skin import *
+import skin as s
 
 
 # basic page conifg static but changes in few parameters
@@ -117,3 +119,8 @@ elif selected3 == "Multidisease":
 elif selected3 == 'Pneumonia':
     st.write('Pneumonia')
     p.pneumonia()
+elif selected3 == 'Skin Cancer':
+    s.skin()
+
+
+
