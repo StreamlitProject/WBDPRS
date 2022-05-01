@@ -5,8 +5,8 @@ from home import *
 from multidisease import *
 import heart as h
 import multidisease as m
-import pneumonia as p
 from pneumonia import *
+import pneumonia as p
 
 
 # basic page conifg static but changes in few parameters
@@ -23,7 +23,7 @@ st.set_page_config(
     }
 )
 
-st.title("Web-based Disease Prediction & Recommender System")
+st.title("Web-based Disease Prediction System")
 # NavBar standard for all
 selected3 = option_menu(None, ['Home', 'Heart Disease', 'Skin Cancer', 'Catract', 'Pneumonia', 'Multidisease'],
                         icons=['house', 'heart', 'file-person', 'eye', 'clipboard-plus', 'file-medical'],
@@ -32,7 +32,7 @@ selected3 = option_menu(None, ['Home', 'Heart Disease', 'Skin Cancer', 'Catract'
                             "container": {"padding": "0!important", "background-color": "#fafafa"},
                             "icon": {"color": "black", "font-size": "15px"},
                             "nav-link": {"font-size": "15px", "text-align": "left", "margin": "0px",
-                                         "--hover-color": "#eee"},
+                                         "--hover-color": "#000000"},
                             "nav-link-selected": {"background-color": "#6cdacf"},
                         }
                         )
@@ -49,6 +49,7 @@ def set_bg_hack_url():
     st.markdown(
         f"""
          <style>
+	 #root > div:nth-child(1) > div > div > div > div > section > div {{padding-top: 3rem;}}
 	 /*setting background image*/
          .stApp {{
              background: url("https://drive.google.com/uc?export=view&id=13vhdzYq-NQyW-pzfJooTAfPsluAvsagA");
@@ -72,7 +73,14 @@ def set_bg_hack_url():
 	.st-bp {{color:black;}}  /*dropdown text*/
 	.css-e3kofv {{background:rgb(240,242,246);}}  /*dropdown hover*/
 	.css-1q8dd3e {{background:white;}}  /*clear button*/
-	.menu-title[data-v-4323f8ce], .menu .nav-item[data-v-4323f8ce], .menu .nav-link[data-v-4323f8ce], hr[data-v-4323f8ce]{{color:black;}}
+
+	.css-1wgbv7k {{background-color:rgb(109,218,207);}} /*Camera Pneumnia*/
+	.css-x8wxsk {{background-color:rgb(109,218,207);color:black;}} /*upload*/
+	:root{{--text-color:black;}}
+	.nav-item{{color:black;}}
+	.nav-item[[data-v-4323f8ce]]{{color:black;}}
+	.data-v-4323f8ce{{color:black;}}
+
 
          </style>
          """,
