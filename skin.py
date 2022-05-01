@@ -68,3 +68,4 @@ def skin():
             max_prob = max(result[0])
             class_index = result[0].index(max_prob)
             st.success(classes[class_index])
+            
