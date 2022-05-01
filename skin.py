@@ -52,7 +52,7 @@ def skin():
     elif selected1=='Upload Image':
         uploaded_file = st.file_uploader("Choose a file")
         if uploaded_file is not None:
-            an_image = Image.open(picture)
+            an_image = Image.open(uploaded_file)
             st.image(an_image,width=500)
             an_image = an_image.resize((28,28))
             img = np.array(an_image).reshape(-1,28,28,3)
