@@ -87,33 +87,33 @@ def set_bg_hack_url():
 	.css-6awftf{{display: none;}} /*hide the link on images*/
 	
 	/* this to remove all the things*/
-	 div[data-testid="stToolbar"] {
+	 div[data-testid="stToolbar"] {{
                 visibility: hidden;
                 height: 0%;
                 position: fixed;
-                }
-                div[data-testid="stDecoration"] {
+                }}
+                div[data-testid="stDecoration"] {{
                 visibility: hidden;
                 height: 0%;
                 position: fixed;
-                }
-                div[data-testid="stStatusWidget"] {
+                }}
+                div[data-testid="stStatusWidget"] {{
                 visibility: hidden;
                 height: 0%;
                 position: fixed;
-                }
-                #MainMenu {
+                }}
+                #MainMenu {{
                 visibility: hidden;
                 height: 0%;
-                }
-                header {
+                }}
+                header {{
                 visibility: hidden;
                 height: 0%;
-                }
-                footer {
+                }}
+                footer {{
                 visibility: hidden;
                 height: 0%;
-                }
+                }}
 
          </style>
          """,
