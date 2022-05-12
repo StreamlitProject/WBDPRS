@@ -85,6 +85,35 @@ def set_bg_hack_url():
 	.css-eczf16{{display: none;}} /*hide the link on title*/
 	.css-1xfuh55{{display: none;}} /*hide the link on images*/
 	.css-6awftf{{display: none;}} /*hide the link on images*/
+	
+	/* this to remove all the things*/
+	 div[data-testid="stToolbar"] {
+                visibility: hidden;
+                height: 0%;
+                position: fixed;
+                }
+                div[data-testid="stDecoration"] {
+                visibility: hidden;
+                height: 0%;
+                position: fixed;
+                }
+                div[data-testid="stStatusWidget"] {
+                visibility: hidden;
+                height: 0%;
+                position: fixed;
+                }
+                #MainMenu {
+                visibility: hidden;
+                height: 0%;
+                }
+                header {
+                visibility: hidden;
+                height: 0%;
+                }
+                footer {
+                visibility: hidden;
+                height: 0%;
+                }
 
          </style>
          """,
