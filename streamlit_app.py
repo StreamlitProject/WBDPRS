@@ -82,7 +82,7 @@ def set_bg_hack_url():
 	.nav-item{{color:black;}}
 	.nav-item[[data-v-4323f8ce]]{{color:black;}}
 	.data-v-4323f8ce{{color:black;}}
-	.css-15zrgzn {display: none} /*hide the link on title*/
+	.css-15zrgzn {{display: none;}} /*hide the link on title*/
 
          </style>
          """,
