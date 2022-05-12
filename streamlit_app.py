@@ -51,7 +51,7 @@ def set_bg_hack_url():
     st.markdown(
         f"""
          <style>
-	 #root > div:nth-child(1) > div > div > div > div > section > div {{padding-top: 2rem;}}
+	 #root > div:nth-child(1) > div > div > div > div > section > div {{padding-top: 1rem;}}
 	 /*setting background image*/
          .stApp {{
              background: url("https://drive.google.com/uc?export=view&id=13vhdzYq-NQyW-pzfJooTAfPsluAvsagA");
