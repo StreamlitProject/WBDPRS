@@ -154,4 +154,3 @@ elif selected3 == 'Skin Cancer':
     s.skin()
 
 
-
