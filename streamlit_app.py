@@ -84,6 +84,7 @@ def set_bg_hack_url():
 	.data-v-4323f8ce{{color:black;}}
 	.css-eczf16{{display: none;}} /*hide the link on title*/
 	.css-1xfuh55{{display: none;}} /*hide the link on images*/
+	.css-6awftf{{display: none;}} /*hide the link on images*/
 
          </style>
          """,
