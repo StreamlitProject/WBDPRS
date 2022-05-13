@@ -135,8 +135,6 @@ hide_st_style = """
           padding-right: 6rem;
 		  }
 		  h1{text-align: center;color:#6cdacf;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;}
-		  
-		  .nav-link[data-v-4323f8ce]{{color: #262730;}}
 		  </style>
 		  """
 st.markdown(hide_st_style, unsafe_allow_html=True)
