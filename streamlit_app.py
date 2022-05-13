@@ -31,7 +31,7 @@ selected3 = option_menu(None, ['Home','Skin Cancer', 'Pneumonia', 'Multidisease'
                         icons=['house','file-person', 'clipboard-plus', 'file-medical'],
                         menu_icon="cast", default_index=0, orientation="horizontal",
                         styles={
-                            "container": {"padding": "0!important", "background-color": "#fafafa"},
+                            "container": {"padding": "0!important", "background-color": "#fafafa","color": #262730},
                             "icon": {"color": "black", "font-size": "15px"},
                             "nav-link": {"font-size": "15px", "text-align": "left", "margin": "0px",
                                          "--hover-color": "#6ddacf"},
