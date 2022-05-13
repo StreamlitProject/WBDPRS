@@ -34,8 +34,8 @@ selected3 = option_menu(None, ['Home','Skin Cancer', 'Pneumonia', 'Multidisease'
                             "container": {"padding": "0!important", "background-color": "#fafafa","color": "#262730"},
                             "icon": {"color": "black", "font-size": "15px"},
                             "nav-link": {"font-size": "15px", "text-align": "left", "margin": "0px",
-                                         "--hover-color": "#6ddacf"},
-                            "nav-link-selected": {"background-color": "#6cdacf"},
+                                         "--hover-color": "#6ddacf","--text-color":"#262730"},
+                            "nav-link-selected": {"background-color": "#6cdacf","--text-color":"#262730"},
                         }
                         )
 
