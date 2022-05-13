@@ -18,7 +18,7 @@ def pneumonia():
     selected1 = option_menu(None, ['Camera','Upload Image'],
                             icons=['camera','image'], 
                             menu_icon="cast", default_index=0, orientation="horizontal",
-                            styles={"container": {"padding": "0!important", "background-color": "#fafafa"},"icon": {"color": "black", "font-size": "15px"}, "nav-link": {"font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#eee"},"nav-link-selected": {"background-color": "#6cdacf"},})
+                            styles={"container": {"padding": "0!important", "background-color": "#fafafa"},"icon": {"color": "black", "font-size": "15px"}, "nav-link": {"font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#eee","--text-color":"#262730"},"nav-link-selected": {"background-color": "#6cdacf","--text-color":"#262730"},})
 
     if selected1=='Camera':
         picture = st.camera_input("Take a picture")
