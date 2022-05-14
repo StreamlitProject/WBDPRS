@@ -54,7 +54,7 @@ def set_bg_hack_url():
 	 #root > div:nth-child(1) > div > div > div > div > section > div {{padding-top: 1rem;}}
 	 /*setting background image*/
          .stApp {{
-             background: url("https://drive.google.com/uc?export=view&id=13vhdzYq-NQyW-pzfJooTAfPsluAvsagA");
+             background: url("https://drive.google.com/uc?export=view&id=1QNZpRaGDbxsDO3ZyjURYTfIMePIMbQ4c");
              https://drive.google.com/file/d/13vhdzYq-NQyW-pzfJooTAfPsluAvsagA/view?usp=sharing
              background-size: cover
          }}
