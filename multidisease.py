@@ -7,9 +7,11 @@ def multidisease():
     with st.container():
         st.markdown("Have A Quick Overlook :eyes:")
         st.subheader("Steps to follow:")
-        st.text("Step I: Go down in this webpage, where you find a template to check you prediction \n of disease using your symptoms")
-        st.text("Step II: Select all the five symptoms(similar) that you have from the pre-existed \n drop-down list.")
-        st.text("Step III: Now click on submit")
+        st.text("Step I: Go down in this webpage, where you find a template to check you prediction \n of disease by selecting your symptoms")
+        st.text("Step II: Select all the five symptoms(mandatory) that you have from the pre-existed \n drop-down list.")
+        st.text("Step III: Now click on submit.\n")
+        st.markdown("That's cool :sunglasses: You find approximate disease that matches your symptoms")
+        
 
     l1 = ['itching', 'skin_rash', 'nodal_skin_eruptions', 'continuous_sneezing', 'shivering', 'chills', 'joint_pain',
           'stomach_pain', 'acidity', 'ulcers_on_tongue', 'muscle_wasting', 'vomiting', 'burning_micturition',
