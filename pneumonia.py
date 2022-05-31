@@ -14,14 +14,14 @@ from PIL import Image
 
 
 def pneumonia():
-    with st.expander("Key Facts"):
+    with st.expander("Key Facts",expanded=True):
         st.write("""
         1. Pneumonia accounts for 14% of all deaths of children under 5 years old, killing 740 180 children in 2019 \n
         2. Pneumonia can be caused by viruses, bacteria, or fungi. \n
         3. Pneumonia can be prevented by immunization, adequate nutrition, and by addressing environmental factors.\n
         4. Pneumonia caused by bacteria can be treated with antibiotics, but only one third of children with pneumonia receive the antibiotics they need.
      """)
-    with st.expander("Causes"):
+    with st.expander("Causes",expanded=True):
         st.write("""
         Pneumonia is caused by a number of infectious agents, including viruses, bacteria and fungi. The most common are:
 
@@ -30,7 +30,7 @@ def pneumonia():
         3. Respiratory syncytial virus is the most common viral cause of pneumonia \n
         4. In infants infected with HIV, Pneumocystis jiroveci is one of the most common causes of pneumonia, responsible for at least one quarter of all pneumonia deaths in HIV-infected infants.
      """)
-    with st.expander("Transmission"):
+    with st.expander("Transmission",expanded=True):
         st.write("""
         Pneumonia can be spread in a number of ways.
         The viruses and bacteria that are commonly found in a child's nose or throat, can infect the lungs if they are inhaled. 
@@ -38,14 +38,14 @@ def pneumonia():
         In addition, pneumonia may spread through blood, especially during and shortly after birth. 
         More research needs to be done on the different pathogens causing pneumonia and the ways they are transmitted, as this is of critical importance for treatment and prevention.
      """)
-    with st.expander("Risk Factors"):
+    with st.expander("Risk Factors",expanded=True):
         st.write("""
         The following environmental factors also increase a child's susceptibility to pneumonia:
         1. indoor air pollution caused by cooking and heating with biomass fuels (such as wood or dung)
         2. living in crowded homes
         3. parental smoking.
         """)
-    with st.expander("Treatment"):
+    with st.expander("Treatment",expanded=True):
         st.write("""
         Pneumonia should be treated with antibiotics. 
         The antibiotic of choice for first line treatment is amoxicillin dispersible tablets. 
@@ -53,7 +53,7 @@ def pneumonia():
         These cases can also be diagnosed and treated with inexpensive oral antibiotics at the community level by trained community health workers. 
         Hospitalization is recommended only for severe cases of pneumonia.
         """)
-    with st.expander("Prevention"):
+    with st.expander("Prevention",expanded=True):
         st.write("""
         Preventing pneumonia in children is an essential component of a strategy to reduce child mortality. Immunization against Hib, pneumococcus, measles and whooping cough (pertussis) is the most effective way to prevent pneumonia.
         Adequate nutrition is key to improving children's natural defences, starting with exclusive breastfeeding for the first 6 months of life. In addition to being effective in preventing pneumonia, it also helps to reduce the length of the illness if a child does become ill.
