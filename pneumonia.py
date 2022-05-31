@@ -14,6 +14,14 @@ from PIL import Image
 
 
 def pneumonia():
+    with st.container():
+        st.markdown("Have A Quick Overlook :eyes:")
+        st.text("Step I: Go down in this webpage, where you find a template to check whether you have Pneumonia or Not")
+        st.text("Step II: Here we have 2 options to choose 1.upload image 2. camera input, with  the help of this take X-ray image")
+        st.text("Step III: Now click on submit.\n")
+        st.markdown("That's cool :sunglasses:")
+        st.info("Note: This is a approximate model, under development")
+        st.text("\n\n\n")
     with st.expander("Key Facts",expanded=False):
         st.write("""
         1. Pneumonia accounts for 14% of all deaths of children under 5 years old, killing 740 180 children in 2019 \n
