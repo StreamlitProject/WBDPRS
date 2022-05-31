@@ -55,7 +55,7 @@ def set_bg_hack_url():
 	 /*setting background image*/
          .stApp {{
              /*background: url("https://drive.google.com/uc?export=view&id=1QNZpRaGDbxsDO3ZyjURYTfIMePIMbQ4c");*/
-	     background: url("bg.jpg");
+	     background: url("/bg.jpg");
              https://drive.google.com/file/d/13vhdzYq-NQyW-pzfJooTAfPsluAvsagA/view?usp=sharing
              background-size: cover
          }}
