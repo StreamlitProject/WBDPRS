@@ -146,12 +146,12 @@ elif selected3 == "Heart Disease":
     st.write("Heart Disease")
     h.heart()
 elif selected3 == "Multidisease":
-    st.markdown("<center><h2><b>Multidisease</b></h2></center>",unsafe_allow_html=True)
+    st.markdown("<center><h2><strong>Multidisease</strong></h2></center>",unsafe_allow_html=True)
     m.multidisease()
 elif selected3 == 'Pneumonia':
-    st.markdown("<center><h2><b>Pneumonia</b></h2></center>",unsafe_allow_html=True)
+    st.markdown("<center><h2><strong>Pneumonia</strong></h2></center>",unsafe_allow_html=True)
     p.pneumonia()
 elif selected3 == 'Skin Cancer':
-    st.markdown("<center><h2><b>Skin Cancer</b></h2></center>",unsafe_allow_html=True)
+    st.markdown("<center><h2><strong>Skin Cancer</strong></h2></center>",unsafe_allow_html=True)
     s.skin()
 
