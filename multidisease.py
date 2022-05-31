@@ -89,8 +89,47 @@ def multidisease():
     y_pred = gnb.predict(X_test)
     # print(accuracy_score(y_test, y_pred))
     # print(accuracy_score(y_test, y_pred, normalize=False))
+    
+    form=st.form(key="MDP")
+    psymptoms = []
+    Symptom1 = form.selectbox('Symptom1', tuple(['None']) + tuple(l1))
+    psymptoms.append(Symptom1)
+    Symptom2 = form.selectbox('Symptom2', tuple(['None']) + tuple(l1))
+    psymptoms.append(Symptom2)
+    Symptom3 = form.selectbox('Symptom3', tuple(['None']) + tuple(l1))
+    psymptoms.append(Symptom3)
+    Symptom4 = form.selectbox('Symptom4', tuple(['None']) + tuple(l1))
+    psymptoms.append(Symptom4)
+    Symptom5 = form.selectbox('Symptom5', tuple(['None']) + tuple(l1))
+    psymptoms.append(Symptom5)
+    
+    Submitted = form.form_submit_button("Submit")
+    
+    if Submitted:
+        if psymptoms.count('None') == 0:
+            for k in range(0, len(l1)):
+                for z in psymptoms:
+                    if (z == l1[k]):
+                        l2[k] = 1
+            inputtest = [l2]
+            predict = gnb.predict(inputtest)
+            predicted = predict[0]
+            h = 'no'
+            for a in range(0, len(disease)):
+                if (disease[predicted] == disease[a]):
+                    h = 'yes'
+                    break
+            if (h == 'yes'):
+                form.success(disease[a])
+            else:
+                form.success("No Disease")
+        elif psymptoms.count('None') >= 1:
+            form.warning("Select All the 5 Symptoms")
+        
 
-
+    
+    
+    """"
     psymptoms = []
     Symptom1 = st.selectbox('Symptom1', tuple(['None']) + tuple(l1))
     psymptoms.append(Symptom1)
@@ -123,3 +162,4 @@ def multidisease():
                 st.success("No Disease")
         elif psymptoms.count('None') >= 1:
             st.warning("Select All the 5 Symptoms")
+    """
