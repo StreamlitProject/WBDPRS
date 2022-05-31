@@ -156,4 +156,3 @@ elif selected3 == 'Pneumonia':
 elif selected3 == 'Skin Cancer':
     st.markdown("<center><h2><strong><u>Skin Cancer</u></strong></h2></center>",unsafe_allow_html=True)
     s.skin()
-
