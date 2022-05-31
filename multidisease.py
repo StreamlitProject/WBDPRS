@@ -49,12 +49,12 @@ def multidisease():
                'Arthritis', '(vertigo) Paroymsal  Positional Vertigo', 'Acne', 'Urinary tract infection', 'Psoriasis',
                'Impetigo']
 
-    testurl = 'https://drive.google.com/file/d/1cY89ARWHkUviL34hI8jRHlu5cRvn_RZH/view?usp=sharing'
-    testurl = 'https://drive.google.com/uc?id=' + testurl.split('/')[-2]
-    testdf = pd.read_csv(testurl)
-    trainurl = 'https://drive.google.com/file/d/1dSryy7kA39UECxjxGoLIixRgNXDMnj1-/view?usp=sharing'
-    trainurl = 'https://drive.google.com/uc?id=' + trainurl.split('/')[-2]
-    traindf = pd.read_csv(trainurl)
+    #testurl = 'https://drive.google.com/file/d/1cY89ARWHkUviL34hI8jRHlu5cRvn_RZH/view?usp=sharing'
+    #testurl = 'https://drive.google.com/uc?id=' + testurl.split('/')[-2]
+    testdf = pd.read_csv("Testing.csv")
+    #trainurl = 'https://drive.google.com/file/d/1dSryy7kA39UECxjxGoLIixRgNXDMnj1-/view?usp=sharing'
+    #trainurl = 'https://drive.google.com/uc?id=' + trainurl.split('/')[-2]
+    traindf = pd.read_csv("Training.csv")
 
     l2 = []
     for x in range(0, len(l1)):
