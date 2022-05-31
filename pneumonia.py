@@ -28,7 +28,7 @@ def pneumonia():
         #1. Pneumonia accounts for 14% of all deaths of children under 5 years old, killing 740 180 children in 2019 \n
         #2. Pneumonia can be caused by viruses, bacteria, or fungi. \n
         #3. Pneumonia can be prevented by immunization, adequate nutrition, and by addressing environmental factors.\n
-        $4. Pneumonia caused by bacteria can be treated with antibiotics, but only one third of children with pneumonia receive the antibiotics they need.""")
+        #4. Pneumonia caused by bacteria can be treated with antibiotics, but only one third of children with pneumonia receive the antibiotics they need.""")
     
     #with st.expander("Causes",expanded=False):
         #st.write("""
