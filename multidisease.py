@@ -173,3 +173,4 @@ def multidisease():
         elif psymptoms.count('None') >= 1:
             st.warning("Select All the 5 Symptoms")
     """
+    
