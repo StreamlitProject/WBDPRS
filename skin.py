@@ -14,6 +14,14 @@ from PIL import Image
 
 
 def skin():
+    with st.container():
+        st.markdown("Have A Quick Overlook :eyes:")
+        st.text("Step I: Go down in this webpage, where you find a template to check what kind of lesion type of skin cancer you have")
+        st.text("Step II: Here we have 2 options to choose 1.upload image 2. camera input, with  the help of this take X-ray image")
+        st.text("Step III: Now click on submit.\n")
+        st.markdown("That's cool :sunglasses:")
+        st.info("Note: This is a approximate model, under development")
+        st.write("\n\n\n")
     model = load_model(r'best_model.h5')
     selected1 = option_menu(None, ['Camera','Upload Image'],
                             icons=['camera','image'], 
