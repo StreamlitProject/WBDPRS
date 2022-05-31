@@ -85,6 +85,7 @@ def set_bg_hack_url():
 	.css-eczf16{{display: none;}} /*hide the link on title*/
 	.css-1xfuh55{{display: none;}} /*hide the link on images*/
 	.css-6awftf{{display: none;}} /*hide the link on images*/
+	.st-bu {{background-color:rgb(109,218,207);}}
 	
 	/* this to remove all the things*/
 	 div[data-testid="stToolbar"] {{
