@@ -14,6 +14,13 @@ from PIL import Image
 
 
 def pneumonia():
+    with st.expander("Key Facts"):
+     st.write("""
+        Pneumonia accounts for 14% of all deaths of children under 5 years old, killing 740 180 children in 2019
+        Pneumonia can be caused by viruses, bacteria, or fungi.
+        Pneumonia can be prevented by immunization, adequate nutrition, and by addressing environmental factors.
+        Pneumonia caused by bacteria can be treated with antibiotics, but only one third of children with pneumonia receive the antibiotics they need.
+     """)
     model = load_model(r'model_vgg16.h5')
     selected1 = option_menu(None, ['Camera','Upload Image'],
                             icons=['camera','image'], 
