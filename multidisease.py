@@ -120,11 +120,11 @@ def multidisease():
                     h = 'yes'
                     break
             if (h == 'yes'):
-                form.success(disease[a])
+                st.success(disease[a])
             else:
-                form.success("No Disease")
+                st.success("No Disease")
         elif psymptoms.count('None') >= 1:
-            form.warning("Select All the 5 Symptoms")
+            st.warning("Select All the 5 Symptoms")
         
 
     
