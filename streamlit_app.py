@@ -143,15 +143,15 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 if selected3 == "Home":
     pass
 elif selected3 == "Heart Disease":
-    st.header("Heart Disease")
+    st.write("Heart Disease")
     h.heart()
 elif selected3 == "Multidisease":
-    st.header("Multidisease")
+    st.write("**Multidisease**")
     m.multidisease()
 elif selected3 == 'Pneumonia':
-    st.header('Pneumonia')
+    st.write('Pneumonia')
     p.pneumonia()
 elif selected3 == 'Skin Cancer':
-    st.header('Skin Cancer')
+    st.write('Skin Cancer')
     s.skin()
 
