@@ -19,10 +19,9 @@ def pneumonia():
                             icons=['camera','image'], 
                             menu_icon="cast", default_index=0, orientation="horizontal",
                             styles={"container": {"padding": "0!important", "background-color": "#fafafa"},"icon": {"color": "black", "font-size": "15px"}, "nav-link": {"font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#eee","--text-color":"#262730"},"nav-link-selected": {"background-color": "#6cdacf","--text-color":"#262730"},})
-    form =st.form(key="pneumonia")
+    container =st.container(key="pneumonia")
     if selected1=='Camera':
-        picture = form.camera_input("Take a picture")
-        submitted = form.form_submit_button()
+        picture = container.camera_input("Take a picture")
         if picture is not None:
             an_image = Image.open(picture)
             st.image(an_image,width=500)
@@ -41,7 +40,7 @@ def pneumonia():
             elif int(classes[0][1])==1:
                 st.success("Pneumonia")
     elif selected1=='Upload Image':
-        uploaded_file = form.file_uploader("Choose a file")
+        uploaded_file = container.file_uploader("Choose a file")
         if uploaded_file is not None:
             an_image = Image.open(uploaded_file)
             st.image(an_image,width=500)
