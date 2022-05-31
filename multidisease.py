@@ -10,7 +10,8 @@ def multidisease():
         st.text("Step I: Go down in this webpage, where you find a template to check you prediction \n of disease by selecting your symptoms")
         st.text("Step II: Select all the five symptoms(mandatory) that you have from the pre-existed \n drop-down list.")
         st.text("Step III: Now click on submit.\n")
-        st.text("That's cool :sunglasses: You find approximate disease that matches your symptoms")
+        st.markdown("That's cool :sunglasses: You find approximate disease that matches your symptoms")
+        st.text("\n\n")
         
 
     l1 = ['itching', 'skin_rash', 'nodal_skin_eruptions', 'continuous_sneezing', 'shivering', 'chills', 'joint_pain',
