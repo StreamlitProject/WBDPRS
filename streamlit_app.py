@@ -152,6 +152,7 @@ elif selected3 == 'Pneumonia':
     st.write('Pneumonia')
     p.pneumonia()
 elif selected3 == 'Skin Cancer':
+    st.write('Skin Cancer')
     s.skin()
 
 
