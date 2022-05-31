@@ -5,7 +5,7 @@ import pandas as pd
 
 def multidisease():
     with st.container():
-        st.markdown("Have A Quick Overlook **eyes**")
+        st.markdown("Have A Quick Overlook :eyes:")
         st.text("This is inside the container")
 
     l1 = ['itching', 'skin_rash', 'nodal_skin_eruptions', 'continuous_sneezing', 'shivering', 'chills', 'joint_pain',
