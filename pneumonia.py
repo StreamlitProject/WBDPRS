@@ -16,10 +16,26 @@ from PIL import Image
 def pneumonia():
     with st.expander("Key Facts"):
      st.write("""
-        Pneumonia accounts for 14% of all deaths of children under 5 years old, killing 740 180 children in 2019
-        Pneumonia can be caused by viruses, bacteria, or fungi.
-        Pneumonia can be prevented by immunization, adequate nutrition, and by addressing environmental factors.
-        Pneumonia caused by bacteria can be treated with antibiotics, but only one third of children with pneumonia receive the antibiotics they need.
+        1. Pneumonia accounts for 14% of all deaths of children under 5 years old, killing 740 180 children in 2019 \n
+        2. Pneumonia can be caused by viruses, bacteria, or fungi. \n
+        3. Pneumonia can be prevented by immunization, adequate nutrition, and by addressing environmental factors.\n
+        4. Pneumonia caused by bacteria can be treated with antibiotics, but only one third of children with pneumonia receive the antibiotics they need.
+     """)
+    with st.expander("Causes"):
+     st.write("""
+        Pneumonia is caused by a number of infectious agents, including viruses, bacteria and fungi. The most common are:
+
+        1. Streptococcus pneumoniae – the most common cause of bacterial pneumonia in children \n
+        2. Haemophilus influenzae type b (Hib) – the second most common cause of bacterial pneumonia \n
+        3. Respiratory syncytial virus is the most common viral cause of pneumonia \n
+        4. In infants infected with HIV, Pneumocystis jiroveci is one of the most common causes of pneumonia, responsible for at least one quarter of all pneumonia deaths in HIV-infected infants.
+     """)
+    with st.expander("Key Facts"):
+     st.write("""
+        1. Pneumonia accounts for 14% of all deaths of children under 5 years old, killing 740 180 children in 2019 \n
+        2. Pneumonia can be caused by viruses, bacteria, or fungi. \n
+        3. Pneumonia can be prevented by immunization, adequate nutrition, and by addressing environmental factors.\n
+        4. Pneumonia caused by bacteria can be treated with antibiotics, but only one third of children with pneumonia receive the antibiotics they need.
      """)
     model = load_model(r'model_vgg16.h5')
     selected1 = option_menu(None, ['Camera','Upload Image'],
