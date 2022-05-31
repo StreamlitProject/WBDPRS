@@ -38,14 +38,14 @@ def pneumonia():
         In addition, pneumonia may spread through blood, especially during and shortly after birth. 
         More research needs to be done on the different pathogens causing pneumonia and the ways they are transmitted, as this is of critical importance for treatment and prevention.
      """)
-     with st.expander("Risk Factors"):
+    with st.expander("Risk Factors"):
         st.write("""
         The following environmental factors also increase a child's susceptibility to pneumonia:
         1. indoor air pollution caused by cooking and heating with biomass fuels (such as wood or dung)
         2. living in crowded homes
         3. parental smoking.
         """)
-      with st.expander("Treatment"):
+    with st.expander("Treatment"):
         st.write("""
         Pneumonia should be treated with antibiotics. 
         The antibiotic of choice for first line treatment is amoxicillin dispersible tablets. 
@@ -53,7 +53,7 @@ def pneumonia():
         These cases can also be diagnosed and treated with inexpensive oral antibiotics at the community level by trained community health workers. 
         Hospitalization is recommended only for severe cases of pneumonia.
         """)
-      with st.expander("Prevention"):
+    with st.expander("Prevention"):
         st.write("""
         Preventing pneumonia in children is an essential component of a strategy to reduce child mortality. Immunization against Hib, pneumococcus, measles and whooping cough (pertussis) is the most effective way to prevent pneumonia.
         Adequate nutrition is key to improving children's natural defences, starting with exclusive breastfeeding for the first 6 months of life. In addition to being effective in preventing pneumonia, it also helps to reduce the length of the illness if a child does become ill.
