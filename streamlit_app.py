@@ -58,7 +58,7 @@ def set_bg_hack_url():
              https://drive.google.com/file/d/13vhdzYq-NQyW-pzfJooTAfPsluAvsagA/view?usp=sharing
              background-size: cover
          }}
-         .css-12ttj6m{{background-color:rgba(217,25,33,255); }}
+         .css-12ttj6m{{background-color:rgb(109,218,207); }}
          body{{font-weight: bold;
                font-family:"Galaxy-BT", sans-serif}}
          .css-1cpxqw2{{font-weight:bold}}
