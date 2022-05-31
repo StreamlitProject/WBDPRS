@@ -60,7 +60,7 @@ def pneumonia():
         Addressing environmental factors such as indoor air pollution (by providing affordable clean indoor stoves, for example) and encouraging good hygiene in crowded homes also reduces the number of children who fall ill with pneumonia.
         In children infected with HIV, the antibiotic cotrimoxazole is given daily to decrease the risk of contracting pneumonia.
         """)
-    
+    st.write("\n\n\n")
     model = load_model(r'model_vgg16.h5')
     selected1 = option_menu(None, ['Camera','Upload Image'],
                             icons=['camera','image'], 
