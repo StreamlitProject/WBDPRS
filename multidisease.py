@@ -11,7 +11,7 @@ def multidisease():
         st.text("Step II: Select all the five symptoms(mandatory) that you have from the pre-existed \n drop-down list.")
         st.text("Step III: Now click on submit.\n")
         st.markdown("That's cool :sunglasses:")
-        st.markdown("You find  your approximate disease that matches your symptoms")
+        st.info("Note: You find  your approximate disease that matches your symptoms")
         st.text("\n\n\n")
         
 
