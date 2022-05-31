@@ -39,9 +39,8 @@ def pneumonia():
         More research needs to be done on the different pathogens causing pneumonia and the ways they are transmitted, as this is of critical importance for treatment and prevention.
      """)
      with st.expander("Risk Factors"):
-            st.write("""
+        st.write("""
         The following environmental factors also increase a child's susceptibility to pneumonia:
-
         1. indoor air pollution caused by cooking and heating with biomass fuels (such as wood or dung)
         2. living in crowded homes
         3. parental smoking.
