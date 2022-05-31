@@ -146,7 +146,7 @@ elif selected3 == "Heart Disease":
     st.write("Heart Disease")
     h.heart()
 elif selected3 == "Multidisease":
-    st.markdown("<h2>Multidisease</h2>")
+    st.markdown("<h2>Multidisease</h2>",unsafe_allow_html=True)
     m.multidisease()
 elif selected3 == 'Pneumonia':
     st.write('Pneumonia')
