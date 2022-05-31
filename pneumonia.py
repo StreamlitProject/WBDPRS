@@ -19,46 +19,7 @@ def pneumonia():
                             icons=['camera','image'], 
                             menu_icon="cast", default_index=0, orientation="horizontal",
                             styles={"container": {"padding": "0!important", "background-color": "#fafafa"},"icon": {"color": "black", "font-size": "15px"}, "nav-link": {"font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#eee","--text-color":"#262730"},"nav-link-selected": {"background-color": "#6cdacf","--text-color":"#262730"},})
-    container =st.container(key="pneumonia")
-    if selected1=='Camera':
-        picture = container.camera_input("Take a picture")
-        if picture is not None:
-            an_image = Image.open(picture)
-            st.image(an_image,width=500)
-            an_image = an_image.resize((224,224))
-            an_image = an_image.convert('RGB')
-            #st.write(type(an_image))
-            x = image.img_to_array(an_image)
-            #st.write(x)
-            #st.write(x.dtype)
-            #st.write(x.shape)
-            x = np.expand_dims(x,axis=0)
-            img_data = preprocess_input(x)
-            classes = model.predict(x)
-            if int(classes[0][0])==1:
-                st.success("Normal")
-            elif int(classes[0][1])==1:
-                st.success("Pneumonia")
-    elif selected1=='Upload Image':
-        uploaded_file = container.file_uploader("Choose a file")
-        if uploaded_file is not None:
-            an_image = Image.open(uploaded_file)
-            st.image(an_image,width=500)
-            an_image = an_image.resize((224,224))
-            an_image = an_image.convert('RGB')
-            #st.write(type(an_image))
-            x = image.img_to_array(an_image)
-            #st.write(x)
-            #st.write(x.dtype)
-            #st.write(x.shape)
-            x = np.expand_dims(x,axis=0)
-            img_data = preprocess_input(x)
-            classes = model.predict(x)
-            if int(classes[0][0])==1:
-                st.success("Normal")
-            elif int(classes[0][1])==1:
-                st.success("Pneumonia")
-    """
+
     if selected1=='Camera':
         picture = st.camera_input("Take a picture")
         if picture is not None:
@@ -97,4 +58,3 @@ def pneumonia():
                 st.success("Normal")
             elif int(classes[0][1])==1:
                 st.success("Pneumonia")
-    """
