@@ -22,6 +22,7 @@ def pneumonia():
     form =st.form(key="pneumonia")
     if selected1=='Camera':
         picture = form.camera_input("Take a picture")
+        submitted = form.form_submit_button()
         if picture is not None:
             an_image = Image.open(picture)
             st.image(an_image,width=500)
