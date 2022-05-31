@@ -155,4 +155,3 @@ elif selected3 == 'Skin Cancer':
     st.header('Skin Cancer')
     s.skin()
 
-
