@@ -6,7 +6,7 @@ sklearn
 pandas
 numpy
 keras
-tensorflow
+tensorflow==2.9.1
 Pillow==9.1.0
 urllib3==1.26.9
 opencv-python==4.5.5.64
