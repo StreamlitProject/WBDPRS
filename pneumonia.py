@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from streamlit_option_menu import option_menu
 from keras.models import load_model
-from keras.preprocessing import image
+from tensorflow.keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input
 from PIL import Image
 #from io import BytesIO
