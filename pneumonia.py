@@ -22,49 +22,7 @@ def pneumonia():
         st.markdown("That's cool :sunglasses:")
         st.info("Note: This is a approximate model, under development")
         st.text("\n\n\n")
-        
-    #with st.expander("Key Facts",expanded=False):
-        #st.write("""
-        #1. Pneumonia accounts for 14% of all deaths of children under 5 years old, killing 740 180 children in 2019 \n
-        #2. Pneumonia can be caused by viruses, bacteria, or fungi. \n
-        #3. Pneumonia can be prevented by immunization, adequate nutrition, and by addressing environmental factors.\n
-        #4. Pneumonia caused by bacteria can be treated with antibiotics, but only one third of children with pneumonia receive the antibiotics they need.""")
     
-    #with st.expander("Causes",expanded=False):
-        #st.write("""
-        #Pneumonia is caused by a number of infectious agents, including viruses, bacteria and fungi. The most common are:
-
-        #1. Streptococcus pneumoniae – the most common cause of bacterial pneumonia in children \n
-        #2. Haemophilus influenzae type b (Hib) – the second most common cause of bacterial pneumonia \n
-        #3. Respiratory syncytial virus is the most common viral cause of pneumonia \n
-        #4. In infants infected with HIV, Pneumocystis jiroveci is one of the most common causes of pneumonia, responsible for at least one quarter of all pneumonia deaths in HIV-infected infants.""")
-    #with st.expander("Transmission",expanded=False):
-        #st.write("""
-        #Pneumonia can be spread in a number of ways.
-        #The viruses and bacteria that are commonly found in a child's nose or throat, can infect the lungs if they are inhaled. 
-        #They may also spread via air-borne droplets from a cough or sneeze. 
-        #In addition, pneumonia may spread through blood, especially during and shortly after birth. 
-        #More research needs to be done on the different pathogens causing pneumonia and the ways they are transmitted, as this is of critical importance for treatment and prevention.""")
-    #with st.expander("Risk Factors",expanded=False):
-        #st.write("""
-        #The following environmental factors also increase a child's susceptibility to pneumonia:
-        #1. indoor air pollution caused by cooking and heating with biomass fuels (such as wood or dung)
-        #2. living in crowded homes
-        #3. parental smoking.""")
-    #with st.expander("Treatment",expanded=False):
-        #st.write("""
-        #Pneumonia should be treated with antibiotics. 
-        #The antibiotic of choice for first line treatment is amoxicillin dispersible tablets. 
-        #Most cases of pneumonia require oral antibiotics, which are often prescribed at a health centre. 
-        #These cases can also be diagnosed and treated with inexpensive oral antibiotics at the community level by trained community health workers. 
-        #Hospitalization is recommended only for severe cases of pneumonia.""")
-    #with st.expander("Prevention",expanded=False):
-        #st.write("""
-        #Preventing pneumonia in children is an essential component of a strategy to reduce child mortality. Immunization against Hib, pneumococcus, measles and whooping cough (pertussis) is the most effective way to prevent pneumonia.
-        #Adequate nutrition is key to improving children's natural defences, starting with exclusive breastfeeding for the first 6 months of life. In addition to being effective in preventing pneumonia, it also helps to reduce the length of the illness if a child does become ill.
-        #Addressing environmental factors such as indoor air pollution (by providing affordable clean indoor stoves, for example) and encouraging good hygiene in crowded homes also reduces the number of children who fall ill with pneumonia.
-        #In children infected with HIV, the antibiotic cotrimoxazole is given daily to decrease the risk of contracting pneumonia.""")
-        
     st.write("\n\n\n")
     model = load_model(r'model_vgg16.h5')
     selected1 = option_menu(None, ['Camera','Upload Image'],
