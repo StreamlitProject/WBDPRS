@@ -1,13 +1,13 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-#from heart import *
-#from home import *
-#from multidisease import *
+from heart import *
+from home import *
+from multidisease import *
 import heart as h
 import multidisease as m
-#from pneumonia import *
+from pneumonia import *
 import pneumonia as p
-#from skin import *
+from skin import *
 import skin as s
 
 
