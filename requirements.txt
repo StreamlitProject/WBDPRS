@@ -1,8 +1,8 @@
-streamlit_option_menu
+streamlit_option_menu == 0.3.13
 pip == 24.2
 matplotlib
 seaborn
-sklearn
+scikit-learn
 pandas
 numpy
 keras
@@ -10,5 +10,4 @@ tensorflow
 Pillow
 urllib3
 opencv-python
-scikit-learn
 streamlit == 1.37.0
