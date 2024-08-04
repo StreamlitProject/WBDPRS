@@ -1,5 +1,5 @@
 streamlit_option_menu
-pip==24.2
+pip == 24.2
 matplotlib
 seaborn
 sklearn
@@ -11,4 +11,4 @@ Pillow
 urllib3
 opencv-python
 scikit-learn
-streamlit
+streamlit == 1.37.0
