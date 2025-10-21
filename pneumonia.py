@@ -2,32 +2,39 @@ import streamlit as st
 import numpy as np
 from keras.models import load_model
 from tensorflow.keras.preprocessing import image
+from keras.applications.vgg16 import preprocess_input
 from PIL import Image
-from streamlit_extras.badges import badge
 
 def pneumonia():
-    st.info("Upload X-ray or use camera to predict Pneumonia.")
+    st.markdown("## Pneumonia X-ray Checker :microscope:")
+    st.info("Upload or take a chest X-ray. Approximate results only!")
 
-    model = load_model('model_vgg16.h5')
-    cols = st.columns(2)
-    with cols[0]:
-        cam = st.camera_input("Take a picture", key="pneu_cam")
-    with cols[1]:
-        upload = st.file_uploader("Upload X-ray", type=['png','jpg','jpeg'], key="pneu_upload")
+    model = load_model("model_vgg16.h5")
 
-    img = cam or upload
+    input_type = st.radio("Select Input Method", ['Camera', 'Upload Image'], horizontal=True)
 
-    if img:
-        img = Image.open(img)
-        st.image(img, width=400)
+    def predict(img):
+        img = img.resize((224,224)).convert('RGB')
+        x = image.img_to_array(img)
+        x = np.expand_dims(x, axis=0)
+        x = preprocess_input(x)
+        pred = model.predict(x)
+        if pred.shape[1]==2:
+            idx = int(np.argmax(pred[0]))
+            st.success("Normal" if idx==0 else "Pneumonia")
+        else:
+            st.warning("Unexpected model output shape")
 
-        def predict(img):
-            img = img.resize((224,224)).convert('RGB')
-            x = image.img_to_array(img)/255.0
-            x = np.expand_dims(x, axis=0)
-            pred = model.predict(x)
-            result = "Pneumonia" if np.argmax(pred[0]) else "Normal"
-            st.success(f"Prediction: {result}")
-            badge("🩺 Accuracy approx: 85%", color="green")
+    if input_type == "Camera":
+        pic = st.camera_input("Take a picture")
+        if pic:
+            img = Image.open(pic)
+            st.image(img, width=400)
+            predict(img)
 
-        predict(img)
+    else:
+        upload = st.file_uploader("Upload Image", type=['png','jpg','jpeg'])
+        if upload:
+            img = Image.open(upload)
+            st.image(img, width=400)
+            predict(img)
