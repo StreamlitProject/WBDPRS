@@ -1,28 +1,55 @@
 import streamlit as st
-from heart import heart
-from multidisease import multidisease
-from pneumonia import pneumonia
-from skin import skin
-from streamlit_extras.badges import badge
-from streamlit_extras.let_it_rain import rain
+import skin as s
+import pneumonia as p
+import multidisease as m
+import heart as h
 
+# ---------------- Page Config ----------------
 st.set_page_config(
-    page_title="WBDPRS Dashboard",
+    page_title="WBDPRS",
     page_icon="🤖",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed",
 )
 
-# --------- Custom CSS for dashboard ---------
+# ---------------- Global CSS ----------------
 st.markdown("""
 <style>
+/* Font & Global Colors */
+html, body, [class*="css"]  {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Light theme */
+[data-theme="light"] {
+    --text-color: #004d40;
+    --bg-color: #e0f7fa;
+    --header-color: #00695c;
+    --card-bg: #ffffff;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --text-color: #e0f7fa;
+    --bg-color: #004d40;
+    --header-color: #80cbc4;
+    --card-bg: #1a374d;
+}
+
+/* App Background & Text */
 .stApp {
-    background: linear-gradient(135deg, #e0f7fa, #b2dfdb);
-    font-family: 'Arial', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
 }
-h1, h2, h3, p, label {
-    color: #004d40;
+
+/* Headers */
+h1, h2, h3 {
+    color: var(--header-color);
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
+
+/* Buttons */
 div.stButton > button {
     background-color: #26a69a;
     color: white;
@@ -33,6 +60,17 @@ div.stButton > button {
 div.stButton > button:hover {
     background-color: #00796b;
 }
+
+/* Cards */
+.stCard {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+/* Form padding */
 section.main > div.block-container {
     padding-top: 2rem;
     padding-left: 3rem;
@@ -41,33 +79,25 @@ section.main > div.block-container {
 </style>
 """, unsafe_allow_html=True)
 
-# --------- Header ---------
-st.markdown("<h1 style='text-align:center;'>🩺 Web-based Disease Prediction System</h1>", unsafe_allow_html=True)
+# ---------------- Header ----------------
+st.markdown("<h1 style='text-align:center;'>Web-based Disease Prediction System</h1>", unsafe_allow_html=True)
 st.write("---")
 
-# --------- Sidebar Navigation ---------
-option = st.sidebar.radio(
-    "Select Disease Module",
-    ["Skin Cancer", "Pneumonia", "Multidisease", "Heart Disease"],
-    index=0
-)
+# ---------------- Tabs as Pages ----------------
+tab1, tab2, tab3, tab4 = st.tabs(["Skin Cancer", "Pneumonia", "Multidisease", "Heart Disease"])
 
-st.sidebar.markdown("#### About")
-st.sidebar.info("Predict diseases based on symptoms or images. Supports Skin, Pneumonia, Heart, and Multidisease prediction.")
-
-# Optional Rain animation for fun
-rain(emoji="🩺", font_size=20, falling_speed=5, animation_length=3)
-
-# --------- Main Content ---------
-if option == "Skin Cancer":
+with tab1:
     st.markdown("<h2 style='text-align:center;'>Skin Cancer Prediction</h2>", unsafe_allow_html=True)
-    skin()
-elif option == "Pneumonia":
+    s.skin()
+
+with tab2:
     st.markdown("<h2 style='text-align:center;'>Pneumonia Prediction</h2>", unsafe_allow_html=True)
-    pneumonia()
-elif option == "Multidisease":
+    p.pneumonia()
+
+with tab3:
     st.markdown("<h2 style='text-align:center;'>Multidisease Prediction</h2>", unsafe_allow_html=True)
-    multidisease()
-elif option == "Heart Disease":
+    m.multidisease()
+
+with tab4:
     st.markdown("<h2 style='text-align:center;'>Heart Disease Prediction</h2>", unsafe_allow_html=True)
-    heart()
+    h.heart()
