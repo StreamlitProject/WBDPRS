@@ -4,105 +4,65 @@ import multidisease as m
 import pneumonia as p
 import skin as s
 
-# -------------------- Page Config --------------------
+# ---------------- Page Configuration ----------------
 st.set_page_config(
     page_title="WBDPRS",
     page_icon="🤖",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed",
 )
 
-# -------------------- Sidebar --------------------
-with st.sidebar:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Medical_icon.svg/512px-Medical_icon.svg.png", width=100)
-    st.title("WBDPRS")
-    st.markdown("### Web-based Disease Prediction System")
-    st.markdown("---")
-    st.markdown("**Info:**")
-    st.info("""
-    - Predict **Heart Disease**, **Pneumonia**, **Skin Cancer**, or **Multidisease**.
-    - Approximate results, for educational purposes only.
-    - Use healthy habits & consult a doctor for any concern.
-    """)
-
-    # Dark/light toggle
-    theme_choice = st.radio("Theme:", ["Light", "Dark"])
-    if theme_choice == "Dark":
-        st.markdown("""
-        <style>
-        .stApp { background-color: #262730; color: #fafafa; }
-        </style>
-        """, unsafe_allow_html=True)
-    else:
-        st.markdown("""
-        <style>
-        .stApp { background-color: #fafafa; color: #262730; }
-        </style>
-        """, unsafe_allow_html=True)
-
-# -------------------- Custom CSS --------------------
+# ---------------- Background & Theme ----------------
 st.markdown("""
 <style>
-h1, h2 {
-    text-align: center; 
-    color: #0a9396;
-    text-shadow: 1px 1px 2px #fff;
+.stApp {
+    background: linear-gradient(to bottom right, #e0f7fa, #e0f2f1);
+    color: #004d40;
+    font-family: 'Arial', sans-serif;
 }
-.stTabs [role="tab"] {
-    font-weight: bold;
-    font-size: 16px;
-    color: #262730;
+h1, h2, h3, p, label {
+    color: #004d40;
 }
-.stTabs [role="tab"][aria-selected="true"] {
+section.main > div.block-container {
+    padding-top: 3rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+div.stButton > button {
+    background-color: #26a69a;
     color: white;
-    background-color: #0a9396;
-    border-radius: 10px;
-}
-.stButton>button {
-    border-radius: 10px;
+    border-radius: 8px;
+    height: 3em;
+    width: 100%;
+    font-size: 1.1rem;
     font-weight: bold;
-    transition: 0.3s;
 }
-.stButton>button:hover {
-    background-color: #6cdacf;
+div.stButton > button:hover {
+    background-color: #00796b;
     color: white;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# -------------------- App Title --------------------
-st.title("🤖 Web-based Disease Prediction System")
-st.markdown("---")
+# ---------------- Header ----------------
+st.markdown("<h1 style='text-align:center;'>Web-based Disease Prediction System</h1>", unsafe_allow_html=True)
+st.write("---")
 
-# -------------------- Dashboard Cards --------------------
-col1, col2, col3, col4 = st.columns(4)
+# ---------------- Tabs as Pages ----------------
+tab1, tab2, tab3, tab4 = st.tabs(["Skin Cancer", "Pneumonia", "Multidisease", "Heart Disease"])
 
-with col1:
-    if st.button("🩺 Skin Cancer"):
-        st.session_state['page'] = 'Skin Cancer'
-
-with col2:
-    if st.button("🫁 Pneumonia"):
-        st.session_state['page'] = 'Pneumonia'
-
-with col3:
-    if st.button("💊 Multidisease"):
-        st.session_state['page'] = 'Multidisease'
-
-with col4:
-    if st.button("❤️ Heart Disease"):
-        st.session_state['page'] = 'Heart Disease'
-
-# -------------------- Load Selected Page --------------------
-page = st.session_state.get('page', 'Skin Cancer')
-
-st.markdown(f"<h2 style='text-align:center'><u>{page}</u></h2>", unsafe_allow_html=True)
-
-if page == "Skin Cancer":
+with tab1:
+    st.markdown("<h2 style='text-align:center;'>Skin Cancer Prediction</h2>", unsafe_allow_html=True)
     s.skin()
-elif page == "Pneumonia":
+
+with tab2:
+    st.markdown("<h2 style='text-align:center;'>Pneumonia Prediction</h2>", unsafe_allow_html=True)
     p.pneumonia()
-elif page == "Multidisease":
+
+with tab3:
+    st.markdown("<h2 style='text-align:center;'>Multidisease Prediction</h2>", unsafe_allow_html=True)
     m.multidisease()
-elif page == "Heart Disease":
+
+with tab4:
+    st.markdown("<h2 style='text-align:center;'>Heart Disease Prediction</h2>", unsafe_allow_html=True)
     h.heart()
