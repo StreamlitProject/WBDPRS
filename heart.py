@@ -1,9 +1,13 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 
 def heart():
+    st.markdown("## Heart Disease Prediction")
+    st.info("Approximate prediction using logistic regression model.")
+
     url = 'https://drive.google.com/uc?id=155zmtpJU3_uxcl1BGRRScgrgvKcswHdt'
     df = pd.read_csv(url)
 
@@ -11,42 +15,35 @@ def heart():
     for col in ['age','trestbps','chol','thalach','oldpeak']:
         df[col] = scaler.fit_transform(df[[col]])
 
-    X = df.drop('target', axis=1)
+    X = df.drop('target',axis=1)
     y = df['target']
-
     model = LogisticRegression()
-    model.fit(X, y)
+    model.fit(X,y)
 
-    form = st.form("heart_form")
+    # User input form
+    age = st.number_input("Age", 1,120,30)
+    sex = st.radio("Gender", ["Male","Female"], horizontal=True)
+    cp = st.selectbox("Chest pain type", ['typical angina','atypical angina','non-angina','asymptomatic'])
+    thestbps = st.number_input("Resting BP")
+    chol = st.number_input("Cholesterol")
+    fbs = st.radio("Fasting blood sugar", ["<120","≥120"], horizontal=True)
+    restecg = st.selectbox("Resting ECG", ['Normal','ST-T abnormal','LV hypertrophy'])
+    thalach = st.number_input("Max heart rate")
+    exang = st.radio("Exercise induced angina", ["No","Yes"], horizontal=True)
+    oldpeak = st.number_input("ST depression")
+    slope = st.selectbox("Slope of ST segment", ['Up','Flat','Down'])
+    ca = st.selectbox("Major vessels colored", [0,1,2,3])
+    thal = st.selectbox("Defect type", ['Normal','Fixed','Reversible'])
 
-    age = form.number_input("Age", min_value=1, max_value=120, value=30, key="heart_age")
-    sex = form.radio("Gender", ['Male','Female'], key="heart_sex")
-    cp = form.radio("Chest pain type", ['1 typical','2 atypical','3 non-angina','4 asymptomatic'], key="heart_cp")
-    trestbps = form.number_input("Resting BP", key="heart_bp")
-    chol = form.number_input("Cholesterol", key="heart_chol")
-    fbs = form.radio("Fasting BS", ['Yes','No'], key="heart_fbs")
-    restecg = form.radio("Rest ECG", ['Normal','Abnormal','Left hypertrophy'], key="heart_ecg")
-    thalach = form.number_input("Max HR", key="heart_thalach")
-    exang = form.radio("Exercise induced angina", ['Yes','No'], key="heart_exang")
-    oldpeak = form.number_input("ST depression", key="heart_oldpeak")
-    slope = form.radio("Slope", ['Up','Flat','Down'], key="heart_slope")
-    ca = form.radio("Major vessels colored", [0,1,2,3], key="heart_ca")
-    thal = form.radio("Defect type", ['Normal','Fixed','Reversible'], key="heart_thal")
-
-    submitted = form.form_submit_button("Submit", key="heart_submit")
-
-    if submitted:
-        mapping = {
-            'Male':1, 'Female':0,
-            'Yes':1, 'No':0,
-            '1 typical':1, '2 atypical':2, '3 non-angina':3, '4 asymptomatic':4,
-            'Normal':0, 'Abnormal':1, 'Left hypertrophy':2,
-            'Up':1, 'Flat':2, 'Down':3,
-            'Fixed':6, 'Reversible':7
-        }
-        input_data = pd.DataFrame([[
-            age, mapping[sex], mapping[cp], trestbps, chol, mapping[fbs], mapping[restecg],
-            thalach, mapping[exang], oldpeak, mapping[slope], ca, mapping[thal]
-        ]], columns=X.columns)
-        pred = model.predict(input_data)[0]
-        st.success("LOW risk" if pred==0 else "HIGH risk")
+    if st.button("Predict"):
+        input_df = pd.DataFrame([[age,1 if sex=='Male' else 0,
+                                  ['typical angina','atypical angina','non-angina','asymptomatic'].index(cp)+1,
+                                  thestbps, chol, 1 if fbs=='≥120' else 0,
+                                  ['Normal','ST-T abnormal','LV hypertrophy'].index(restecg),
+                                  thalach,1 if exang=='Yes' else 0, oldpeak,
+                                  ['Up','Flat','Down'].index(slope)+1, ca,
+                                  ['Normal','Fixed','Reversible'].index(thal)+3]],
+                                columns=X.columns)
+        pred = model.predict(input_df)[0]
+        if pred==1: st.error("HIGH risk of heart disease")
+        else: st.success("LOW risk of heart disease")
