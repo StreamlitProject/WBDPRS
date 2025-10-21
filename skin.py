@@ -2,45 +2,32 @@ import streamlit as st
 import numpy as np
 from keras.models import load_model
 from PIL import Image
+from streamlit_extras.mention import mention
 
 def skin():
-    st.markdown("## Skin Cancer Prediction :microscope:")
-    st.info("Upload a skin lesion image or use your camera to predict the type of lesion. Approximate model under development.")
+    st.info("Upload an image or use your camera for Skin Lesion detection.")
 
-    model = load_model(r'best_model.h5')
+    model = load_model('best_model.h5')
 
-    # Input selection
-    input_method = st.radio("Select Input Method", ["Camera", "Upload Image"], horizontal=True, key="skin_input")
+    cols = st.columns(2)
+    with cols[0]:
+        cam = st.camera_input("Take a picture", key="skin_cam")
+    with cols[1]:
+        upload = st.file_uploader("Upload Image", type=['png','jpg','jpeg'], key="skin_upload")
 
-    # Function to predict
-    def predict_image(img):
-        img = img.resize((28,28)).convert('RGB')
-        img_array = np.array(img).reshape(-1,28,28,3)
-        result = model.predict(img_array)
-        class_index = int(np.argmax(result[0]))
-        classes = {
-            0: 'Akiec : Actinic keratoses and intraepithelial carcinoma',
-            1: 'Bcc : Basal cell carcinoma',
-            2: 'Bkl : Benign lesions of the keratosis',
-            3: 'Df : Dermatofibroma',
-            4: 'Nv : Melanocytic nevi',
-            5: 'Vasc : Vascular lesions',
-            6: 'Mel : Melanoma'
-        }
-        st.success(classes[class_index])
+    img = cam or upload
 
-    # Camera input
-    if input_method == "Camera":
-        picture = st.camera_input("Take a picture", key="skin_cam")
-        if picture is not None:
-            img = Image.open(picture)
-            st.image(img, width=400)
-            predict_image(img)
+    if img:
+        image = Image.open(img)
+        st.image(image, width=400)
 
-    # Upload input
-    else:
-        uploaded_file = st.file_uploader("Upload image", type=["jpg","jpeg","png"], key="skin_file")
-        if uploaded_file is not None:
-            img = Image.open(uploaded_file)
-            st.image(img, width=400)
-            predict_image(img)
+        def predict(img):
+            img = img.resize((28,28)).convert('RGB')
+            arr = np.array(img).reshape(-1,28,28,3)
+            pred = model.predict(arr)
+            classes = ['Akiec','Bcc','Bkl','Df','Nv','Vasc','Mel']
+            st.balloons()
+            st.success(f"Prediction: {classes[int(np.argmax(pred[0]))]}")
+            mention("Note: Model is approximate and under development.", icon="💡")
+
+        predict(image)
