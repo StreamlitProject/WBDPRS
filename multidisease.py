@@ -5,41 +5,53 @@ from sklearn.naive_bayes import MultinomialNB
 
 @st.cache_data
 def load_data():
-    df_train = pd.read_csv("Training.csv")
-    df_test = pd.read_csv("Testing.csv")
-    df_train.columns = df_train.columns.str.strip()
-    df_test.columns = df_test.columns.str.strip()
+    train_df = pd.read_csv("Training.csv")
+    test_df = pd.read_csv("Testing.csv")
+    train_df.columns = train_df.columns.str.strip()
+    test_df.columns = test_df.columns.str.strip()
 
-    diseases = sorted(df_train['prognosis'].unique())
-    disease_map = {d:i for i,d in enumerate(diseases)}
-    df_train['prognosis'] = df_train['prognosis'].map(disease_map)
-    return df_train, disease_map
+    disease_list = ['Fungal infection','Allergy','GERD','Chronic cholestasis','Drug Reaction',
+                    'Peptic ulcer diseae','AIDS','Diabetes','Gastroenteritis','Bronchial Asthma',
+                    'Hypertension','Migraine','Cervical spondylosis','Paralysis (brain hemorrhage)',
+                    'Jaundice','Malaria','Chicken pox','Dengue','Typhoid','hepatitis A','Hepatitis B',
+                    'Hepatitis C','Hepatitis D','Hepatitis E','Alcoholic hepatitis','Tuberculosis',
+                    'Common Cold','Pneumonia','Dimorphic hemmorhoids(piles)','Heartattack','Varicoseveins',
+                    'Hypothyroidism','Hyperthyroidism','Hypoglycemia','Osteoarthristis','Arthritis',
+                    '(vertigo) Paroymsal  Positional Vertigo','Acne','Urinary tract infection','Psoriasis','Impetigo']
+    disease_map = {d:i for i,d in enumerate(disease_list)}
+
+    train_df['prognosis'] = train_df['prognosis'].map(disease_map)
+    test_df['prognosis'] = test_df['prognosis'].map(disease_map)
+    train_df.dropna(subset=['prognosis'], inplace=True)
+    test_df.dropna(subset=['prognosis'], inplace=True)
+    train_df['prognosis'] = train_df['prognosis'].astype(int)
+    test_df['prognosis'] = test_df['prognosis'].astype(int)
+
+    return train_df, test_df, disease_map
 
 @st.cache_data
-def train_model(df, features):
-    X = df[features].astype(int)
-    y = df['prognosis'].values
-    model = MultinomialNB()
-    model.fit(X, y)
-    return model
+def train_model(train_df, features):
+    X = train_df[features].astype(int)
+    y = train_df['prognosis'].values
+    gnb = MultinomialNB()
+    gnb.fit(X, y)
+    return gnb
 
 def multidisease():
-    st.markdown("## Multi-Disease Predictor :stethoscope:")
-    st.info("Select exactly 5 symptoms to predict probable disease.")
+    st.info("Select 5 symptoms to predict possible disease.")
 
-    features = ['itching','skin_rash','nodal_skin_eruptions','continuous_sneezing','shivering','chills','joint_pain','stomach_pain']
-    df_train, disease_map = load_data()
-    model = train_model(df_train, features)
-    disease_list = list(disease_map.keys())
+    features = ['itching','skin_rash','nodal_skin_eruptions','continuous_sneezing','shivering']
+    train_df, test_df, disease_map = load_data()
+    gnb = train_model(train_df, features)
 
-    form = st.form(key="MD")
-    symptoms = form.multiselect("Select 5 Symptoms", options=features)
-    submit = form.form_submit_button("Submit")
+    form = st.form("multidisease_form")
+    symptoms = form.multiselect("Select exactly 5 Symptoms", options=features, key="multi_symptoms")
+    submitted = form.form_submit_button("Submit", key="multi_submit")
 
-    if submit:
-        if len(symptoms)!=5:
-            st.warning("Select exactly 5 symptoms")
+    if submitted:
+        if len(symptoms) != 5:
+            st.warning("Select exactly 5 symptoms!")
         else:
-            vector = [1 if f in symptoms else 0 for f in features]
-            pred = model.predict([vector])[0]
-            st.success(f"Predicted Disease: {disease_list[pred]}")
+            input_vec = [1 if f in symptoms else 0 for f in features]
+            pred_idx = gnb.predict([input_vec])[0]
+            st.success(f"Predicted Disease: {list(disease_map.keys())[pred_idx]}")
