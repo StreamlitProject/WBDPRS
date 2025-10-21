@@ -4,75 +4,105 @@ import multidisease as m
 import pneumonia as p
 import skin as s
 
-# -------------------- Page Configuration --------------------
+# -------------------- Page Config --------------------
 st.set_page_config(
     page_title="WBDPRS",
     page_icon="🤖",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
+# -------------------- Sidebar --------------------
+with st.sidebar:
+    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Medical_icon.svg/512px-Medical_icon.svg.png", width=100)
+    st.title("WBDPRS")
+    st.markdown("### Web-based Disease Prediction System")
+    st.markdown("---")
+    st.markdown("**Info:**")
+    st.info("""
+    - Predict **Heart Disease**, **Pneumonia**, **Skin Cancer**, or **Multidisease**.
+    - Approximate results, for educational purposes only.
+    - Use healthy habits & consult a doctor for any concern.
+    """)
+
+    # Dark/light toggle
+    theme_choice = st.radio("Theme:", ["Light", "Dark"])
+    if theme_choice == "Dark":
+        st.markdown("""
+        <style>
+        .stApp { background-color: #262730; color: #fafafa; }
+        </style>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown("""
+        <style>
+        .stApp { background-color: #fafafa; color: #262730; }
+        </style>
+        """, unsafe_allow_html=True)
+
 # -------------------- Custom CSS --------------------
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background: url("https://drive.google.com/uc?export=view&id=1QNZpRaGDbxsDO3ZyjURYTfIMePIMbQ4c");
-        background-size: cover;
-        background-attachment: fixed;
-    }
-    h1, h2 {
-        text-align: center; 
-        color: #0a9396;
-        text-shadow: 1px 1px 2px #fff;
-    }
-    .nav-button {
-        display: inline-block;
-        margin: 0 8px;
-        padding: 6px 16px;
-        border-radius: 8px;
-        background-color: #fafafa;
-        color: #262730;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    .nav-button:hover {
-        background-color: #6cdacf;
-        color: #fff;
-    }
-    .nav-button-active {
-        background-color: #0a9396;
-        color: #fff;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("""
+<style>
+h1, h2 {
+    text-align: center; 
+    color: #0a9396;
+    text-shadow: 1px 1px 2px #fff;
+}
+.stTabs [role="tab"] {
+    font-weight: bold;
+    font-size: 16px;
+    color: #262730;
+}
+.stTabs [role="tab"][aria-selected="true"] {
+    color: white;
+    background-color: #0a9396;
+    border-radius: 10px;
+}
+.stButton>button {
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.stButton>button:hover {
+    background-color: #6cdacf;
+    color: white;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # -------------------- App Title --------------------
 st.title("🤖 Web-based Disease Prediction System")
+st.markdown("---")
 
-# -------------------- Horizontal Navigation Bar --------------------
-if "page" not in st.session_state:
-    st.session_state.page = "Skin Cancer"  # default page
+# -------------------- Dashboard Cards --------------------
+col1, col2, col3, col4 = st.columns(4)
 
-# Define pages and optional icons
-pages = {
-    "Skin Cancer": {"func": s.skin, "icon": "🩺"},
-    "Pneumonia": {"func": p.pneumonia, "icon": "🫁"},
-    "Multidisease": {"func": m.multidisease, "icon": "💊"},
-    "Heart Disease": {"func": h.heart, "icon": "❤️"},
-}
+with col1:
+    if st.button("🩺 Skin Cancer"):
+        st.session_state['page'] = 'Skin Cancer'
 
-# Render navigation buttons
-cols = st.columns(len(pages))
-for i, (name, info) in enumerate(pages.items()):
-    if cols[i].button(f"{info['icon']} {name}"):
-        st.session_state.page = name
+with col2:
+    if st.button("🫁 Pneumonia"):
+        st.session_state['page'] = 'Pneumonia'
 
-st.markdown("<br>", unsafe_allow_html=True)  # spacing
+with col3:
+    if st.button("💊 Multidisease"):
+        st.session_state['page'] = 'Multidisease'
 
-# -------------------- Render Selected Page --------------------
-current_page = st.session_state.page
-st.markdown(f"<h2><u>{current_page}</u></h2>", unsafe_allow_html=True)
-pages[current_page]["func"]()
+with col4:
+    if st.button("❤️ Heart Disease"):
+        st.session_state['page'] = 'Heart Disease'
+
+# -------------------- Load Selected Page --------------------
+page = st.session_state.get('page', 'Skin Cancer')
+
+st.markdown(f"<h2 style='text-align:center'><u>{page}</u></h2>", unsafe_allow_html=True)
+
+if page == "Skin Cancer":
+    s.skin()
+elif page == "Pneumonia":
+    p.pneumonia()
+elif page == "Multidisease":
+    m.multidisease()
+elif page == "Heart Disease":
+    h.heart()
