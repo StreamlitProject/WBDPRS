@@ -1,11 +1,10 @@
 streamlit==1.50.0
+tensorflow
+keras
 numpy
 pandas
 scikit-learn
-keras
-tensorflow
 Pillow
-opencv-python
 matplotlib
 seaborn
-streamlit-extras
+opencv-python
