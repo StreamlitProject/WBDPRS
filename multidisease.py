@@ -4,36 +4,32 @@ from sklearn.naive_bayes import MultinomialNB
 
 @st.cache_data
 def load_data():
-    train_df = pd.read_csv("Training.csv")
-    test_df = pd.read_csv("Testing.csv")
-    return train_df, test_df
+    train = pd.read_csv("Training.csv")
+    test = pd.read_csv("Testing.csv")
+    return train, test
 
 @st.cache_data
-def train_model(train_df, features):
-    X = train_df[features]
-    y = train_df['prognosis']
+def train_model(train, features):
+    X = train[features]
+    y = train['prognosis']
     model = MultinomialNB()
     model.fit(X, y)
     return model
 
 def multidisease():
-    st.info("Approximate disease prediction based on symptoms.")
+    st.header("Multidisease Prediction")
+    st.info("Prediction based on symptoms")
 
-    train_df, test_df = load_data()
-    features = train_df.columns[:-1].tolist()
-    model = train_model(train_df, features)
+    train, test = load_data()
+    features = train.columns[:-1].tolist()
+    model = train_model(train, features)
 
-    symptoms = st.multiselect(
-        "Select up to 5 symptoms",
-        options=features,
-        max_selections=5,
-        key="multi_symptoms"
-    )
+    symptoms = st.multiselect("Select up to 5 symptoms", options=features, max_selections=5, key="multi_symptoms")
 
-    if st.button("Predict Disease", key="multi_predict"):
-        if len(symptoms) == 0:
+    if st.button("Predict", key="multi_predict"):
+        if not symptoms:
             st.warning("Select at least 1 symptom")
         else:
-            input_vector = [1 if f in symptoms else 0 for f in features]
-            pred_idx = model.predict([input_vector])[0]
-            st.success(f"Predicted Disease Code: {pred_idx}")
+            vector = [1 if f in symptoms else 0 for f in features]
+            pred = model.predict([vector])[0]
+            st.success(f"Predicted Disease Code: {pred}")
