@@ -6,36 +6,41 @@ from keras.applications.vgg16 import preprocess_input
 from PIL import Image
 
 def pneumonia():
-    st.markdown("## Have a Quick Overlook :eyes:")
-    st.text("Step I: Scroll down to check whether you have Pneumonia or not.")
-    st.text("Step II: Choose either Camera input or Upload Image to provide an X-ray image.")
-    st.text("Step III: Click Submit to see the prediction.\n")
-    st.markdown("That's cool :sunglasses:")
-    st.info("Note: This is an approximate model under development.")
+    st.markdown("## Pneumonia Prediction :lungs:")
+    st.info("Upload a chest X-ray image or use your camera to detect Pneumonia. Approximate model under development.")
 
-    model = load_model('model_vgg16.h5')
+    model = load_model(r'model_vgg16.h5')
 
-    selected_input = st.radio("Select Input Method", ['Camera', 'Upload Image'], horizontal=True)
+    # Input method
+    input_method = st.radio("Select Input Method", ["Camera", "Upload Image"], horizontal=True, key="pneu_input")
 
     def predict_image(img):
         img = img.resize((224,224)).convert('RGB')
         x = image.img_to_array(img)
         x = np.expand_dims(x, axis=0)
         x = preprocess_input(x)
-        classes = model.predict(x)
-        pred_idx = int(np.argmax(classes[0]))
-        st.success("Normal" if pred_idx==0 else "Pneumonia")
+        result = model.predict(x)
+        pred_idx = int(np.argmax(result[0]))
+        if result.shape[1]==2:
+            if pred_idx == 0:
+                st.success("Prediction: Normal")
+            else:
+                st.error("Prediction: Pneumonia")
+        else:
+            st.warning("Unexpected model output shape.")
 
-    if selected_input == 'Camera':
-        picture = st.camera_input("Take a picture")
-        if picture:
+    # Camera
+    if input_method == "Camera":
+        picture = st.camera_input("Take a picture", key="pneu_cam")
+        if picture is not None:
             img = Image.open(picture)
-            st.image(img, width=500)
+            st.image(img, width=400)
             predict_image(img)
 
+    # Upload
     else:
-        uploaded_file = st.file_uploader("Choose an image", type=['png','jpg','jpeg'])
-        if uploaded_file:
+        uploaded_file = st.file_uploader("Upload image", type=["jpg","jpeg","png"], key="pneu_file")
+        if uploaded_file is not None:
             img = Image.open(uploaded_file)
-            st.image(img, width=500)
+            st.image(img, width=400)
             predict_image(img)
