@@ -1,13 +1,10 @@
-streamlit_option_menu == 0.4.0
-pip == 25.0.1
-matplotlib
-seaborn
-scikit-learn
+streamlit==1.50.0
 pandas
 numpy
-keras
+scikit-learn
+matplotlib
+seaborn
 tensorflow
+keras
 Pillow
-urllib3
 opencv-python
-streamlit == 1.44.0
