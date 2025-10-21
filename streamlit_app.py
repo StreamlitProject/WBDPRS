@@ -54,15 +54,14 @@ st.title("🤖 Web-based Disease Prediction System")
 
 # -------------------- Horizontal Navigation Bar --------------------
 if "page" not in st.session_state:
-    st.session_state.page = "Home"
+    st.session_state.page = "Skin Cancer"  # default page
 
 # Define pages and optional icons
 pages = {
-    "Home": {"func": lambda: st.info("Welcome to **Web-based Disease Prediction System**! 🏥\nSelect a module above to start prediction."), "icon": "🏠"},
-    "Heart Disease": {"func": h.heart, "icon": "❤️"},
-    "Multidisease": {"func": m.multidisease, "icon": "💊"},
+    "Skin Cancer": {"func": s.skin, "icon": "🩺"},
     "Pneumonia": {"func": p.pneumonia, "icon": "🫁"},
-    "Skin Cancer": {"func": s.skin, "icon": "🩺"}
+    "Multidisease": {"func": m.multidisease, "icon": "💊"},
+    "Heart Disease": {"func": h.heart, "icon": "❤️"},
 }
 
 # Render navigation buttons
