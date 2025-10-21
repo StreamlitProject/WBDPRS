@@ -6,5 +6,3 @@ keras
 tensorflow
 Pillow
 opencv-python
-matplotlib
-seaborn
