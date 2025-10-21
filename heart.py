@@ -1,42 +1,42 @@
 import streamlit as st
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
 
 def heart():
-    st.info("Enter patient details for Heart Disease prediction.")
+    st.markdown("## Heart Disease Risk Checker :heart:")
+    st.info("Fill the form to estimate risk of heart disease.")
 
     url = 'https://drive.google.com/uc?id=155zmtpJU3_uxcl1BGRRScgrgvKcswHdt'
     df = pd.read_csv(url)
     scaler = StandardScaler()
-    cols_to_scale = ['age','trestbps','chol','thalach','oldpeak']
-    df[cols_to_scale] = scaler.fit_transform(df[cols_to_scale])
+    for col in ['age','trestbps','chol','thalach','oldpeak']:
+        df[col] = scaler.fit_transform(df[[col]])
 
-    form = st.form("HeartFormUI")
-    age = form.number_input("Age", min_value=1, max_value=120, value=30)
-    sex = form.radio("Gender", ['Male','Female'], key="sex_ui")
-    cp = form.selectbox("Chest Pain Type", ['Typical','Atypical','Non-angina','Asymptomatic'], key="cp_ui")
-    trestbps = form.number_input("Resting BP", value=120)
-    chol = form.number_input("Cholesterol", value=200)
-    fbs = form.radio("Fasting Blood Sugar >120 mg/dl", ['Yes','No'], key="fbs_ui")
-    restecg = form.selectbox("Resting ECG", ['Normal','ST-T','LVH'], key="ecg_ui")
-    thalach = form.number_input("Max Heart Rate", value=150)
-    exang = form.radio("Exercise Induced Angina", ['Yes','No'], key="exang_ui")
-    oldpeak = form.number_input("ST depression", value=1.0)
-    slope = form.selectbox("Slope", ['Upsloping','Flat','Downsloping'], key="slope_ui")
-    ca = form.selectbox("Major vessels colored", [0,1,2,3], key="ca_ui")
-    thal = form.selectbox("Thalassemia", ['Normal','Fixed','Reversible'], key="thal_ui")
-    submitted = form.form_submit_button("Predict")
+    X = df.drop(['target'], axis=1)
+    y = df['target']
+    model = LogisticRegression().fit(X, y)
 
-    if submitted:
-        mapping = {'Male':1,'Female':0,'Yes':1,'No':0,'Typical':1,'Atypical':2,'Non-angina':3,'Asymptomatic':4,
-                   'Normal':0,'ST-T':1,'LVH':2,'Upsloping':1,'Flat':2,'Downsloping':3,'Normal':3,'Fixed':6,'Reversible':7}
-        input_data = pd.DataFrame([[
-            mapping[sex], mapping[cp], trestbps, chol, mapping[fbs], mapping[restecg],
-            thalach, mapping[exang], oldpeak, mapping[slope], mapping[ca], mapping[thal]
-        ]], columns=['sex','cp','trestbps','chol','fbs','restecg','thalach','exang','oldpeak','slope','ca','thal'])
-        model = LogisticRegression()
-        model.fit(df.drop('target',axis=1), df['target'])
-        pred = model.predict(input_data)[0]
-        st.balloons()
-        st.success("HIGH risk!" if pred==1 else "LOW risk!")
+    form = st.form(key="Heart")
+    age = form.number_input("Age", 1,120,30)
+    sex = form.radio("Gender", ['Male','Female'], horizontal=True)
+    sex_val = 1 if sex=='Male' else 0
+    cp = form.radio("Chest Pain Type", ['Typical','Atypical','Non-angina','Asymptomatic'], horizontal=True)
+    cp_val = ['Typical','Atypical','Non-angina','Asymptomatic'].index(cp)+1
+    trestbps = form.number_input("Resting BP")
+    chol = form.number_input("Cholesterol")
+    fbs = form.radio("Fasting Blood Sugar >=120 mg/dL", ['Yes','No'], horizontal=True)
+    fbs_val = 1 if fbs=='Yes' else 0
+    thalach = form.number_input("Max Heart Rate")
+    exang = form.radio("Exercise Induced Angina", ['Yes','No'], horizontal=True)
+    exang_val = 1 if exang=='Yes' else 0
+    oldpeak = form.number_input("ST Depression")
+    submit = form.form_submit_button("Submit")
+
+    if submit:
+        data = pd.DataFrame([[age, sex_val, cp_val, trestbps, chol, fbs_val, thalach, exang_val, oldpeak]], columns=X.columns[:9])
+        pred = model.predict(data)[0]
+        if pred==1:
+            st.error("HIGH risk of heart disease")
+        else:
+            st.success("LOW risk of heart disease")
