@@ -4,100 +4,85 @@ import pneumonia as p
 import multidisease as m
 import heart as h
 
-# ---------------- Page Config ----------------
+# -------------------- Page Config --------------------
 st.set_page_config(
     page_title="WBDPRS",
     page_icon="🤖",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
 )
 
-# ---------------- Global CSS ----------------
+# -------------------- Custom CSS & Theme --------------------
 st.markdown("""
-<style>
-/* Font & Global Colors */
-html, body, [class*="css"]  {
-    font-family: 'Roboto', sans-serif;
-}
+    <style>
+    /* Background gradient */
+    .stApp {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
+        color: #0f3d3e;
+    }
 
-/* Light theme */
-[data-theme="light"] {
-    --text-color: #004d40;
-    --bg-color: #e0f7fa;
-    --header-color: #00695c;
-    --card-bg: #ffffff;
-}
+    /* Headings */
+    h1, h2, h3 {
+        font-family: 'Helvetica Neue', sans-serif;
+        color: #056676;
+        text-align: center;
+    }
 
-/* Dark theme */
-[data-theme="dark"] {
-    --text-color: #e0f7fa;
-    --bg-color: #004d40;
-    --header-color: #80cbc4;
-    --card-bg: #1a374d;
-}
+    /* Buttons */
+    div.stButton > button {
+        background-color: #009688;
+        color: white;
+        border-radius: 8px;
+        height: 3em;
+        font-size: 1.1rem;
+        font-weight: bold;
+        width: 100%;
+    }
+    div.stButton > button:hover {
+        background-color: #00796b;
+        color: white;
+    }
 
-/* App Background & Text */
-.stApp {
-    background: var(--bg-color);
-    color: var(--text-color);
-}
+    /* Forms and container spacing */
+    section.main > div.block-container {
+        padding-top: 3rem;
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
 
-/* Headers */
-h1, h2, h3 {
-    color: var(--header-color);
-    font-weight: 700;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-}
-
-/* Buttons */
-div.stButton > button {
-    background-color: #26a69a;
-    color: white;
-    border-radius: 10px;
-    height: 3em;
-    font-weight: bold;
-}
-div.stButton > button:hover {
-    background-color: #00796b;
-}
-
-/* Cards */
-.stCard {
-    background-color: var(--card-bg);
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-}
-
-/* Form padding */
-section.main > div.block-container {
-    padding-top: 2rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
-}
-</style>
+    /* Dark mode overrides */
+    [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
+        color: #80cbc4;
+    }
+    [data-theme="dark"] .stApp {
+        background: linear-gradient(to bottom right, #102027, #263238);
+        color: #e0f7fa;
+    }
+    </style>
 """, unsafe_allow_html=True)
 
-# ---------------- Header ----------------
-st.markdown("<h1 style='text-align:center;'>Web-based Disease Prediction System</h1>", unsafe_allow_html=True)
+# -------------------- Header --------------------
+st.markdown("<h1>Web-based Disease Prediction System</h1>", unsafe_allow_html=True)
 st.write("---")
 
-# ---------------- Tabs as Pages ----------------
-tab1, tab2, tab3, tab4 = st.tabs(["Skin Cancer", "Pneumonia", "Multidisease", "Heart Disease"])
+# -------------------- Tabs as Pages --------------------
+tab_skin, tab_pneu, tab_multi, tab_heart = st.tabs(
+    ["Skin Cancer", "Pneumonia", "Multidisease", "Heart Disease"]
+)
 
-with tab1:
-    st.markdown("<h2 style='text-align:center;'>Skin Cancer Prediction</h2>", unsafe_allow_html=True)
-    s.skin()
+with tab_skin:
+    st.markdown("<h2>Skin Cancer Prediction</h2>", unsafe_allow_html=True)
+    s.skin()  # Call skin.py function
 
-with tab2:
-    st.markdown("<h2 style='text-align:center;'>Pneumonia Prediction</h2>", unsafe_allow_html=True)
-    p.pneumonia()
+with tab_pneu:
+    st.markdown("<h2>Pneumonia Prediction</h2>", unsafe_allow_html=True)
+    p.pneumonia()  # Call pneumonia.py function
 
-with tab3:
-    st.markdown("<h2 style='text-align:center;'>Multidisease Prediction</h2>", unsafe_allow_html=True)
-    m.multidisease()
+with tab_multi:
+    st.markdown("<h2>Multidisease Prediction</h2>", unsafe_allow_html=True)
+    m.multidisease()  # Call multidisease.py function
 
-with tab4:
-    st.markdown("<h2 style='text-align:center;'>Heart Disease Prediction</h2>", unsafe_allow_html=True)
-    h.heart()
+with tab_heart:
+    st.markdown("<h2>Heart Disease Prediction</h2>", unsafe_allow_html=True)
+    h.heart()  # Call heart.py function
