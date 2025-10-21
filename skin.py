@@ -2,32 +2,45 @@ import streamlit as st
 import numpy as np
 from keras.models import load_model
 from PIL import Image
-from streamlit_extras.mention import mention
 
 def skin():
-    st.info("Upload an image or use your camera for Skin Lesion detection.")
+    st.markdown("## Quick Skin Lesion Checker :eyes:")
+    st.info("Upload or take a photo to predict the type of lesion. Approximate results only!")
 
-    model = load_model('best_model.h5')
+    # Load model
+    model = load_model("best_model.h5")
 
-    cols = st.columns(2)
-    with cols[0]:
-        cam = st.camera_input("Take a picture", key="skin_cam")
-    with cols[1]:
-        upload = st.file_uploader("Upload Image", type=['png','jpg','jpeg'], key="skin_upload")
+    # Input type selection
+    input_type = st.radio("Select Input Method", ['Camera', 'Upload Image'], horizontal=True)
 
-    img = cam or upload
+    # Class labels
+    classes = {
+        0: 'Akiec: Actinic keratoses',
+        1: 'Bcc: Basal cell carcinoma',
+        2: 'Bkl: Benign keratosis',
+        3: 'Df: Dermatofibroma',
+        4: 'Nv: Melanocytic nevi',
+        5: 'Vasc: Vascular lesions',
+        6: 'Mel: Melanoma'
+    }
 
-    if img:
-        image = Image.open(img)
-        st.image(image, width=400)
+    def predict(img):
+        img = img.resize((28,28)).convert('RGB')
+        arr = np.array(img).reshape(-1,28,28,3)
+        pred = model.predict(arr)
+        idx = int(np.argmax(pred[0]))
+        st.success(f"Predicted Lesion: {classes[idx]}")
 
-        def predict(img):
-            img = img.resize((28,28)).convert('RGB')
-            arr = np.array(img).reshape(-1,28,28,3)
-            pred = model.predict(arr)
-            classes = ['Akiec','Bcc','Bkl','Df','Nv','Vasc','Mel']
-            st.balloons()
-            st.success(f"Prediction: {classes[int(np.argmax(pred[0]))]}")
-            mention("Note: Model is approximate and under development.", icon="💡")
+    if input_type == "Camera":
+        pic = st.camera_input("Take a picture")
+        if pic:
+            img = Image.open(pic)
+            st.image(img, width=400)
+            predict(img)
 
-        predict(image)
+    else:
+        upload = st.file_uploader("Upload Image", type=['png','jpg','jpeg'])
+        if upload:
+            img = Image.open(upload)
+            st.image(img, width=400)
+            predict(img)
