@@ -1,40 +1,39 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 from sklearn.naive_bayes import MultinomialNB
 
 @st.cache_data
 def load_data():
     train_df = pd.read_csv("Training.csv")
     test_df = pd.read_csv("Testing.csv")
-    disease_list = list(set(train_df['prognosis'].str.strip()))
-    disease_map = {d:i for i,d in enumerate(disease_list)}
-    train_df['prognosis'] = train_df['prognosis'].map(disease_map)
-    test_df['prognosis'] = test_df['prognosis'].map(disease_map)
-    return train_df, test_df, disease_map
+    return train_df, test_df
 
 @st.cache_data
 def train_model(train_df, features):
-    X = train_df[features].astype(int)
-    y = train_df['prognosis'].values
+    X = train_df[features]
+    y = train_df['prognosis']
     model = MultinomialNB()
-    model.fit(X,y)
+    model.fit(X, y)
     return model
 
 def multidisease():
-    st.markdown("## Predict Disease from Symptoms")
-    st.info("Approximate predictions using an AI model. Select exactly 5 symptoms.")
+    st.info("Approximate disease prediction based on symptoms.")
 
-    features = pd.read_csv("Training.csv").columns[:-1].tolist()
-    traindf, testdf, disease_map = load_data()
-    model = train_model(traindf, features)
-    disease_list = list(disease_map.keys())
+    train_df, test_df = load_data()
+    features = train_df.columns[:-1].tolist()
+    model = train_model(train_df, features)
 
-    symptoms = st.multiselect("Select 5 symptoms:", options=features)
-    if st.button("Predict"):
-        if len(symptoms)!=5:
-            st.warning("Please select exactly 5 symptoms.")
+    symptoms = st.multiselect(
+        "Select up to 5 symptoms",
+        options=features,
+        max_selections=5,
+        key="multi_symptoms"
+    )
+
+    if st.button("Predict Disease", key="multi_predict"):
+        if len(symptoms) == 0:
+            st.warning("Select at least 1 symptom")
         else:
-            input_vector = [1 if s in symptoms else 0 for s in features]
+            input_vector = [1 if f in symptoms else 0 for f in features]
             pred_idx = model.predict([input_vector])[0]
-            st.success(f"Predicted Disease: {disease_list[pred_idx]}")
+            st.success(f"Predicted Disease Code: {pred_idx}")
