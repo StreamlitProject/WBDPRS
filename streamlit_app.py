@@ -1,66 +1,57 @@
 import streamlit as st
-from pages import skin, pneumonia, multidisease, heart  # Assuming a folder named pages
+import heart
+import multidisease
+import pneumonia
+import skin
 
 # ---------------- Page Configuration ----------------
 st.set_page_config(
     page_title="WBDPRS",
     page_icon="🤖",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
-# ---------------- Background & Custom CSS ----------------
-st.markdown("""
-<style>
-.stApp {
-    background: linear-gradient(to bottom right, #e0f7fa, #b2dfdb);
-    font-family: 'Poppins', sans-serif;
-    color: #004d40;
-}
-h1, h2, h3, p, label {
-    color: #004d40;
-}
-section.main > div.block-container {
-    padding-top: 2rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
-}
-div.stButton > button {
-    background-color: #26a69a;
-    color: white;
-    border-radius: 8px;
-    height: 3em;
-    width: 100%;
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-div.stButton > button:hover {
-    background-color: #00796b;
-}
-</style>
-""", unsafe_allow_html=True)
+# ---------------- Background & Font ----------------
+st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    .stApp {
+        font-family: 'Roboto', sans-serif;
+    }
+    .main-header {
+        color: #004d40;
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
-# ---------------- App Header ----------------
-st.markdown("<h1 style='text-align:center;'>Web-based Disease Prediction System</h1>", unsafe_allow_html=True)
+# ---------------- Header ----------------
+st.markdown("<div class='main-header'>Web-based Disease Prediction System 🤖</div>", unsafe_allow_html=True)
 st.write("---")
 
-# ---------------- Tabs ----------------
-tab_skin, tab_pneumonia, tab_multidisease, tab_heart = st.tabs(
+# ---------------- Tabs as Pages ----------------
+tab1, tab2, tab3, tab4 = st.tabs(
     ["Skin Cancer", "Pneumonia", "Multidisease", "Heart Disease"]
 )
 
-with tab_skin:
-    st.markdown("<h2 style='text-align:center;'>Skin Cancer Prediction</h2>", unsafe_allow_html=True)
+with tab1:
+    st.header("Skin Cancer Prediction")
     skin.skin()
 
-with tab_pneumonia:
-    st.markdown("<h2 style='text-align:center;'>Pneumonia Detection</h2>", unsafe_allow_html=True)
+with tab2:
+    st.header("Pneumonia Prediction")
     pneumonia.pneumonia()
 
-with tab_multidisease:
-    st.markdown("<h2 style='text-align:center;'>Multidisease Prediction</h2>", unsafe_allow_html=True)
+with tab3:
+    st.header("Multidisease Prediction")
     multidisease.multidisease()
 
-with tab_heart:
-    st.markdown("<h2 style='text-align:center;'>Heart Disease Prediction</h2>", unsafe_allow_html=True)
+with tab4:
+    st.header("Heart Disease Prediction")
     heart.heart()
