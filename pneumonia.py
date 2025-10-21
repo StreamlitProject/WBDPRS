@@ -5,33 +5,43 @@ from tensorflow.keras.preprocessing import image
 from PIL import Image
 
 def pneumonia():
-    st.markdown("## Pneumonia Detection from X-ray")
-    st.info("Approximate predictions using an AI model. For demonstration purposes only.")
+    st.info("Approximate Pneumonia prediction (under development).")
 
-    model = load_model('model_vgg16.h5')
+    # Load model
+    model = load_model("model_vgg16.h5")
 
-    input_type = st.radio("Input Method:", ["Camera", "Upload Image"], horizontal=True)
+    # Input type
+    input_type = st.radio(
+        "Input Method:",
+        ["Camera", "Upload Image"],
+        horizontal=True,
+        key="pneumonia_input"
+    )
 
     def predict_image(img):
-        img = img.resize((224,224)).convert('RGB')
+        img = img.resize((224, 224)).convert("RGB")
         x = image.img_to_array(img)
         x = np.expand_dims(x, axis=0)
-        x = x/255.0  # normalize
-        classes = model.predict(x)
-        if classes.shape[1]==2:
-            st.success("Pneumonia" if np.argmax(classes[0]) else "Normal")
+        x = x / 255.0
+        result = model.predict(x)
+        if result.shape[1] == 2:
+            pred_idx = np.argmax(result[0])
+            st.success("Prediction: " + ("Normal" if pred_idx == 0 else "Pneumonia"))
         else:
-            st.warning("Unexpected model output.")
+            st.warning("Unexpected model output")
 
+    # Camera input
     if input_type == "Camera":
-        picture = st.camera_input("Take a picture")
-        if picture:
-            img = Image.open(picture)
-            st.image(img, width=400)
+        pic = st.camera_input("Take a picture", key="pneumonia_camera")
+        if pic:
+            img = Image.open(pic)
+            st.image(img, width=300)
             predict_image(img)
-    else:
-        uploaded_file = st.file_uploader("Upload Image", type=['png','jpg','jpeg'])
-        if uploaded_file:
-            img = Image.open(uploaded_file)
-            st.image(img, width=400)
+
+    # Upload
+    if input_type == "Upload Image":
+        file = st.file_uploader("Upload X-ray image", type=["png", "jpg", "jpeg"], key="pneumonia_upload")
+        if file:
+            img = Image.open(file)
+            st.image(img, width=300)
             predict_image(img)
