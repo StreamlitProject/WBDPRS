@@ -46,14 +46,14 @@ with st.form("Heart Disease Prediction"):
     with c1:
         st.markdown("#### 👤 Demographics")
         age = st.number_input("Age (years)", min_value=1, max_value=120, value=45, help="Your age in complete years")
-        sex = st.pills("Gender", ["Male", "Female"], selection_mode="single")
+        sex = st.radio("Gender", ["Male", "Female"], horizontal=True)
 
         st.markdown("#### 🩸 Vitals")
         trestbps = st.number_input("Resting blood pressure (mmHg)", min_value=60, max_value=250, value=120,
                                    help="Blood pressure at rest, in mmHg. Normal: ~120/80")
         chol = st.number_input("Serum cholesterol (mg/dL)", min_value=100, max_value=600, value=200,
                                help="Total serum cholesterol. Desirable: <200 mg/dL")
-        fbs = st.pills("Fasting blood sugar > 120 mg/dL?", ["No", "Yes"], selection_mode="single",
+        fbs = st.radio("Fasting blood sugar > 120 mg/dL?", ["No", "Yes"], horizontal=True,
                        help="Fasting blood sugar above 120 mg/dL indicates elevated glucose")
 
     with c2:
@@ -71,7 +71,7 @@ with st.form("Heart Disease Prediction"):
         ], help="Resting electrocardiographic results")
         thalach = st.number_input("Max heart rate achieved", min_value=60, max_value=220, value=150,
                                   help="Maximum heart rate reached during exercise. Normal: 100-170")
-        exang = st.pills("Exercise-induced angina?", ["No", "Yes"], selection_mode="single",
+        exang = st.radio("Exercise-induced angina?", ["No", "Yes"], horizontal=True,
                          help="Chest pain triggered by exercise")
 
         st.markdown("#### 🧪 Additional")
@@ -95,13 +95,13 @@ with st.form("Heart Disease Prediction"):
 if submitted:
     with st.spinner("Analyzing your results..."):
         sex_val = 1 if sex == "Male" else 0
-        cp_val = int(cp[0])
+        cp_val = int(cp.split("(")[-1].replace(")", ""))
         fbs_val = 1 if fbs == "Yes" else 0
-        restecg_val = int(restecg[0])
+        restecg_val = int(restecg.split("(")[-1].replace(")", ""))
         exang_val = 1 if exang == "Yes" else 0
-        slope_val = int(slope[0])
+        slope_val = int(slope.split("(")[-1].replace(")", ""))
         ca_val = ca
-        thal_val = int(thal[0])
+        thal_val = int(thal.split("(")[-1].replace(")", ""))
 
         columns = ["age", "sex", "cp", "trestbps", "chol", "fbs", "restecg",
                     "thalach", "exang", "oldpeak", "slope", "ca", "thal"]
