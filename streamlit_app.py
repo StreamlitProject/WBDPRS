@@ -237,9 +237,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 with st.sidebar:
-    sc1, sc2, sc3 = st.columns([1, 2, 1])
+    sc1, sc2, sc3 = st.columns([1, 1, 1])
     with sc2:
-        st.image("assets/logo.svg", width=72)
+        st.image("assets/logo.svg", width=72, use_container_width=False)
     st.markdown("### HealthPulse")
     st.caption("AI-Powered Health Screening")
     st.divider()
