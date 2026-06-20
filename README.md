@@ -1,5 +1,3 @@
-# WBDPRS
-
 Web-based Disease Prediction & Recommendation System built with [Streamlit](https://streamlit.io).
 
 ## Features
@@ -37,3 +35,4 @@ WBDPRS/
 ## License
 
 MIT
+
