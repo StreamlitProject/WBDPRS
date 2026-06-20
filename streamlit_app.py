@@ -237,11 +237,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 with st.sidebar:
-    st.markdown("""
-    <div style="text-align: center; margin-bottom: 0.5rem;">
-        <img src="assets/logo.svg" width="72" style="display: inline-block;" />
-    </div>
-    """, unsafe_allow_html=True)
+    sc1, sc2, sc3 = st.columns([1, 2, 1])
+    with sc2:
+        st.image("assets/logo.svg", width=72)
     st.markdown("### HealthPulse")
     st.caption("AI-Powered Health Screening")
     st.divider()

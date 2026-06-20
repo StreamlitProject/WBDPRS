@@ -44,11 +44,9 @@ def about_models_dialog():
     )
 
 
-st.markdown("""
-<div style="text-align: center; margin-bottom: 0.5rem;">
-    <img src="assets/logo.svg" width="100" style="display: inline-block;" />
-</div>
-""", unsafe_allow_html=True)
+logo_col1, logo_col2, logo_col3 = st.columns([1, 2, 1])
+with logo_col2:
+    st.image("assets/logo.svg", width=100)
 
 st.markdown("""
 <div class="page-header">
