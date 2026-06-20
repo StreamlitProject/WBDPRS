@@ -62,7 +62,7 @@ with col2:
 
 st.markdown("")
 
-with st.expander(":material/info: About the Models", expanded=False):
+with st.expander("ℹ️ About the Models", expanded=False):
     st.markdown("### Model Information")
     st.markdown("This system uses four different machine learning models for disease prediction:")
 

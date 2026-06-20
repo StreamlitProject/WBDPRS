@@ -118,7 +118,7 @@ with st.status("Loading model and training data...", expanded=False) as status:
     model = train_model(traindf, testdf)
     status.update(label="Model ready", state="complete")
 
-st.badge("Naive Bayes", color="blue", icon=":material/algorithm:")
+st.badge("Naive Bayes", color="blue")
 
 with st.form("Multidisease Prediction"):
     selected_symptoms = st.multiselect(
@@ -162,7 +162,7 @@ if submitted:
                 "Please consult a healthcare professional for proper diagnosis."
             )
 
-            st.toast(f"Disease prediction: {predicted_disease}", icon=":material/clinical_notes:")
+            st.toast(f"Disease prediction: {predicted_disease}", icon="📋")
 
             with st.expander("View prediction details"):
                 st.markdown(f"**Predicted disease:** {predicted_disease}")

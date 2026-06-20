@@ -63,7 +63,7 @@ with st.status("Loading skin cancer model...", expanded=False) as status:
     model = load_skin_model()
     status.update(label="Model ready", state="complete")
 
-st.badge("Custom CNN", color="blue", icon=":material/brain:")
+st.badge("Custom CNN", color="blue")
 
 tab_camera, tab_upload = st.tabs(["📷 Camera", "📁 Upload Image"])
 
@@ -115,7 +115,7 @@ def display_result(an_image):
         st.success("Low-risk lesion. Regular monitoring is recommended.")
         st.balloons()
 
-    st.toast("Skin lesion analysis complete!", icon=":material/dermatology:")
+    st.toast("Skin lesion analysis complete!", icon="🩺")
 
     with st.expander("View details"):
         c1, c2, c3 = st.columns(3)

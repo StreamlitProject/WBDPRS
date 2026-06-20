@@ -35,7 +35,7 @@ with st.status("Loading model...", expanded=False) as status:
     model = load_data_and_model()
     status.update(label="Model ready", state="complete")
 
-st.badge("Logistic Regression", color="blue", icon=":material/algorithm:")
+st.badge("Logistic Regression", color="blue")
 
 with st.form("Heart Disease Prediction"):
     c1, c2 = st.columns(2)
@@ -137,7 +137,7 @@ if submitted:
         st.success("Maintain a healthy lifestyle for continued well-being.")
         st.balloons()
 
-    st.toast("Heart disease prediction complete!", icon=":material/monitor_heart:")
+    st.toast("Heart disease prediction complete!", icon="🫀")
 
     with st.expander("View prediction details"):
         c1, c2, c3 = st.columns(3)

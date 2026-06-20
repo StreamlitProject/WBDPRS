@@ -196,13 +196,13 @@ with st.sidebar:
 
 pages = {
     "": [
-        st.Page("pages/home.py", title="Home", icon=":material/home:", default=True),
+        st.Page("pages/home.py", title="Home", icon="🏠", default=True),
     ],
     "Predictions": [
-        st.Page("pages/heart.py", title="Heart Disease", icon=":material/monitor_heart:"),
-        st.Page("pages/pneumonia.py", title="Pneumonia", icon=":material/biotech:"),
-        st.Page("pages/skin.py", title="Skin Cancer", icon=":material/dermatology:"),
-        st.Page("pages/multidisease.py", title="Multidisease", icon=":material/clinical_notes:"),
+        st.Page("pages/heart.py", title="Heart Disease", icon="🫀"),
+        st.Page("pages/pneumonia.py", title="Pneumonia", icon="🔬"),
+        st.Page("pages/skin.py", title="Skin Cancer", icon="🩺"),
+        st.Page("pages/multidisease.py", title="Multidisease", icon="📋"),
     ],
 }
 

@@ -39,7 +39,7 @@ with st.status("Loading pneumonia model...", expanded=False) as status:
     model = load_pneumonia_model()
     status.update(label="Model ready", state="complete")
 
-st.badge("VGG16 CNN", color="blue", icon=":material/brain:")
+st.badge("VGG16 CNN", color="blue")
 
 tab_camera, tab_upload = st.tabs(["📷 Camera", "📁 Upload Image"])
 
@@ -86,7 +86,7 @@ def display_result(an_image):
         }).set_index("Class")
         st.bar_chart(prob_df, horizontal=True, height=120, color="#0f9b8e")
 
-    st.toast("Pneumonia analysis complete!", icon=":material/biotech:")
+    st.toast("Pneumonia analysis complete!", icon="🔬")
 
     with st.expander("View details"):
         c1, c2, c3 = st.columns(3)
