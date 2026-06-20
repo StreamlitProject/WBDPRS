@@ -11,17 +11,18 @@ def load_data_and_model():
     url = "https://drive.google.com/uc?id=155zmtpJU3_uxcl1BGRRScgrgvKcswHdt"
     df = pd.read_csv(url)
 
-    scaler = StandardScaler()
-    columns_to_scale = ["age", "trestbps", "chol", "thalach", "oldpeak"]
-    df[columns_to_scale] = scaler.fit_transform(df[columns_to_scale])
-
     X = df.drop(["target"], axis=1)
     y = df["target"]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=40)
 
+    scaler = StandardScaler()
+    columns_to_scale = ["age", "trestbps", "chol", "thalach", "oldpeak"]
+    X_train[columns_to_scale] = scaler.fit_transform(X_train[columns_to_scale])
+    X_test[columns_to_scale] = scaler.transform(X_test[columns_to_scale])
+
     lr = LogisticRegression()
     model = lr.fit(X_train, y_train)
-    return model
+    return model, scaler
 
 
 st.markdown("""
@@ -31,21 +32,23 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-with st.status("Loading model...", expanded=False) as status:
-    model = load_data_and_model()
-    status.update(label="Model ready", state="complete")
-
-st.badge("Logistic Regression", color="blue")
+try:
+    with st.spinner("Loading model..."):
+        model, scaler = load_data_and_model()
+    st.badge("Logistic Regression", color="blue")
+except Exception as e:
+    st.error(f"Failed to load heart disease model: {e}")
+    st.stop()
 
 with st.form("Heart Disease Prediction"):
     c1, c2 = st.columns(2)
 
     with c1:
-        st.markdown("#### :bust_in_silhouette: Demographics")
+        st.markdown("#### 👤 Demographics")
         age = st.number_input("Age (years)", min_value=1, max_value=120, value=45, help="Your age in complete years")
         sex = st.radio("Gender", ["Male", "Female"], horizontal=True)
 
-        st.markdown("#### :drop_of_blood: Vitals")
+        st.markdown("#### 🩸 Vitals")
         trestbps = st.number_input("Resting blood pressure (mmHg)", min_value=60, max_value=250, value=120,
                                    help="Blood pressure at rest, in mmHg. Normal: ~120/80")
         chol = st.number_input("Serum cholesterol (mg/dL)", min_value=100, max_value=600, value=200,
@@ -54,7 +57,7 @@ with st.form("Heart Disease Prediction"):
                         help="Fasting blood sugar above 120 mg/dL indicates elevated glucose")
 
     with c2:
-        st.markdown("#### :heart: ECG & Exercise")
+        st.markdown("#### ❤️ ECG & Exercise")
         cp = st.selectbox("Chest pain type", [
             "Typical angina (1)",
             "Atypical angina (2)",
@@ -71,7 +74,7 @@ with st.form("Heart Disease Prediction"):
         exang = st.radio("Exercise-induced angina?", ["No", "Yes"], horizontal=True,
                           help="Chest pain triggered by exercise")
 
-        st.markdown("#### :test_tube: Additional")
+        st.markdown("#### 🧪 Additional")
         oldpeak = st.number_input("ST depression (exercise vs rest)", min_value=0.0, max_value=10.0, value=0.0, step=0.1,
                                   help="ST segment depression induced by exercise. Normal: 0")
         slope = st.selectbox("Peak exercise ST slope", [
@@ -90,8 +93,7 @@ with st.form("Heart Disease Prediction"):
     submitted = st.form_submit_button("Predict Heart Disease Risk", use_container_width=True)
 
 if submitted:
-    with st.status("Analyzing your results...", expanded=True) as status:
-        st.write("Encoding input features...")
+    with st.spinner("Analyzing your results..."):
         sex_val = 1 if sex == "Male" else 0
         cp_val = int(cp[0])
         fbs_val = 1 if fbs == "Yes" else 0
@@ -101,19 +103,18 @@ if submitted:
         ca_val = ca
         thal_val = int(thal[0])
 
-        st.write("Running prediction model...")
-        features = np.array([[age, sex_val, cp_val, trestbps, chol, fbs_val,
-                              restecg_val, thalach, exang_val, oldpeak, slope_val,
-                              ca_val, thal_val]])
-
         columns = ["age", "sex", "cp", "trestbps", "chol", "fbs", "restecg",
                     "thalach", "exang", "oldpeak", "slope", "ca", "thal"]
-        input_df = pd.DataFrame(features, columns=columns)
+        raw = np.array([[age, sex_val, cp_val, trestbps, chol, fbs_val,
+                         restecg_val, thalach, exang_val, oldpeak, slope_val,
+                         ca_val, thal_val]])
+        input_df = pd.DataFrame(raw, columns=columns)
+
+        columns_to_scale = ["age", "trestbps", "chol", "thalach", "oldpeak"]
+        input_df[columns_to_scale] = scaler.transform(input_df[columns_to_scale])
 
         prediction = model.predict(input_df)
         prob = model.predict_proba(input_df)[0]
-
-        status.update(label="Prediction complete", state="complete", expanded=False)
 
     if prediction[0] == 1:
         risk_pct = int(prob[1] * 100)
@@ -138,6 +139,14 @@ if submitted:
         st.balloons()
 
     st.toast("Heart disease prediction complete!", icon="🫀")
+
+    if "history" not in st.session_state:
+        st.session_state.history = []
+    st.session_state.history.append({
+        "Module": "Heart Disease",
+        "Result": "High Risk" if prediction[0] == 1 else "Low Risk",
+        "Confidence": f"{max(prob) * 100:.1f}%",
+    })
 
     with st.expander("View prediction details"):
         c1, c2, c3 = st.columns(3)

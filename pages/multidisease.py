@@ -83,11 +83,13 @@ SYMPTOM_FORMATTED = [s.replace("_", " ").replace("  ", " ").strip().title() for 
 def load_training_data():
     traindf = pd.read_csv("Training.csv")
     testdf = pd.read_csv("Testing.csv")
-    return traindf, testdf
+    return traindf.copy(), testdf.copy()
 
 
 @st.cache_resource
-def train_model(traindf, testdf):
+def train_model(_traindf, _testdf):
+    traindf = _traindf.copy()
+    testdf = _testdf.copy()
     traindf.replace({"prognosis": DISEASE_MAP}, inplace=True)
     testdf.replace({"prognosis": DISEASE_MAP}, inplace=True)
 
@@ -108,17 +110,19 @@ st.markdown("""
 
 st.markdown("""
 <div class="info-box">
-    :bulb: **How it works:** Select the symptoms you are experiencing from the list below.
+    💡 **How it works:** Select the symptoms you are experiencing from the list below.
     The Naive Bayes classifier matches your symptom profile against 41 known diseases.
 </div>
 """, unsafe_allow_html=True)
 
-with st.status("Loading model and training data...", expanded=False) as status:
-    traindf, testdf = load_training_data()
-    model = train_model(traindf, testdf)
-    status.update(label="Model ready", state="complete")
-
-st.badge("Naive Bayes", color="blue")
+try:
+    with st.spinner("Loading model and training data..."):
+        traindf, testdf = load_training_data()
+        model = train_model(traindf, testdf)
+    st.badge("Naive Bayes", color="blue")
+except Exception as e:
+    st.error(f"Failed to load multidisease model: {e}")
+    st.stop()
 
 with st.form("Multidisease Prediction"):
     selected_symptoms = st.multiselect(
@@ -134,18 +138,15 @@ if submitted:
     if len(selected_symptoms) == 0:
         st.warning("Please select at least one symptom.")
     else:
-        with st.status("Analyzing symptoms...", expanded=True) as status:
-            st.write(f"Processing {len(selected_symptoms)} symptom(s)...")
+        with st.spinner("Analyzing symptoms..."):
             feature_vector = [0] * len(SYMPTOMS)
             for sym in selected_symptoms:
                 idx = SYMPTOM_FORMATTED.index(sym)
                 feature_vector[idx] = 1
 
-            st.write("Running classifier...")
             input_df = pd.DataFrame([feature_vector], columns=SYMPTOMS)
             prediction = model.predict(input_df)
             predicted_index = prediction[0]
-            status.update(label="Prediction complete", state="complete", expanded=False)
 
         if predicted_index < len(DISEASES):
             predicted_disease = DISEASES[predicted_index]
@@ -163,6 +164,14 @@ if submitted:
             )
 
             st.toast(f"Disease prediction: {predicted_disease}", icon="📋")
+
+            if "history" not in st.session_state:
+                st.session_state.history = []
+            st.session_state.history.append({
+                "Module": "Multidisease",
+                "Result": predicted_disease,
+                "Confidence": "N/A",
+            })
 
             with st.expander("View prediction details"):
                 st.markdown(f"**Predicted disease:** {predicted_disease}")

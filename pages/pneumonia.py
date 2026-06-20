@@ -1,22 +1,22 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from keras.models import load_model
-from tensorflow.keras.preprocessing import image
-from keras.applications.vgg16 import preprocess_input
 from PIL import Image
 
 
 @st.cache_resource
 def load_pneumonia_model():
+    from keras.models import load_model
     return load_model("model_vgg16.h5")
 
 
 def predict_image(model, img):
+    from tensorflow.keras.preprocessing import image
+    from keras.applications.vgg16 import preprocess_input
     img = img.resize((224, 224)).convert("RGB")
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
-    preprocess_input(x)
+    x = preprocess_input(x)
     classes = model.predict(x)
     return classes[0]
 
@@ -30,16 +30,19 @@ st.markdown("""
 
 st.markdown("""
 <div class="info-box">
-    :bulb: **How it works:** The VGG16 deep learning model analyzes your chest X-ray
+    💡 **How it works:** The VGG16 deep learning model analyzes your chest X-ray
     and classifies it as either Normal or showing signs of Pneumonia.
 </div>
 """, unsafe_allow_html=True)
 
-with st.status("Loading pneumonia model...", expanded=False) as status:
-    model = load_pneumonia_model()
-    status.update(label="Model ready", state="complete")
-
-st.badge("VGG16 CNN", color="blue")
+try:
+    with st.spinner("Loading pneumonia model..."):
+        model = load_pneumonia_model()
+    st.badge("VGG16 CNN", color="blue")
+    model_ready = True
+except Exception as e:
+    st.error(f"Failed to load pneumonia model: {e}")
+    st.stop()
 
 tab_camera, tab_upload = st.tabs(["📷 Camera", "📁 Upload Image"])
 
@@ -47,14 +50,11 @@ def display_result(an_image):
     img_col, result_col = st.columns([1, 1])
 
     with img_col:
-        st.image(an_image, caption="Analyzing image", use_container_width=True)
+        st.image(an_image, caption="Analyzing image", use_column_width=True)
 
     with result_col:
-        with st.status("Analyzing X-ray...", expanded=True) as status:
-            st.write("Preprocessing image...")
-            st.write("Running VGG16 inference...")
+        with st.spinner("Analyzing X-ray..."):
             probs = predict_image(model, an_image)
-            status.update(label="Analysis complete", state="complete", expanded=False)
 
         normal_prob = float(probs[0])
         pneumonia_prob = float(probs[1])
@@ -62,7 +62,7 @@ def display_result(an_image):
         confidence = max(normal_prob, pneumonia_prob)
 
         if predicted_class == "Pneumonia":
-            st.markdown(f"""
+            st.markdown("""
             <div class="result-card positive">
                 <div class="result-label">Diagnosis</div>
                 <div class="result-value danger">Pneumonia Detected</div>
@@ -70,7 +70,7 @@ def display_result(an_image):
             """, unsafe_allow_html=True)
             st.error("Please seek medical attention immediately.")
         else:
-            st.markdown(f"""
+            st.markdown("""
             <div class="result-card negative">
                 <div class="result-label">Diagnosis</div>
                 <div class="result-value success">Normal</div>
@@ -87,6 +87,14 @@ def display_result(an_image):
         st.bar_chart(prob_df, horizontal=True, height=120, color="#0f9b8e")
 
     st.toast("Pneumonia analysis complete!", icon="🔬")
+
+    if "history" not in st.session_state:
+        st.session_state.history = []
+    st.session_state.history.append({
+        "Module": "Pneumonia",
+        "Result": predicted_class,
+        "Confidence": f"{confidence:.1%}",
+    })
 
     with st.expander("View details"):
         c1, c2, c3 = st.columns(3)

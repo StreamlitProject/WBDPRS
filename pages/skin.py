@@ -1,23 +1,18 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from keras.models import load_model
 from PIL import Image
 
 
 @st.cache_resource
 def load_skin_model():
+    from keras.models import load_model
     return load_model("best_model.h5")
 
 
 SKIN_CLASSES = {
-    0: "AKIEC",  # Actinic keratoses
-    1: "BCC",    # Basal cell carcinoma
-    2: "BKL",    # Benign keratosis
-    3: "DF",     # Dermatofibroma
-    4: "NV",     # Melanocytic nevi
-    5: "VASC",   # Vascular lesions
-    6: "MEL",    # Melanoma
+    0: "AKIEC", 1: "BCC", 2: "BKL", 3: "DF",
+    4: "NV", 5: "VASC", 6: "MEL",
 }
 
 SKIN_DESCRIPTIONS = {
@@ -54,16 +49,18 @@ st.markdown("""
 
 st.markdown("""
 <div class="info-box">
-    :bulb: **How it works:** A CNN model classifies your skin lesion image into one of
+    💡 **How it works:** A CNN model classifies your skin lesion image into one of
     7 types. Malignant types (Melanoma, BCC) are flagged with higher risk alerts.
 </div>
 """, unsafe_allow_html=True)
 
-with st.status("Loading skin cancer model...", expanded=False) as status:
-    model = load_skin_model()
-    status.update(label="Model ready", state="complete")
-
-st.badge("Custom CNN", color="blue")
+try:
+    with st.spinner("Loading skin cancer model..."):
+        model = load_skin_model()
+    st.badge("Custom CNN", color="blue")
+except Exception as e:
+    st.error(f"Failed to load skin cancer model: {e}")
+    st.stop()
 
 tab_camera, tab_upload = st.tabs(["📷 Camera", "📁 Upload Image"])
 
@@ -71,14 +68,11 @@ def display_result(an_image):
     img_col, result_col = st.columns([1, 1])
 
     with img_col:
-        st.image(an_image, caption="Analyzing image", use_container_width=True)
+        st.image(an_image, caption="Analyzing image", use_column_width=True)
 
     with result_col:
-        with st.status("Analyzing skin lesion...", expanded=True) as status:
-            st.write("Preprocessing image...")
-            st.write("Running CNN inference...")
+        with st.spinner("Analyzing skin lesion..."):
             class_index, probs = predict_skin(model, an_image)
-            status.update(label="Analysis complete", state="complete", expanded=False)
 
         label = SKIN_CLASSES[class_index]
         confidence = max(probs)
@@ -116,6 +110,14 @@ def display_result(an_image):
         st.balloons()
 
     st.toast("Skin lesion analysis complete!", icon="🩺")
+
+    if "history" not in st.session_state:
+        st.session_state.history = []
+    st.session_state.history.append({
+        "Module": "Skin Cancer",
+        "Result": f"{label} ({risk})",
+        "Confidence": f"{confidence:.1%}",
+    })
 
     with st.expander("View details"):
         c1, c2, c3 = st.columns(3)

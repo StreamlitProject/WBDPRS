@@ -10,7 +10,7 @@ st.markdown("""
 
 st.markdown("""
 <div class="info-box">
-    Select a prediction tool from the navigation bar above to get started. Each tool uses
+    Select a prediction tool below to get started. Each tool uses
     machine learning models trained on medical datasets to provide preliminary screenings.
 </div>
 """, unsafe_allow_html=True)
@@ -28,6 +28,7 @@ with col1:
         </p>
     </div>
     """, unsafe_allow_html=True)
+    st.page_link("pages/heart.py", label="Go to Heart Disease Prediction", icon="🫀")
 
     st.markdown("""
     <div class="feature-card">
@@ -38,6 +39,7 @@ with col1:
         </p>
     </div>
     """, unsafe_allow_html=True)
+    st.page_link("pages/pneumonia.py", label="Go to Pneumonia Detection", icon="🔬")
 
 with col2:
     st.markdown("""
@@ -49,6 +51,7 @@ with col2:
         </p>
     </div>
     """, unsafe_allow_html=True)
+    st.page_link("pages/skin.py", label="Go to Skin Cancer Detection", icon="🩺")
 
     st.markdown("""
     <div class="feature-card">
@@ -59,8 +62,15 @@ with col2:
         </p>
     </div>
     """, unsafe_allow_html=True)
+    st.page_link("pages/multidisease.py", label="Go to Multidisease Prediction", icon="📋")
 
 st.markdown("")
+
+if st.session_state.get("history"):
+    st.markdown("---")
+    st.markdown("### 📊 Recent Predictions")
+    history_df = st.DataFrame(st.session_state.history[-10:][::-1])
+    st.dataframe(history_df, use_container_width=True, hide_index=True)
 
 with st.expander("ℹ️ About the Models", expanded=False):
     st.markdown("### Model Information")

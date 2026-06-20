@@ -180,8 +180,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 with st.sidebar:
-    st.markdown("### :heartpulse: WBDPRS")
+    st.markdown("### 🫀 WBDPRS")
     st.markdown("Web-based Disease Prediction & Recommendation System")
+    st.divider()
+    st.markdown("**Quick Navigation**")
+    st.page_link("pages/home.py", label="Home", icon="🏠")
+    st.page_link("pages/heart.py", label="Heart Disease", icon="🫀")
+    st.page_link("pages/pneumonia.py", label="Pneumonia", icon="🔬")
+    st.page_link("pages/skin.py", label="Skin Cancer", icon="🩺")
+    st.page_link("pages/multidisease.py", label="Multidisease", icon="📋")
+    st.divider()
+    if st.session_state.get("history"):
+        st.markdown(f"**Session:** {len(st.session_state.history)} prediction(s)")
     st.divider()
     st.markdown(
         "<div class='disclaimer'>"
@@ -192,7 +202,7 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
     st.divider()
-    st.caption("Built with Streamlit | v2.0")
+    st.caption("Built with Streamlit | v2.1")
 
 pages = {
     "": [
