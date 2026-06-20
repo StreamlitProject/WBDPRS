@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="HealthPulse",
-    page_icon="💓",
+    page_icon="assets/favicon.svg",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -189,7 +189,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 with st.sidebar:
-    st.markdown("### 💓 HealthPulse")
+    st.image("assets/logo.svg", width=80)
+    st.markdown("### HealthPulse")
     st.markdown("AI-Powered Health Screening Platform")
     st.divider()
     st.markdown("**Quick Navigation**")

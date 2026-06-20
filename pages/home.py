@@ -68,6 +68,8 @@ if locale:
 
 theme_label = "dark" if theme and theme.get("base") == "dark" else "light"
 
+st.image("assets/logo.svg", width=120)
+
 st.markdown(f"""
 <div class="page-header">
     <h2>HealthPulse</h2>
