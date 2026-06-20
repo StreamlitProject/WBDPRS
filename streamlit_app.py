@@ -1,158 +1,210 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
-from heart import *
-from home import *
-from multidisease import *
-import heart as h
-import multidisease as m
-from pneumonia import *
-import pneumonia as p
-from skin import *
-import skin as s
-
-
-# basic page conifg static but changes in few parameters
 
 st.set_page_config(
     page_title="WBDPRS",
-    page_icon="🤖",
-    layout="centered",
+    page_icon=":heartpulse:",
+    layout="wide",
     initial_sidebar_state="expanded",
-    menu_items={
-        'Get Help': 'https://www.extremelycoolapp.com/help',
-        'Report a bug': "https://www.extremelycoolapp.com/bug",
-        'About': "# This is a header. This is an *extremely* cool app!"
-    }
 )
 
-st.title("Web-based Disease Prediction System")
-# NavBar standard for all
-selected3 = option_menu(None, ['Skin Cancer', 'Pneumonia', 'Multidisease'],
-                        icons=['file-person', 'clipboard-plus', 'file-medical'],
-                        menu_icon="cast", default_index=0, orientation="horizontal",
-                        styles={
-                            "container": {"padding": "0!important", "background-color": "#fafafa","color": "#262730"},
-                            "icon": {"color": "black", "font-size": "15px"},
-                            "nav-link": {"font-size": "15px", "text-align": "left", "margin": "0px",
-                                         "--hover-color": "#6ddacf","--text-color":"#262730"},
-                            "nav-link-selected": {"background-color": "#6cdacf","--text-color":"#262730"},
-                        }
-                        )
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+    :root {
+        --accent: #0f9b8e;
+        --accent-light: #6cdacf;
+        --accent-dark: #0a7a6e;
+        --bg-primary: #0e1117;
+        --bg-secondary: #1a1d24;
+        --bg-card: #1e2129;
+        --text-primary: #fafafa;
+        --text-secondary: #a3a8b4;
+        --border: #2e3239;
+        --danger: #ff4b4b;
+        --success: #21c354;
+        --warning: #ffaa00;
+    }
 
-def set_bg_hack_url():
-    '''
-    A function to unpack an image from url and set as bg.
-    Returns
-    -------
-    The background.
-    '''
+    /* --- Global --- */
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+    }
 
+    div[data-testid="stToolbar"] {visibility: hidden; height: 0; position: fixed;}
+    div[data-testid="stDecoration"] {visibility: hidden; height: 0; position: fixed;}
+    div[data-testid="stStatusWidget"] {visibility: hidden; height: 0; position: fixed;}
+    #MainMenu {visibility: hidden; height: 0;}
+    header {visibility: hidden; height: 0;}
+    footer {visibility: hidden; height: 0;}
+
+    .stApp {
+        background: linear-gradient(135deg, #0e1117 0%, #1a1d24 50%, #0e1117 100%);
+    }
+
+    /* --- Headings --- */
+    h1 { color: var(--accent-light) !important; font-weight: 700 !important; }
+    h2 { color: var(--text-primary) !important; font-weight: 600 !important; }
+    h3 { color: var(--text-primary) !important; font-weight: 600 !important; }
+
+    /* --- Section header on pages --- */
+    .page-header {
+        text-align: center;
+        padding: 0.5rem 0 1.5rem 0;
+    }
+    .page-header h2 {
+        margin: 0;
+        font-size: 1.8rem;
+        background: linear-gradient(90deg, var(--accent-light), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .page-header p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        margin-top: 0.3rem;
+    }
+
+    /* --- Cards --- */
+    .feature-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 0 20px rgba(15, 155, 142, 0.15);
+    }
+    .feature-card h3 {
+        margin-top: 0 !important;
+        font-size: 1.15rem !important;
+    }
+    .feature-card-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* --- Result cards --- */
+    .result-card {
+        background: var(--bg-card);
+        border-radius: 12px;
+        padding: 1.5rem 2rem;
+        margin: 1rem 0;
+        text-align: center;
+        border: 1px solid var(--border);
+    }
+    .result-card.positive {
+        border-left: 4px solid var(--danger);
+    }
+    .result-card.negative {
+        border-left: 4px solid var(--success);
+    }
+    .result-card .result-label {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.25rem;
+    }
+    .result-card .result-value {
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+    .result-card .result-value.danger { color: var(--danger); }
+    .result-card .result-value.success { color: var(--success); }
+
+    /* --- Info box --- */
+    .info-box {
+        background: rgba(15, 155, 142, 0.08);
+        border: 1px solid rgba(15, 155, 142, 0.25);
+        border-radius: 8px;
+        padding: 0.8rem 1rem;
+        color: var(--text-secondary);
+        font-size: 0.88rem;
+        margin-bottom: 1rem;
+    }
+
+    /* --- Disclaimer --- */
+    .disclaimer {
+        background: rgba(255, 170, 0, 0.06);
+        border: 1px solid rgba(255, 170, 0, 0.2);
+        border-radius: 8px;
+        padding: 0.8rem 1rem;
+        color: var(--warning);
+        font-size: 0.82rem;
+    }
+
+    /* --- Sidebar --- */
+    section[data-testid="stSidebar"] {
+        background-color: var(--bg-secondary);
+    }
+    section[data-testid="stSidebar"] .stMarkdown p {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+    }
+
+    /* --- Form elements --- */
+    .stRadio > div { gap: 0.4rem; }
+
+    /* --- Divider override --- */
+    hr {
+        border-color: var(--border) !important;
+        opacity: 0.5;
+    }
+
+    /* --- Tabs --- */
+    .stTabs [data-baseweb="tab-list"] { gap: 0; }
+    .stTabs [data-baseweb="tab"] {
+        padding: 0.6rem 1.5rem;
+        font-weight: 500;
+    }
+
+    /* --- Buttons --- */
+    .stFormSubmitButton > button {
+        background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 2rem;
+        font-weight: 600;
+        transition: opacity 0.2s;
+    }
+    .stFormSubmitButton > button:hover {
+        opacity: 0.9;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+with st.sidebar:
+    st.markdown("### :heartpulse: WBDPRS")
+    st.markdown("Web-based Disease Prediction & Recommendation System")
+    st.divider()
     st.markdown(
-        f"""
-         <style>
-	 #root > div:nth-child(1) > div > div > div > div > section > div {{padding-top: 1rem;}}
-	 /*setting background image*/
-         .stApp {{
-             background: url("https://drive.google.com/uc?export=view&id=1QNZpRaGDbxsDO3ZyjURYTfIMePIMbQ4c");
-             https://drive.google.com/file/d/13vhdzYq-NQyW-pzfJooTAfPsluAvsagA/view?usp=sharing
-             background-size: cover
-         }}
-         .css-12ttj6m{{background-color:rgb(109,218,207); }}
-         body{{font-weight: bold;
-               font-family:"Galaxy-BT", sans-serif}}
-         .css-1cpxqw2{{font-weight:bold}}
-         p, ol, ul, dl{{font-weight:bold;
-                        text-align:center;
-                        font-size:1.3rem;}}
-	
-	.css-ffhzg2 {{color:black;}} /*form title color*/
-	.css-16huue1{{color:black;}} /*text in form*/
-	.st-by {{color:black;}}  /*text in form*/
-	.css-1595djx{{visibility:hidden;}} /*upper tag hidden*/
-	.st-dc{{background-color:white;}}  /*dropdown background*/
-	.st-bu {{background-color:rgb(240,242,246);}}  /*dropdown flex color*/
-	.st-bp {{color:black;}}  /*dropdown text*/
-	.css-e3kofv {{background:rgb(240,242,246);}}  /*dropdown hover*/
-	.css-1q8dd3e {{background:white;}}  /*clear button*/
-
-	.css-1wgbv7k {{background-color:rgb(109,218,207);}} /*Camera Pneumnia*/
-	.css-x8wxsk {{background-color:rgb(109,218,207);color:black;}} /*upload*/
-	:root{{--text-color:black;}}
-	.nav-item{{color:black;}}
-	.nav-item[[data-v-4323f8ce]]{{color:black;}}
-	.data-v-4323f8ce{{color:black;}}
-	.css-eczf16{{display: none;}} /*hide the link on title*/
-	.css-1xfuh55{{display: none;}} /*hide the link on images*/
-	.css-6awftf{{display: none;}} /*hide the link on images*/
-	/*.st-bu {{background-color:rgb(109,218,207);}}*/
-	/*.st-bp {{font-size: 15px;}}*/
-	
-	/* this to remove all the things*/
-	 div[data-testid="stToolbar"] {{
-                visibility: hidden;
-                height: 0%;
-                position: fixed;
-                }}
-                div[data-testid="stDecoration"] {{
-                visibility: hidden;
-                height: 0%;
-                position: fixed;
-                }}
-                div[data-testid="stStatusWidget"] {{
-                visibility: hidden;
-                height: 0%;
-                position: fixed;
-                }}
-                #MainMenu {{
-                visibility: hidden;
-                height: 0%;
-                }}
-                header {{
-                visibility: hidden;
-                height: 0%;
-                }}
-                footer {{
-                visibility: hidden;
-                height: 0%;
-                }}
-
-         </style>
-         """,
-        unsafe_allow_html=True
+        "<div class='disclaimer'>"
+        "**Disclaimer:** This system is for educational purposes only. "
+        "It is not a substitute for professional medical advice, diagnosis, or treatment. "
+        "Always consult a qualified healthcare provider."
+        "</div>",
+        unsafe_allow_html=True,
     )
+    st.divider()
+    st.caption("Built with Streamlit | v2.0")
 
+pages = {
+    "": [
+        st.Page("pages/home.py", title="Home", icon=":material/home:", default=True),
+    ],
+    "Predictions": [
+        st.Page("pages/heart.py", title="Heart Disease", icon=":material/monitor_heart:"),
+        st.Page("pages/pneumonia.py", title="Pneumonia", icon=":material/biotech:"),
+        st.Page("pages/skin.py", title="Skin Cancer", icon=":material/dermatology:"),
+        st.Page("pages/multidisease.py", title="Multidisease", icon=":material/clinical_notes:"),
+    ],
+}
 
-set_bg_hack_url()
-
-hide_st_style = """
-		  <style>
-		  #MainMenu {visibility: hidden;}
-		  footer {visibility: hidden;}
-		  .css-18e3th9{
-		  padding: 1.5rem 0rem 0rem; 
-		  }
-		  .css-18e3th9 {
-		  padding-left: 6rem;
-          padding-right: 6rem;
-		  }
-		  h1{text-align: center;color:#6cdacf;text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;}
-
-		  </style>
-		  """
-st.markdown(hide_st_style, unsafe_allow_html=True)
-
-if selected3 == "Home":
-    pass
-elif selected3 == "Heart Disease":
-    st.write("Heart Disease")
-    h.heart()
-elif selected3 == "Multidisease":
-    st.markdown("<center><h2><strong><u>Multidisease</u></strong></h2></center>",unsafe_allow_html=True)
-    m.multidisease()
-elif selected3 == 'Pneumonia':
-    st.markdown("<center><h2><strong><u>Pneumonia</u></strong></h2></center>",unsafe_allow_html=True)
-    p.pneumonia()
-elif selected3 == 'Skin Cancer':
-    st.markdown("<center><h2><strong><u>Skin Cancer</u></strong></h2></center>",unsafe_allow_html=True)
-    s.skin()
+pg = st.navigation(pages, position="top")
+pg.run()
