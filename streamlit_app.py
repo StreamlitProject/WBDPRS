@@ -1,8 +1,8 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="WBDPRS",
-    page_icon=":heartpulse:",
+    page_title="HealthPulse",
+    page_icon="💓",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -189,8 +189,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 with st.sidebar:
-    st.markdown("### 🫀 WBDPRS")
-    st.markdown("Web-based Disease Prediction & Recommendation System")
+    st.markdown("### 💓 HealthPulse")
+    st.markdown("AI-Powered Health Screening Platform")
     st.divider()
     st.markdown("**Quick Navigation**")
     st.page_link("pages/home.py", label="Home", icon="🏠")
@@ -211,7 +211,7 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
     st.divider()
-    st.caption("Built with Streamlit | v2.2")
+    st.caption("Built with Streamlit | v3.0")
 
 pages = {
     "": [

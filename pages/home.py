@@ -70,7 +70,7 @@ theme_label = "dark" if theme and theme.get("base") == "dark" else "light"
 
 st.markdown(f"""
 <div class="page-header">
-    <h2>Web-based Disease Prediction System</h2>
+    <h2>HealthPulse</h2>
     <p>AI-powered health screening tools for early detection</p>
 </div>
 """, unsafe_allow_html=True)
