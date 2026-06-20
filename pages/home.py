@@ -96,7 +96,7 @@ with col1:
         </p>
     </div>
     """, unsafe_allow_html=True)
-    st.page_link("pages/heart.py", label="Go to Heart Disease Prediction", icon="🫀")
+    st.page_link("pages/heart.py", label="Go to Heart Disease Prediction")
 
     st.markdown("""
     <div class="feature-card">
@@ -107,7 +107,7 @@ with col1:
         </p>
     </div>
     """, unsafe_allow_html=True)
-    st.page_link("pages/pneumonia.py", label="Go to Pneumonia Detection", icon="🔬")
+    st.page_link("pages/pneumonia.py", label="Go to Pneumonia Detection")
 
 with col2:
     st.markdown("""
@@ -119,7 +119,7 @@ with col2:
         </p>
     </div>
     """, unsafe_allow_html=True)
-    st.page_link("pages/skin.py", label="Go to Skin Cancer Detection", icon="🩺")
+    st.page_link("pages/skin.py", label="Go to Skin Cancer Detection")
 
     st.markdown("""
     <div class="feature-card">
@@ -130,7 +130,7 @@ with col2:
         </p>
     </div>
     """, unsafe_allow_html=True)
-    st.page_link("pages/multidisease.py", label="Go to Multidisease Prediction", icon="📋")
+    st.page_link("pages/multidisease.py", label="Go to Multidisease Prediction")
 
 st.markdown("")
 
