@@ -99,7 +99,7 @@ with st.form("heart_form"):
             "Reversible defect",
         ])
 
-    submitted = st.form_submit_button("Predict Heart Disease Risk", use_container_width=True)
+    submitted = st.form_submit_button("Predict Heart Disease Risk", width="stretch")
 
 if submitted:
     with st.spinner("Analyzing your results..."):

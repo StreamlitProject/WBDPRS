@@ -71,7 +71,7 @@ def display_result(an_image):
     img_col, result_col = st.columns([1, 1])
 
     with img_col:
-        st.image(an_image, caption="Analyzing image", use_container_width=True)
+        st.image(an_image, caption="Analyzing image", width="stretch")
 
     with result_col:
         with st.spinner("Analyzing skin lesion..."):

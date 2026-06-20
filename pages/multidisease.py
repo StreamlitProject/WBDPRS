@@ -179,7 +179,7 @@ for tab, (cat_name, cat_symptoms) in zip(category_tabs, SYMPTOM_CATEGORIES.items
 if selected_symptoms:
     st.info(f"**{len(selected_symptoms)}** symptom{'s' if len(selected_symptoms) != 1 else ''} selected")
 
-if st.button("Check for Diseases", use_container_width=True, type="primary"):
+if st.button("Check for Diseases", width="stretch", type="primary"):
     if len(selected_symptoms) == 0:
         st.warning("Please select at least one symptom.")
     else:

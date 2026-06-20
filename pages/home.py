@@ -46,7 +46,7 @@ def about_models_dialog():
 
 logo_col1, logo_col2, logo_col3 = st.columns([1, 1, 1])
 with logo_col2:
-    st.image("assets/logo.svg", width=100, use_container_width=False)
+    st.image("assets/logo.svg", width="content")
 
 st.markdown("""
 <div class="page-header">
@@ -74,7 +74,7 @@ for i, (icon, title, desc, page) in enumerate(cards):
             <p style="color: #a3a8b4; font-size: 0.88rem; line-height: 1.5;">{desc}</p>
         </div>
         """, unsafe_allow_html=True)
-        if st.button(f"Open {title}", key=f"btn_{i}", use_container_width=True):
+        if st.button(f"Open {title}", key=f"btn_{i}", width="stretch"):
             st.switch_page(page)
 
 st.markdown("")
@@ -113,7 +113,7 @@ if st.session_state.get("history"):
 
 c1, c2, c3 = st.columns([1, 1, 1])
 with c2:
-    if st.button("About the Models", use_container_width=True):
+    if st.button("About the Models", width="stretch"):
         about_models_dialog()
 
 st.markdown("""
