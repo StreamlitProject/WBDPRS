@@ -8,4 +8,4 @@ tensorflow
 Pillow
 urllib3
 opencv-python
-streamlit>=1.44.0
+streamlit==1.44.0

@@ -1,50 +1,6 @@
 import streamlit as st
 
 
-@st.dialog("About the Models", width="large", icon=":material/info:")
-def about_dialog():
-    st.markdown("### Model Information")
-    st.markdown("This system uses four different machine learning models for disease prediction:")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown("""
-        **Heart Disease**
-        - Algorithm: Logistic Regression
-        - Features: 13 clinical parameters
-        - Dataset: UCI Heart Disease dataset
-        """)
-
-        st.markdown("""
-        **Pneumonia Detection**
-        - Algorithm: VGG16 Convolutional Neural Network
-        - Input: Chest X-ray images (224x224)
-        - Classes: Normal, Pneumonia
-        """)
-
-    with col2:
-        st.markdown("""
-        **Skin Cancer**
-        - Algorithm: Custom CNN
-        - Input: Skin lesion images (28x28)
-        - Classes: 7 lesion types (AKIEC, BCC, BKL, DF, NV, VASC, MEL)
-        """)
-
-        st.markdown("""
-        **Multidisease**
-        - Algorithm: Multinomial Naive Bayes
-        - Features: 132 symptom binary indicators
-        - Classes: 41 diseases
-        """)
-
-    st.divider()
-    st.caption(
-        "All models are trained on publicly available medical datasets. "
-        "Predictions are approximate and intended for educational purposes only."
-    )
-
-
 st.markdown("""
 <div class="page-header">
     <h2>Web-based Disease Prediction System</h2>
@@ -106,8 +62,47 @@ with col2:
 
 st.markdown("")
 
-if st.button(":material/info: About the Models", use_container_width=False):
-    about_dialog()
+with st.expander(":material/info: About the Models", expanded=False):
+    st.markdown("### Model Information")
+    st.markdown("This system uses four different machine learning models for disease prediction:")
+
+    c1, c2 = st.columns(2)
+
+    with c1:
+        st.markdown("""
+        **Heart Disease**
+        - Algorithm: Logistic Regression
+        - Features: 13 clinical parameters
+        - Dataset: UCI Heart Disease dataset
+        """)
+
+        st.markdown("""
+        **Pneumonia Detection**
+        - Algorithm: VGG16 Convolutional Neural Network
+        - Input: Chest X-ray images (224x224)
+        - Classes: Normal, Pneumonia
+        """)
+
+    with c2:
+        st.markdown("""
+        **Skin Cancer**
+        - Algorithm: Custom CNN
+        - Input: Skin lesion images (28x28)
+        - Classes: 7 lesion types (AKIEC, BCC, BKL, DF, NV, VASC, MEL)
+        """)
+
+        st.markdown("""
+        **Multidisease**
+        - Algorithm: Multinomial Naive Bayes
+        - Features: 132 symptom binary indicators
+        - Classes: 41 diseases
+        """)
+
+    st.divider()
+    st.caption(
+        "All models are trained on publicly available medical datasets. "
+        "Predictions are approximate and intended for educational purposes only."
+    )
 
 st.markdown("""
 <div class="disclaimer" style="margin-top: 1rem;">
