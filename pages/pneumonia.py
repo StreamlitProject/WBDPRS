@@ -28,12 +28,15 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="info-box">
-    💡 **How it works:** The VGG16 deep learning model analyzes your chest X-ray
+with st.popover("💡 How it works"):
+    st.markdown("""
+    The VGG16 deep learning model analyzes your chest X-ray
     and classifies it as either Normal or showing signs of Pneumonia.
-</div>
-""", unsafe_allow_html=True)
+
+    **Model:** VGG16 CNN (pretrained on ImageNet)
+    **Input:** Chest X-ray images resized to 224x224
+    **Output:** Probability scores for Normal and Pneumonia classes
+    """)
 
 try:
     with st.spinner("Loading pneumonia model..."):
@@ -101,6 +104,13 @@ def display_result(an_image):
         c1.metric("Diagnosis", predicted_class)
         c2.metric("Confidence", f"{confidence:.1%}")
         c3.metric("Model", "VGG16")
+
+    st.markdown("---")
+    st.markdown("**Was this analysis helpful?**")
+    feedback = st.feedback("faces")
+    if feedback is not None:
+        st.session_state.history[-1]["Rating"] = f"{feedback}/2"
+        st.toast("Thanks for your feedback!", icon="⭐")
 
 with tab_camera:
     picture = st.camera_input("📷 Capture a chest X-ray image")

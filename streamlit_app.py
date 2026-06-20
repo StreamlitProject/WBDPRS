@@ -176,6 +176,15 @@ st.markdown("""
     .stFormSubmitButton > button:hover {
         opacity: 0.9;
     }
+
+    /* --- Pills --- */
+    .stPills > div > div {
+        gap: 0.4rem;
+    }
+    .stPills button {
+        border-radius: 20px !important;
+        padding: 0.4rem 1rem !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -202,7 +211,7 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
     st.divider()
-    st.caption("Built with Streamlit | v2.1")
+    st.caption("Built with Streamlit | v2.2")
 
 pages = {
     "": [
@@ -215,6 +224,13 @@ pages = {
         st.Page("pages/multidisease.py", title="Multidisease", icon="📋"),
     ],
 }
+
+qp = st.query_params
+if "feedback" in qp:
+    rating = qp["feedback"]
+    if "history" in st.session_state and st.session_state.history:
+        st.session_state.history[-1]["Rating"] = f"{rating}/3"
+        st.toast(f"Thanks for your feedback: {rating}/3", icon="⭐")
 
 pg = st.navigation(pages, position="top")
 pg.run()

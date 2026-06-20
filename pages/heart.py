@@ -46,15 +46,15 @@ with st.form("Heart Disease Prediction"):
     with c1:
         st.markdown("#### 👤 Demographics")
         age = st.number_input("Age (years)", min_value=1, max_value=120, value=45, help="Your age in complete years")
-        sex = st.radio("Gender", ["Male", "Female"], horizontal=True)
+        sex = st.pills("Gender", ["Male", "Female"], selection_mode="single")
 
         st.markdown("#### 🩸 Vitals")
         trestbps = st.number_input("Resting blood pressure (mmHg)", min_value=60, max_value=250, value=120,
                                    help="Blood pressure at rest, in mmHg. Normal: ~120/80")
         chol = st.number_input("Serum cholesterol (mg/dL)", min_value=100, max_value=600, value=200,
                                help="Total serum cholesterol. Desirable: <200 mg/dL")
-        fbs = st.radio("Fasting blood sugar > 120 mg/dL?", ["No", "Yes"], horizontal=True,
-                        help="Fasting blood sugar above 120 mg/dL indicates elevated glucose")
+        fbs = st.pills("Fasting blood sugar > 120 mg/dL?", ["No", "Yes"], selection_mode="single",
+                       help="Fasting blood sugar above 120 mg/dL indicates elevated glucose")
 
     with c2:
         st.markdown("#### ❤️ ECG & Exercise")
@@ -71,8 +71,8 @@ with st.form("Heart Disease Prediction"):
         ], help="Resting electrocardiographic results")
         thalach = st.number_input("Max heart rate achieved", min_value=60, max_value=220, value=150,
                                   help="Maximum heart rate reached during exercise. Normal: 100-170")
-        exang = st.radio("Exercise-induced angina?", ["No", "Yes"], horizontal=True,
-                          help="Chest pain triggered by exercise")
+        exang = st.pills("Exercise-induced angina?", ["No", "Yes"], selection_mode="single",
+                         help="Chest pain triggered by exercise")
 
         st.markdown("#### 🧪 Additional")
         oldpeak = st.number_input("ST depression (exercise vs rest)", min_value=0.0, max_value=10.0, value=0.0, step=0.1,
@@ -153,3 +153,10 @@ if submitted:
         c1.metric("Prediction", "High Risk" if prediction[0] == 1 else "Low Risk")
         c2.metric("Risk Probability", f"{risk_pct}%")
         c3.metric("Confidence", f"{max(prob) * 100:.1f}%")
+
+    st.markdown("---")
+    st.markdown("**Was this prediction helpful?**")
+    feedback = st.feedback("faces")
+    if feedback is not None:
+        st.session_state.history[-1]["Rating"] = f"{feedback}/2"
+        st.toast("Thanks for your feedback!", icon="⭐")

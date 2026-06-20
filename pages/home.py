@@ -1,15 +1,83 @@
 import streamlit as st
 
 
-st.markdown("""
+@st.dialog("About the Models")
+def about_models_dialog():
+    st.markdown("### Model Information")
+    st.markdown("This system uses four different machine learning models for disease prediction:")
+
+    c1, c2 = st.columns(2)
+
+    with c1:
+        st.markdown("""
+        **Heart Disease**
+        - Algorithm: Logistic Regression
+        - Features: 13 clinical parameters
+        - Dataset: UCI Heart Disease dataset
+        """)
+
+        st.markdown("""
+        **Pneumonia Detection**
+        - Algorithm: VGG16 Convolutional Neural Network
+        - Input: Chest X-ray images (224x224)
+        - Classes: Normal, Pneumonia
+        """)
+
+    with c2:
+        st.markdown("""
+        **Skin Cancer**
+        - Algorithm: Custom CNN
+        - Input: Skin lesion images (28x28)
+        - Classes: 7 lesion types (AKIEC, BCC, BKL, DF, NV, VASC, MEL)
+        """)
+
+        st.markdown("""
+        **Multidisease**
+        - Algorithm: Multinomial Naive Bayes
+        - Features: 132 symptom binary indicators
+        - Classes: 41 diseases
+        """)
+
+    st.divider()
+    st.caption(
+        "All models are trained on publicly available medical datasets. "
+        "Predictions are approximate and intended for educational purposes only."
+    )
+
+
+locale = st.context.locale
+theme = st.context.theme
+
+greeting = "Welcome"
+if locale:
+    lang = locale.split("_")[0]
+    if lang == "es":
+        greeting = "Bienvenido"
+    elif lang == "fr":
+        greeting = "Bienvenue"
+    elif lang == "de":
+        greeting = "Willkommen"
+    elif lang == "hi":
+        greeting = "स्वागत है"
+    elif lang == "zh":
+        greeting = "欢迎"
+    elif lang == "ja":
+        greeting = "ようこそ"
+    elif lang == "ko":
+        greeting = "환영합니다"
+
+theme_label = "dark" if theme and theme.get("base") == "dark" else "light"
+
+st.markdown(f"""
 <div class="page-header">
     <h2>Web-based Disease Prediction System</h2>
     <p>AI-powered health screening tools for early detection</p>
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
+st.markdown(f"""
 <div class="info-box">
+    {greeting}! You are using <strong>{theme_label}</strong> mode.
     Select a prediction tool below to get started. Each tool uses
     machine learning models trained on medical datasets to provide preliminary screenings.
 </div>
@@ -72,47 +140,10 @@ if st.session_state.get("history"):
     history_df = st.DataFrame(st.session_state.history[-10:][::-1])
     st.dataframe(history_df, use_container_width=True, hide_index=True)
 
-with st.expander("ℹ️ About the Models", expanded=False):
-    st.markdown("### Model Information")
-    st.markdown("This system uses four different machine learning models for disease prediction:")
-
-    c1, c2 = st.columns(2)
-
-    with c1:
-        st.markdown("""
-        **Heart Disease**
-        - Algorithm: Logistic Regression
-        - Features: 13 clinical parameters
-        - Dataset: UCI Heart Disease dataset
-        """)
-
-        st.markdown("""
-        **Pneumonia Detection**
-        - Algorithm: VGG16 Convolutional Neural Network
-        - Input: Chest X-ray images (224x224)
-        - Classes: Normal, Pneumonia
-        """)
-
-    with c2:
-        st.markdown("""
-        **Skin Cancer**
-        - Algorithm: Custom CNN
-        - Input: Skin lesion images (28x28)
-        - Classes: 7 lesion types (AKIEC, BCC, BKL, DF, NV, VASC, MEL)
-        """)
-
-        st.markdown("""
-        **Multidisease**
-        - Algorithm: Multinomial Naive Bayes
-        - Features: 132 symptom binary indicators
-        - Classes: 41 diseases
-        """)
-
-    st.divider()
-    st.caption(
-        "All models are trained on publicly available medical datasets. "
-        "Predictions are approximate and intended for educational purposes only."
-    )
+c1, c2, c3 = st.columns([1, 1, 1])
+with c2:
+    if st.button("ℹ️ About the Models", use_container_width=True):
+        about_models_dialog()
 
 st.markdown("""
 <div class="disclaimer" style="margin-top: 1rem;">

@@ -108,12 +108,15 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="info-box">
-    💡 **How it works:** Select the symptoms you are experiencing from the list below.
+with st.popover("💡 How it works"):
+    st.markdown("""
+    Select the symptoms you are experiencing from the list below.
     The Naive Bayes classifier matches your symptom profile against 41 known diseases.
-</div>
-""", unsafe_allow_html=True)
+
+    **Model:** Multinomial Naive Bayes
+    **Features:** 132 symptom binary indicators
+    **Classes:** 41 diseases
+    """)
 
 try:
     with st.spinner("Loading model and training data..."):
@@ -184,5 +187,12 @@ if submitted:
                     "Note: This model uses Naive Bayes classification on symptom data. "
                     "Results are indicative and should not replace professional medical advice."
                 )
+
+            st.markdown("---")
+            st.markdown("**Was this prediction helpful?**")
+            feedback = st.feedback("faces")
+            if feedback is not None:
+                st.session_state.history[-1]["Rating"] = f"{feedback}/2"
+                st.toast("Thanks for your feedback!", icon="⭐")
         else:
             st.info("No matching disease found for the given symptoms. Please consult a doctor.")

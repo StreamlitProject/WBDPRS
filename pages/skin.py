@@ -47,12 +47,15 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="info-box">
-    💡 **How it works:** A CNN model classifies your skin lesion image into one of
-    7 types. Malignant types (Melanoma, BCC) are flagged with higher risk alerts.
-</div>
-""", unsafe_allow_html=True)
+with st.popover("💡 How it works"):
+    st.markdown("""
+    A CNN model classifies your skin lesion image into one of 7 types.
+    Malignant types (Melanoma, BCC) are flagged with higher risk alerts.
+
+    **Model:** Custom CNN
+    **Input:** Skin lesion images resized to 28x28
+    **Classes:** AKIEC, BCC, BKL, DF, NV, VASC, MEL
+    """)
 
 try:
     with st.spinner("Loading skin cancer model..."):
@@ -124,6 +127,13 @@ def display_result(an_image):
         c1.metric("Lesion Type", label)
         c2.metric("Confidence", f"{confidence:.1%}")
         c3.metric("Risk Level", risk.capitalize())
+
+    st.markdown("---")
+    st.markdown("**Was this analysis helpful?**")
+    feedback = st.feedback("faces")
+    if feedback is not None:
+        st.session_state.history[-1]["Rating"] = f"{feedback}/2"
+        st.toast("Thanks for your feedback!", icon="⭐")
 
 with tab_camera:
     picture = st.camera_input("📷 Capture a skin lesion image")
