@@ -3,45 +3,78 @@ import numpy as np
 import pandas as pd
 from sklearn.naive_bayes import MultinomialNB
 
-SYMPTOMS = [
-    "itching", "skin_rash", "nodal_skin_eruptions", "continuous_sneezing",
-    "shivering", "chills", "joint_pain", "stomach_pain", "acidity",
-    "ulcers_on_tongue", "muscle_wasting", "vomiting", "burning_micturition",
-    "spotting_ urination", "fatigue", "weight_gain", "anxiety",
-    "cold_hands_and_feets", "mood_swings", "weight_loss", "restlessness",
-    "lethargy", "patches_in_throat", "irregular_sugar_level", "cough",
-    "high_fever", "sunken_eyes", "breathlessness", "sweating", "dehydration",
-    "indigestion", "headache", "yellowish_skin", "dark_urine", "nausea",
-    "loss_of_appetite", "pain_behind_the_eyes", "back_pain", "constipation",
-    "abdominal_pain", "diarrhoea", "mild_fever", "yellow_urine",
-    "yellowing_of_eyes", "acute_liver_failure", "fluid_overload",
-    "swelling_of_stomach", "swelled_lymph_nodes", "malaise",
-    "blurred_and_distorted_vision", "phlegm", "throat_irritation",
-    "redness_of_eyes", "sinus_pressure", "runny_nose", "congestion",
-    "chest_pain", "weakness_in_limbs", "fast_heart_rate",
-    "pain_during_bowel_movements", "pain_in_anal_region", "bloody_stool",
-    "irritation_in_anus", "neck_pain", "dizziness", "cramps", "bruising",
-    "obesity", "swollen_legs", "swollen_blood_vessels", "puffy_face_and_eyes",
-    "enlarged_thyroid", "brittle_nails", "swollen_extremeties",
-    "excessive_hunger", "extra_marital_contacts", "drying_and_tingling_lips",
-    "slurred_speech", "knee_pain", "hip_joint_pain", "muscle_weakness",
-    "stiff_neck", "swelling_joints", "movement_stiffness",
-    "spinning_movements", "loss_of_balance", "unsteadiness",
-    "weakness_of_one_body_side", "loss_of_smell", "bladder_discomfort",
-    "foul_smell_of urine", "continuous_feel_of_urine", "passage_of_gases",
-    "internal_itching", "toxic_look_(typhos)", "depression", "irritability",
-    "muscle_pain", "altered_sensorium", "red_spots_over_body", "belly_pain",
-    "abnormal_menstruation", "dischromic _patches", "watering_from_eyes",
-    "increased_appetite", "polyuria", "family_history", "mucoid_sputum",
-    "rusty_sputum", "lack_of_concentration", "visual_disturbances",
-    "receiving_blood_transfusion", "receiving_unsterile_injections", "coma",
-    "stomach_bleeding", "distention_of_abdomen",
-    "history_of_alcohol_consumption", "fluid_overload",
-    "blood_in_sputum", "prominent_veins_on_calf", "palpitations",
-    "painful_walking", "pus_filled_pimples", "blackheads", "scurring",
-    "skin_peeling", "silver_like_dusting", "small_dents_in_nails",
-    "inflammatory_nails", "blister", "red_sore_around_nose", "yellow_crust_ooze",
-]
+SYMPTOM_CATEGORIES = {
+    "General": [
+        "fatigue", "fever", "malaise", "lethargy", "restlessness",
+        "weight_gain", "weight_loss", "anxiety", "depression",
+    ],
+    "Skin": [
+        "itching", "skin_rash", "nodal_skin_eruptions", "pus_filled_pimples",
+        "blackheads", "scurring", "skin_peeling", "silver_like_dusting",
+        "blister", "red_sore_around_nose", "yellow_crust_ooze",
+        "dischromic _patches", "red_spots_over_body",
+    ],
+    "Respiratory": [
+        "continuous_sneezing", "cough", "breathlessness", "phlegm",
+        "throat_irritation", "patches_in_throat", "runny_nose",
+        "congestion", "sinus_pressure", "mucoid_sputum", "rusty_sputum",
+        "blood_in_sputum",
+    ],
+    "Digestive": [
+        "stomach_pain", "acidity", "ulcers_on_tongue", "vomiting",
+        "indigestion", "nausea", "loss_of_appetite", "constipation",
+        "diarrhoea", "abdominal_pain", "pain_behind_the_eyes",
+        "yellowish_skin", "dark_urine", "yellow_urine", "yellowing_of_eyes",
+    ],
+    "Pain & Joints": [
+        "joint_pain", "back_pain", "neck_pain", "knee_pain",
+        "hip_joint_pain", "muscle_pain", "muscle_weakness",
+        "muscle_wasting", "cramps", "stiff_neck", "swelling_joints",
+        "movement_stiffness", "painful_walking",
+    ],
+    "Cardiovascular": [
+        "chest_pain", "fast_heart_rate", "palpitations",
+        "swollen_legs", "swollen_blood_vessels", "prominent_veins_on_calf",
+    ],
+    "Neurological": [
+        "headache", "dizziness", "spinning_movements", "loss_of_balance",
+        "unsteadiness", "weakness_of_one_body_side", "slurred_speech",
+        "loss_of_smell", "loss_of_smell", "altered_sensorium",
+        "lack_of_concentration", "visual_disturbances",
+        "blurred_and_distorted_vision",
+    ],
+    "Urinary": [
+        "burning_micturition", "spotting_ urination", "dark_urine",
+        "bladder_discomfort", "foul_smell_of urine",
+        "continuous_feel_of_urine", "polyuria",
+    ],
+    "Other": [
+        "shivering", "chills", "sweating", "dehydration", "sunken_eyes",
+        "mood_swings", "cold_hands_and_feets", "puffy_face_and_eyes",
+        "enlarged_thyroid", "brittle_nails", "swollen_extremeties",
+        "excessive_hunger", "extra_marital_contacts",
+        "drying_and_tingling_lips", "swelled_lymph_nodes",
+        "passage_of_gases", "internal_itching", "toxic_look_(typhos)",
+        "irritability", "redness_of_eyes", "belly_pain",
+        "abnormal_menstruation", "watering_from_eyes", "increased_appetite",
+        "family_history", "receiving_blood_transfusion",
+        "receiving_unsterile_injections", "coma", "stomach_bleeding",
+        "distention_of_abdomen", "history_of_alcohol_consumption",
+        "obesity", "irritation_in_anus", "pain_in_anal_region",
+        "bloody_stool", "weakness_in_limbs",
+    ],
+}
+
+ALL_SYMPTOMS = []
+SYMPTOM_TO_FORMATTED = {}
+for cat, syms in SYMPTOM_CATEGORIES.items():
+    for s in syms:
+        if s not in SYMPTOM_TO_FORMATTED:
+            ALL_SYMPTOMS.append(s)
+            formatted = s.replace("_", " ").replace("  ", " ").strip().title()
+            SYMPTOM_TO_FORMATTED[s] = formatted
+
+FORMATTED_TO_RAW = {v: k for k, v in SYMPTOM_TO_FORMATTED.items()}
 
 DISEASES = [
     "Fungal infection", "Allergy", "GERD", "Chronic cholestasis",
@@ -76,8 +109,6 @@ DISEASE_MAP = {
     "Impetigo": 40,
 }
 
-SYMPTOM_FORMATTED = [s.replace("_", " ").replace("  ", " ").strip().title() for s in SYMPTOMS]
-
 
 @st.cache_data
 def load_training_data():
@@ -93,7 +124,7 @@ def train_model(_traindf, _testdf):
     traindf.replace({"prognosis": DISEASE_MAP}, inplace=True)
     testdf.replace({"prognosis": DISEASE_MAP}, inplace=True)
 
-    X = traindf[SYMPTOMS]
+    X = traindf[ALL_SYMPTOMS]
     y = np.ravel(traindf[["prognosis"]])
 
     gnb = MultinomialNB()
@@ -108,18 +139,18 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-with st.popover("💡 How it works"):
+with st.popover("How it works"):
     st.markdown("""
-    Select the symptoms you are experiencing from the list below.
-    The Naive Bayes classifier matches your symptom profile against 41 known diseases.
+    Select the symptoms you are experiencing. The Naive Bayes classifier
+    matches your symptom profile against 41 known diseases.
 
     **Model:** Multinomial Naive Bayes
-    **Features:** 132 symptom binary indicators
+    **Features:** Symptom binary indicators
     **Classes:** 41 diseases
     """)
 
 try:
-    with st.spinner("Loading model and training data..."):
+    with st.spinner("Loading model..."):
         traindf, testdf = load_training_data()
         model = train_model(traindf, testdf)
     st.badge("Naive Bayes", color="blue")
@@ -127,27 +158,40 @@ except Exception as e:
     st.error(f"Failed to load multidisease model: {e}")
     st.stop()
 
-with st.form("Multidisease Prediction"):
-    selected_symptoms = st.multiselect(
-        "Select your symptoms (1-10)",
-        options=SYMPTOM_FORMATTED,
-        max_selections=10,
-        placeholder="Start typing to search symptoms...",
-    )
+selected_symptoms = []
 
-    submitted = st.form_submit_button("Check for Diseases", use_container_width=True)
+st.markdown("**Select your symptoms**")
+category_tabs = st.tabs(list(SYMPTOM_CATEGORIES.keys()))
 
-if submitted:
+for tab, (cat_name, cat_symptoms) in zip(category_tabs, SYMPTOM_CATEGORIES.items()):
+    with tab:
+        formatted_options = [SYMPTOM_TO_FORMATTED[s] for s in cat_symptoms if s in SYMPTOM_TO_FORMATTED]
+        chosen = st.multiselect(
+            cat_name,
+            options=formatted_options,
+            key=f"cat_{cat_name}",
+            label_visibility="collapsed",
+            placeholder=f"Search {cat_name.lower()} symptoms...",
+        )
+        for c in chosen:
+            selected_symptoms.append(c)
+
+if selected_symptoms:
+    st.info(f"**{len(selected_symptoms)}** symptom{'s' if len(selected_symptoms) != 1 else ''} selected")
+
+if st.button("Check for Diseases", use_container_width=True, type="primary"):
     if len(selected_symptoms) == 0:
         st.warning("Please select at least one symptom.")
     else:
         with st.spinner("Analyzing symptoms..."):
-            feature_vector = [0] * len(SYMPTOMS)
+            feature_vector = [0] * len(ALL_SYMPTOMS)
             for sym in selected_symptoms:
-                idx = SYMPTOM_FORMATTED.index(sym)
-                feature_vector[idx] = 1
+                raw = FORMATTED_TO_RAW.get(sym)
+                if raw and raw in ALL_SYMPTOMS:
+                    idx = ALL_SYMPTOMS.index(raw)
+                    feature_vector[idx] = 1
 
-            input_df = pd.DataFrame([feature_vector], columns=SYMPTOMS)
+            input_df = pd.DataFrame([feature_vector], columns=ALL_SYMPTOMS)
             prediction = model.predict(input_df)
             predicted_index = prediction[0]
 

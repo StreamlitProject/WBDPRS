@@ -16,13 +16,13 @@ SKIN_CLASSES = {
 }
 
 SKIN_DESCRIPTIONS = {
-    "AKIEC": "Actinic keratoses and intraepithelial carcinoma. Pre-cancerous skin growths from sun damage.",
-    "BCC": "Basal cell carcinoma. The most common and treatable form of skin cancer.",
-    "BKL": "Benign keratosis. Non-cancerous skin growths, often age-related.",
-    "DF": "Dermatofibroma. A benign skin growth, usually on lower legs.",
+    "AKIEC": "Actinic keratoses. Pre-cancerous growths from sun damage.",
+    "BCC": "Basal cell carcinoma. Common, treatable skin cancer.",
+    "BKL": "Benign keratosis. Non-cancerous, age-related growths.",
+    "DF": "Dermatofibroma. Benign skin growth, usually on lower legs.",
     "NV": "Melanocytic nevi. Common moles, generally harmless.",
-    "VASC": "Vascular lesions. Blood vessel-related skin growths.",
-    "MEL": "Melanoma. The most dangerous form of skin cancer. Seek medical attention.",
+    "VASC": "Vascular lesions. Blood vessel-related growths.",
+    "MEL": "Melanoma. Most dangerous skin cancer. Seek immediate attention.",
 }
 
 SKIN_RISK = {
@@ -71,7 +71,7 @@ def display_result(an_image):
     img_col, result_col = st.columns([1, 1])
 
     with img_col:
-        st.image(an_image, caption="Analyzing image", use_column_width=True)
+        st.image(an_image, caption="Analyzing image", use_container_width=True)
 
     with result_col:
         with st.spinner("Analyzing skin lesion..."):

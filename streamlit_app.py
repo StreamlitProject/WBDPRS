@@ -47,10 +47,10 @@ st.markdown("""
     h2 { color: var(--text-primary) !important; font-weight: 600 !important; }
     h3 { color: var(--text-primary) !important; font-weight: 600 !important; }
 
-    /* --- Section header on pages --- */
+    /* --- Page header --- */
     .page-header {
         text-align: center;
-        padding: 0.5rem 0 1.5rem 0;
+        padding: 0.5rem 0 1.2rem 0;
     }
     .page-header h2 {
         margin: 0;
@@ -66,26 +66,27 @@ st.markdown("""
         margin-top: 0.3rem;
     }
 
-    /* --- Cards --- */
+    /* --- Feature cards --- */
     .feature-card {
         background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: 12px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-        transition: border-color 0.2s, box-shadow 0.2s;
+        padding: 1.4rem;
+        margin-bottom: 0.8rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
     }
     .feature-card:hover {
         border-color: var(--accent);
-        box-shadow: 0 0 20px rgba(15, 155, 142, 0.15);
+        box-shadow: 0 0 24px rgba(15, 155, 142, 0.12);
+        transform: translateY(-2px);
     }
     .feature-card h3 {
         margin-top: 0 !important;
-        font-size: 1.15rem !important;
+        font-size: 1.1rem !important;
     }
     .feature-card-icon {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.8rem;
+        margin-bottom: 0.4rem;
     }
 
     /* --- Result cards --- */
@@ -93,29 +94,57 @@ st.markdown("""
         background: var(--bg-card);
         border-radius: 12px;
         padding: 1.5rem 2rem;
-        margin: 1rem 0;
+        margin: 0.8rem 0;
         text-align: center;
         border: 1px solid var(--border);
     }
-    .result-card.positive {
-        border-left: 4px solid var(--danger);
-    }
-    .result-card.negative {
-        border-left: 4px solid var(--success);
-    }
+    .result-card.positive { border-left: 4px solid var(--danger); }
+    .result-card.negative { border-left: 4px solid var(--success); }
     .result-card .result-label {
         color: var(--text-secondary);
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.06em;
         margin-bottom: 0.25rem;
     }
     .result-card .result-value {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         font-weight: 700;
     }
     .result-card .result-value.danger { color: var(--danger); }
     .result-card .result-value.success { color: var(--success); }
+
+    /* --- History items --- */
+    .history-item {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.7rem 1rem;
+        margin-bottom: 0.4rem;
+        transition: border-color 0.15s ease;
+    }
+    .history-item:hover {
+        border-color: var(--accent);
+    }
+    .history-badge {
+        display: inline-block;
+        padding: 0.15rem 0.5rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    .history-badge.danger {
+        background: rgba(255, 75, 75, 0.15);
+        color: var(--danger);
+    }
+    .history-badge.success {
+        background: rgba(33, 195, 84, 0.15);
+        color: var(--success);
+    }
+    .history-badge.warning {
+        background: rgba(255, 170, 0, 0.15);
+        color: var(--warning);
+    }
 
     /* --- Info box --- */
     .info-box {
@@ -147,10 +176,7 @@ st.markdown("""
         font-size: 0.85rem;
     }
 
-    /* --- Form elements --- */
-    .stRadio > div { gap: 0.4rem; }
-
-    /* --- Divider override --- */
+    /* --- Divider --- */
     hr {
         border-color: var(--border) !important;
         opacity: 0.5;
@@ -163,7 +189,7 @@ st.markdown("""
         font-weight: 500;
     }
 
-    /* --- Buttons --- */
+    /* --- Form submit button --- */
     .stFormSubmitButton > button {
         background: linear-gradient(90deg, var(--accent), var(--accent-dark));
         color: white;
@@ -171,48 +197,58 @@ st.markdown("""
         border-radius: 8px;
         padding: 0.5rem 2rem;
         font-weight: 600;
-        transition: opacity 0.2s;
+        transition: opacity 0.2s ease, transform 0.1s ease;
     }
     .stFormSubmitButton > button:hover {
         opacity: 0.9;
     }
-
-    /* --- Pills --- */
-    .stPills > div > div {
-        gap: 0.4rem;
+    .stFormSubmitButton > button:active {
+        transform: scale(0.98);
     }
-    .stPills button {
-        border-radius: 20px !important;
-        padding: 0.4rem 1rem !important;
+
+    /* --- Regular buttons --- */
+    .stButton > button {
+        border-radius: 8px;
+        font-weight: 500;
+        transition: opacity 0.2s ease, transform 0.1s ease;
+    }
+    .stButton > button:hover {
+        opacity: 0.9;
+    }
+    .stButton > button:active {
+        transform: scale(0.98);
+    }
+
+    /* --- Selectbox / Radio labels --- */
+    .stRadio label, .stSelectbox label {
+        font-weight: 500;
+    }
+
+    /* --- Expander --- */
+    .streamlit-expanderHeader {
+        font-weight: 600;
+    }
+
+    /* --- Progress bar text --- */
+    .stProgress [data-testid="stMarkdownContainer"] {
+        font-size: 0.85rem;
     }
 </style>
 """, unsafe_allow_html=True)
 
 with st.sidebar:
-    st.image("assets/logo.svg", width=80)
+    st.image("assets/logo.svg", width=72)
     st.markdown("### HealthPulse")
-    st.markdown("AI-Powered Health Screening Platform")
+    st.caption("AI-Powered Health Screening")
     st.divider()
-    st.markdown("**Quick Navigation**")
-    st.markdown("- 🏠 Home")
-    st.markdown("- 🫀 Heart Disease")
-    st.markdown("- 🔬 Pneumonia")
-    st.markdown("- 🩺 Skin Cancer")
-    st.markdown("- 📋 Multidisease")
-    st.divider()
+
     if st.session_state.get("history"):
-        st.markdown(f"**Session:** {len(st.session_state.history)} prediction(s)")
+        count = len(st.session_state.history)
+        st.markdown(f"**{count}** prediction{'s' if count != 1 else ''} this session")
+
     st.divider()
-    st.markdown(
-        "<div class='disclaimer'>"
-        "**Disclaimer:** This system is for educational purposes only. "
-        "It is not a substitute for professional medical advice, diagnosis, or treatment. "
-        "Always consult a qualified healthcare provider."
-        "</div>",
-        unsafe_allow_html=True,
-    )
-    st.divider()
-    st.caption("Built with Streamlit | v3.0")
+    st.caption("For educational purposes only. Not a medical device.")
+    st.caption("Built with Streamlit | v3.1")
 
 pages = {
     "": [
@@ -225,13 +261,6 @@ pages = {
         st.Page("pages/multidisease.py", title="Multidisease", icon="📋"),
     ],
 }
-
-qp = st.query_params
-if "feedback" in qp:
-    rating = qp["feedback"]
-    if "history" in st.session_state and st.session_state.history:
-        st.session_state.history[-1]["Rating"] = f"{rating}/3"
-        st.toast(f"Thanks for your feedback: {rating}/3", icon="⭐")
 
 pg = st.navigation(pages, position="top")
 pg.run()

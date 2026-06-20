@@ -4,7 +4,6 @@ import streamlit as st
 @st.dialog("About the Models")
 def about_models_dialog():
     st.markdown("### Model Information")
-    st.markdown("This system uses four different machine learning models for disease prediction:")
 
     c1, c2 = st.columns(2)
 
@@ -28,13 +27,13 @@ def about_models_dialog():
         **Skin Cancer**
         - Algorithm: Custom CNN
         - Input: Skin lesion images (28x28)
-        - Classes: 7 lesion types (AKIEC, BCC, BKL, DF, NV, VASC, MEL)
+        - Classes: 7 lesion types
         """)
 
         st.markdown("""
         **Multidisease**
         - Algorithm: Multinomial Naive Bayes
-        - Features: 132 symptom binary indicators
+        - Features: 132 symptom indicators
         - Classes: 41 diseases
         """)
 
@@ -45,110 +44,74 @@ def about_models_dialog():
     )
 
 
-locale = st.context.locale
-theme = st.context.theme
+st.image("assets/logo.svg", width=100)
 
-greeting = "Welcome"
-if locale:
-    lang = locale.split("_")[0]
-    if lang == "es":
-        greeting = "Bienvenido"
-    elif lang == "fr":
-        greeting = "Bienvenue"
-    elif lang == "de":
-        greeting = "Willkommen"
-    elif lang == "hi":
-        greeting = "स्वागत है"
-    elif lang == "zh":
-        greeting = "欢迎"
-    elif lang == "ja":
-        greeting = "ようこそ"
-    elif lang == "ko":
-        greeting = "환영합니다"
-
-theme_label = "dark" if theme and theme.get("base") == "dark" else "light"
-
-st.image("assets/logo.svg", width=120)
-
-st.markdown(f"""
+st.markdown("""
 <div class="page-header">
     <h2>HealthPulse</h2>
     <p>AI-powered health screening tools for early detection</p>
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown(f"""
-<div class="info-box">
-    {greeting}! You are using <strong>{theme_label}</strong> mode.
-    Select a prediction tool below to get started. Each tool uses
-    machine learning models trained on medical datasets to provide preliminary screenings.
-</div>
-""", unsafe_allow_html=True)
+cards = [
+    ("🫀", "Heart Disease", "Predicts heart disease risk using 13 clinical parameters including age, blood pressure, cholesterol, and ECG results.", "pages/heart.py"),
+    ("🔬", "Pneumonia Detection", "Analyzes chest X-ray images to detect pneumonia using a VGG16 deep learning model.", "pages/pneumonia.py"),
+    ("🩺", "Skin Cancer", "Classifies skin lesions into 7 types including melanoma and basal cell carcinoma.", "pages/skin.py"),
+    ("📋", "Multidisease", "Matches your symptoms against 41 possible diseases using Naive Bayes classification.", "pages/multidisease.py"),
+]
 
 col1, col2 = st.columns(2)
+cols = [col1, col2]
 
-with col1:
-    st.markdown("""
-    <div class="feature-card">
-        <div class="feature-card-icon">🫀</div>
-        <h3>Heart Disease</h3>
-        <p style="color: #a3a8b4; font-size: 0.9rem;">
-            Predicts heart disease risk using 13 clinical parameters including age,
-            blood pressure, cholesterol levels, and ECG results.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    if st.button("🫀 Go to Heart Disease Prediction", use_container_width=True):
-        st.switch_page("pages/heart.py")
-
-    st.markdown("""
-    <div class="feature-card">
-        <div class="feature-card-icon">🔬</div>
-        <h3>Pneumonia Detection</h3>
-        <p style="color: #a3a8b4; font-size: 0.9rem;">
-            Analyzes chest X-ray images to detect pneumonia using a VGG16 deep learning model.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    if st.button("🔬 Go to Pneumonia Detection", use_container_width=True):
-        st.switch_page("pages/pneumonia.py")
-
-with col2:
-    st.markdown("""
-    <div class="feature-card">
-        <div class="feature-card-icon">🩺</div>
-        <h3>Skin Cancer</h3>
-        <p style="color: #a3a8b4; font-size: 0.9rem;">
-            Classifies skin lesions into 7 types including melanoma and basal cell carcinoma.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    if st.button("🩺 Go to Skin Cancer Detection", use_container_width=True):
-        st.switch_page("pages/skin.py")
-
-    st.markdown("""
-    <div class="feature-card">
-        <div class="feature-card-icon">📋</div>
-        <h3>Multidisease</h3>
-        <p style="color: #a3a8b4; font-size: 0.9rem;">
-            Matches your symptoms against 41 possible diseases using Naive Bayes classification.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    if st.button("📋 Go to Multidisease Prediction", use_container_width=True):
-        st.switch_page("pages/multidisease.py")
+for i, (icon, title, desc, page) in enumerate(cards):
+    with cols[i % 2]:
+        st.markdown(f"""
+        <div class="feature-card" style="cursor: pointer;">
+            <div class="feature-card-icon">{icon}</div>
+            <h3>{title}</h3>
+            <p style="color: #a3a8b4; font-size: 0.88rem; line-height: 1.5;">{desc}</p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button(f"Open {title}", key=f"btn_{i}", use_container_width=True):
+            st.switch_page(page)
 
 st.markdown("")
 
 if st.session_state.get("history"):
     st.markdown("---")
-    st.markdown("### 📊 Recent Predictions")
-    history_df = st.DataFrame(st.session_state.history[-10:][::-1])
-    st.dataframe(history_df, use_container_width=True, hide_index=True)
+    st.markdown("### Recent Predictions")
+
+    history_data = st.session_state.history[-10:][::-1]
+    for i, entry in enumerate(history_data):
+        result = entry.get("Result", "")
+        confidence = entry.get("Confidence", "")
+        module = entry.get("Module", "")
+        rating = entry.get("Rating", "")
+
+        if "High" in result or "Detected" in result or "high" in entry.get("Result", "").lower():
+            badge_class = "danger"
+        elif "Low" in result or "Normal" in result or "low" in entry.get("Result", "").lower():
+            badge_class = "success"
+        else:
+            badge_class = "warning"
+
+        st.markdown(f"""
+        <div class="history-item">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span style="font-weight: 600; color: #fafafa;">{module}</span>
+                    <span class="history-badge {badge_class}" style="margin-left: 0.5rem;">{result}</span>
+                </div>
+                <div style="color: #a3a8b4; font-size: 0.85rem;">
+                    {confidence} {f'| {rating}' if rating else ''}
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 c1, c2, c3 = st.columns([1, 1, 1])
 with c2:
-    if st.button("ℹ️ About the Models", use_container_width=True):
+    if st.button("About the Models", use_container_width=True):
         about_models_dialog()
 
 st.markdown("""
