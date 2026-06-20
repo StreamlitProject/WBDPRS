@@ -46,7 +46,7 @@ def about_models_dialog():
 
 logo_col1, logo_col2, logo_col3 = st.columns([1, 1, 1])
 with logo_col2:
-    st.image("assets/logo.svg", width=64)
+    st.image("assets/logo.svg", width="stretch")
 
 st.markdown("""
 <div class="page-header">
