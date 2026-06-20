@@ -44,7 +44,7 @@ def about_models_dialog():
     )
 
 
-logo_col1, logo_col2, logo_col3 = st.columns([1, 1, 1])
+logo_col1, logo_col2, logo_col3 = st.columns([2, 1, 2])
 with logo_col2:
     st.image("assets/logo.svg", width="stretch")
 
