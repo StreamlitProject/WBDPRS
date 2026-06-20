@@ -96,7 +96,8 @@ with col1:
         </p>
     </div>
     """, unsafe_allow_html=True)
-    st.page_link("pages/heart.py", label="Go to Heart Disease Prediction")
+    if st.button("🫀 Go to Heart Disease Prediction", use_container_width=True):
+        st.switch_page("pages/heart.py")
 
     st.markdown("""
     <div class="feature-card">
@@ -107,7 +108,8 @@ with col1:
         </p>
     </div>
     """, unsafe_allow_html=True)
-    st.page_link("pages/pneumonia.py", label="Go to Pneumonia Detection")
+    if st.button("🔬 Go to Pneumonia Detection", use_container_width=True):
+        st.switch_page("pages/pneumonia.py")
 
 with col2:
     st.markdown("""
@@ -119,7 +121,8 @@ with col2:
         </p>
     </div>
     """, unsafe_allow_html=True)
-    st.page_link("pages/skin.py", label="Go to Skin Cancer Detection")
+    if st.button("🩺 Go to Skin Cancer Detection", use_container_width=True):
+        st.switch_page("pages/skin.py")
 
     st.markdown("""
     <div class="feature-card">
@@ -130,7 +133,8 @@ with col2:
         </p>
     </div>
     """, unsafe_allow_html=True)
-    st.page_link("pages/multidisease.py", label="Go to Multidisease Prediction")
+    if st.button("📋 Go to Multidisease Prediction", use_container_width=True):
+        st.switch_page("pages/multidisease.py")
 
 st.markdown("")
 
